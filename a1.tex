@@ -1,0 +1,156 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage{amssymb,amsmath}
+%amsthm,amsfonts}
+
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{0cm}
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+\newcommand{\nand}{\,\,\mathrm{NAND}\,\,}
+
+%%% Sets
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+
+\begin{document}
+\begin{center}
+{\Large CSC 240 Winter 2024 Homework Assignment 1}\\
+due January 18, 2024
+\end{center}
+
+My name and student number: Joseph Siu, 1010085701\\
+The list of people with whom I discussed this homework assignment:
+
+Sanchit Manchanda
+
+Serif Wu
+
+Hrithik Parag Shah
+
+Abhi Prajapati
+
+Sepehr Jafari
+
+
+\begin{enumerate}
+\item
+Let $U$ be the set of all people and let $\mathcal{P}(U)$ be the set of all subsets of $U$.\\
+Let $In: U \times \mathcal{P}(U)  \rightarrow \{$T,F\} be the predicate such that 
+$In(x,G) = $ T when person $x$ is in the set of people $G$.\\
+Let $size:\mathcal{P}(U) \rightarrow \nats$ be the function 
+such that $size(G)$ is the number of people in the set $G$.\\
+Let $K: U \times U \to \{$T,F\} be the predicate such that 
+$K(a,b) =$ T when person $a$ and person $b$ know each other.\\
+You may assume that $K$ is symmetric, i.e.~$\forall a \in U. \forall b \in U. [K(a,b) \iif  K(b,a)]$.
+
+\begin{enumerate}
+\item
+Consider the following predicate about a set of people $G \in \mathcal{P}(U)$:
+\begin{align*}
+\exists H \in \mathcal{P}(U). & \forall x \in H. \forall y \in H.\\
+& [(size(H)= 40)  \aand  (\nnot(K(x,y)) \oor (x=y)) \aand In(x , G)].
+ \end{align*}
+Express this predicate using at most 15 English words. The letter $G$ counts as one word.
+Justify your answer. 
+    
+\vspace{.25in}\textbf{Solution}\vspace{.10in}\\
+
+The predicate is equivalent to ``The set G contains 40 people who don't know each other."
+
+First we can see the predicate is mainly formed by 2 AND connections, thus all 3 parts need to assert True. The first part is "A set of people H has 40 people", the second part is "no one in H knows each other", and the third part is "all people in H are also in G" which means H is a subset of G. Combining these 3 parts with the 3 quantifications, we obtained our sentence. 
+
+\item
+Consider the following sentence in predicate logic.
+\begin{align*}
+\exists n \in \mathbb{N}. & \forall G \in \mathcal{P}(U). \exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.\\
+& [((size(H)= 40) \oor  (size(G)  < n)) \aand \\ & (\nnot(K(x,y)) \oor (x=y) \oor (size(G)  < n)) \aand \\ & (In(x ,G) \oor  (size(G)  < n))].
+\end{align*}
+Express this sentence using at most 20 English words.
+Justify your answer. 
+ 
+\vspace{.25in}\textbf{Solution}\vspace{.10in}\\
+
+The predicate is equivalent to "Either there are finitely many people within a group, or it contains 40 people who do not know each other."
+% "If a group contains infinitely many people, then it also contains 40 people who do not know each other."
+
+First, the predicate is logically equivalent to \begin{align*}
+\exists n \in \mathbb{N}. & \forall G \in \mathcal{P}(U). \exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.\\
+& (size(G)  < n) \oor [(size(H) = 40) \aand \\ & (\nnot(K(x,y)) \oor (x=y)) \aand \\ & (In(x ,G))].
+\end{align*}
+
+We can see there are 2 parts connected by $\oor$, for any set of people $G$, either the size of $G$ is finite (first part), or there are 40 people within the group who do not know each other (second part, similar to part a). 
+
+% Transform the $\oor$ connection to $\iimplies$,
+
+% \begin{align*}
+% \exists n \in \mathbb{N}. & \forall G \in \mathcal{P}(U). \exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.\\
+% & (size(G)  \geq n) \iimplies [(size(H) = 40) \aand \\ & (\nnot(K(x,y)) \oor (x=y)) \aand \\ & (In(x ,G))].
+% \end{align*}
+
+% Then move $\exists n\in\mathbb{N}$ within the hypothesis of $\text{ IMPLIES }$,
+
+% \begin{align*}
+% \forall G \in \mathcal{P}(U). & \exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.\\
+% & (\forall n \in \mathbb{N}. size(G) \geq n) \iimplies [(size(H) = 40) \aand \\ & (\nnot(K(x,y)) \oor (x=y)) \aand \\ & (In(x ,G))].
+% \end{align*}
+
+% Now we can see the hypothesis is "the size of a group of people G is infinite", and the conclusion is "G contains 40 people who don't know each other", this is logically equivalent to "either the size of a group of people is finite, or it contains 40 people who don't know each other."
+ 
+\end{enumerate}
+
+
+
+\item
+A graph consists of a set of vertices  $V$ and a set of edges between pairs of vertices.\\
+The set of edges can be represented by a symmetric, irreflexive predicate $e: V \times V \to \{T,F\}$, where $e(a,b) = T$ denotes that there is an edge between vertex $a$ and $b$.\\
+Symmetric means  $\forall a \in V. \forall b \in V. (e(a,b) \iif e(b,a))$ and\\
+irreflexive means  $\forall a \in V.\nnot (e(a,a))$).
+
+We say that two vertices $a$ and $b$ are \emph{adjacent} if there is an edge between them.\\
+The \emph{degree of a vertex}  is the number of vertices that are adjacent to it.\\
+The \emph{maximum degree of a graph} is the maximum of the degrees of its vertices.
+
+A \emph{colouring} of the graph is a function from $V$ to a set of colours. We will use the natural numbers
+ as the set of colours. Then $\nats^V$ denotes the set of all colourings of $V$.
+
+A \textit{proper colouring} is a \textit{colouring} such that no two adjacent vertices have the same colour.
+
+
+Using predicate logic, express the following statement  about a graph with vertex set $V$ and whose set of edges is represented by the predicate $e$:\\
+\ \ \ \ \ ``If the graph has maximum degree two, then it can be properly coloured using at most three colours.''\\
+You cannot use any constants. 
+The only predicate (besides $e$) you can use is binary equality, $=$.
+
+To get full marks, you must use $\iimplies$ at most once and $\nnot$ at most four times.
+
+Use parentheses and brackets when necessary to avoid ambiguity.\\
+Justify your answer  by briefly explaining what its various parts mean.
+
+\vspace{.25in}\textbf{Solution}\vspace{.10in}
+
+The statement is logically equivalent to 
+
+\begin{multline*}
+    [[\forall a\in V.\forall b\in V.\forall c\in V.\forall d\in V.\\
+    \nnot(e(a,b)\aand e(a,c)\aand e(a,d))\oor((b=c)\oor(b=d)\oor(c=d))]\\
+    \aand[\exists g\in V.\exists h\in V. \exists i\in V. e(g,h)\aand e(g,i)\aand (\nnot(h=i))]]\\
+    \iimplies[\exists f\in\nats^V.\forall w\in V.\forall x\in V.\forall y\in V.\forall z\in V.\\
+    [(f(w)=f(x))\oor(f(w)=f(y))\oor(f(w)=f(z))] \\
+    \aand [\nnot(e(w,x)\aand(f(w)=f(x)))]].
+\end{multline*} 
+
+The part before IMPLIES has two parts connected by $\aand$. First, $$\nnot(e(a,b)\aand e(a,c)\aand e(a,d))\oor((b=c)\oor(b=d)\oor(c=d))$$ is logically equivalent to $$(e(a,b)\aand e(a,c)\aand e(a,d))\iimplies((b=c)\oor(b=d)\oor(c=d))$$, this means if a vertex is adjacent to 3 other vertices, then at least two of these 3 vertices are the same vertex. What this says is that the maximum degree is at most 2. Second, $$\exists g\in V.\exists h\in V. \exists i\in V. e(g,h)\aand e(g,i)\aand (\nnot(h=i))$$ means there is a vertex adjacent to 2 distinct vertices, this gives the maximum degree of the graph is at least 2. Combining these 2 we have the maximum degree of the graph is precisely 2.
+
+The part after IMPLIES also contains two main parts connected by $\aand$. First, $$\exists f\in\nats^V.\forall w\in V.\forall x\in V.\forall y\in V.\forall z\in V.(f(w)=f(x))\oor(f(w)=f(y))\oor(f(w)=f(z))$$ means there exists a colouring function which, for any 4 vertices, at least 2 of them must have the same colour, this gives a colouring function of the graph with at most 3 colours in the range of the function. Second,  $$\nnot(e(w,x)\aand(f(w)=f(x)))$$ gives it cannot be true that two vertices are adjacent and have the same colour, by definition this shows the function $f$ is a proper colouring function. Combining with the first part, the graph needs to have a proper colouring function which only has at most 3 colours in its range.
+
+Therefore, as combining everything before and after $\iimplies$, we conclude our predicate is precisely the sentence required.
+
+\end{enumerate}
+\end{document}

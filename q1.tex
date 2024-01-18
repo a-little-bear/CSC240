@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{0cm}
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\mathrm{AND}\,}
+\newcommand{\oor}{\,\mathrm{OR}\,}
+\newcommand{\iimplies}{\,\mathrm{IMPLIES}\,}
+\newcommand{\xor}{\,\mathrm{XOR}\,}
+\newcommand{\iif}{\,\mathrm{IFF}\,}
+
+\begin{document}
+
+\begin{center}
+{\bf CSC 240 Winter 2024 Quiz 1}\\
+due 2:00pm on Friday January 12 
+\end{center}
+
+\medskip
+
+A {\em sunflower} over a universe $U$ is a collection $\mathcal{S}$ of subsets of $U$ such that every two distinct sets in $\mathcal{S}$ have the same intersection. 
+
+For example, let $U = \{1,2,3,4,5\}$. Then $\mathcal{S} = \{ \{1,2,3\},\ \{1,2,4\},\ \{1,2,5\} \}$ is a sunflower, since the intersection of every two distinct sets in $\mathcal{S}$ is $\{1,2\}$.
+However, $\mathcal{S}' = \{ \{1,2,3\},\ \{1,2,4\},\ \{1,4,5\} \}$ is not a sunflower since, for example, 
+$\{1,2,3\} \cap \{1,2,4\} = \{1,2\} \neq \{1,4\} = \{1,2,4\} \cap \{1,4,5\}$.
+ 
+
+Let {\it Sunflower}\ :\ $ \mathcal{P}(\mathcal{P}(U)) \to \{T,F\}$ denote the predicate such that {\it Sunflower}$(\mathcal{S}) = T$ if and only if $\mathcal{S}$ is a sunflower over $U$. 
+
+Write {\it Sunflower}$(\mathcal{S})$ using only the binary equality predicate, =, and
+the binary intersection function, $\cap:\mathcal{P}(U)\times \mathcal{P}(U)\rightarrow \mathcal{P}(U)$.\\
+Use brackets when necessary to avoid ambiguity. 
+Briefly justify your answer. 
+
+\vspace{.25in}\textbf{Solution}\vspace{.10in}
+
+Define the predicate $Sunflower(S):\forall a\in S.\forall b\in S. \forall c\in S.\forall d\in S. [(\nnot(a=b))\aand(\nnot(c=d))]\iimplies[(a\cap b)=(c\cap d)]$. Here we can see that $Sunflower$ outputs $T$ if and only if the intersection of any 2 distinct sets in $S$ is equal to the intersection of any 2 distinct sets (may or may not repeat the previous 2 sets) of S, which aligns with the definition of a $sunflower$ over $U$. 
+
+\end{document}

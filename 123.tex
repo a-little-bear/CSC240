@@ -1,0 +1,123 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{Course Name _}
+\date{\today}
+\title{Homework _}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\begin{document} \maketitle
+
+1.
+
+Denote P = lecture will be in person
+
+Denote Q = infection rate decreases
+
+P IMPLIES Q
+
+2.
+
+$y_0=x_0$ XOR $b$
+
+$y_1=x_1$ XOR ($x_0$ AND $b$)
+
+$c=x_1$ AND ($x_0$ AND $b$)
+
+Generalization
+
+$y_0=x_0$ XOR $b$
+
+$y_i=x_i$ XOR ($x_{i-1}$ AND $x_{i-2}$ AND ... AND $x_{0}$ AND $b$) where $i\in \Z\cap[0,n]$
+
+$c=x_n$ AND $x_{n-1}$ AND $x_{n-2}$ AND ... AND $x_{0}$ AND $b$
+
+3.
+
+D = logic is difficult
+
+S = many students like logic
+
+E = Mathematics is easy
+
+[(D OR NOT(s)) AND (E IMPLIES NOT(D))] IMPLIES [NOT(S) IMPLIES (NOT(E) OR NOT(D))]
+
+(E AND D) OR S OR NOT(E) OR NOT(D)
+
+TAUTOLOGY
+
+4.
+
+TRUE
+
+FALSE
+
+TRUE
+
+4.
+
+floor(x,y)="0<=x-y AND x-y<1"
+
+floor(x,y)= "(y<=x) AND ($\forall z\in\Z$).[(z<=x) IMPLIES (z<= y)]"
+
+round(x,y)="$\forall z\in\Z$.(|y-x|<=|z-x|)"
+
+round(x,y)="|x-y|<1/2 OR (|x-y|=1/2 AND x<y)"
+
+5. Let P = all processes
+
+a. $(\forall x \in P. \forall z \in P. \neg(t(x,q,z)))$ AND $\exists x\in P. w(x,q)$
+
+b. $\forall x \in P. \exists y \in P. \neg(w(y,x)) AND t(x,x,y)$
+
+c. $\exists x \in P. \forall y \in P. \forall z \in P. t(y,x,z) IMPLIES w(x,y)$
+
+\end{document}

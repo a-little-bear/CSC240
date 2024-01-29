@@ -1,0 +1,43 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb, amsthm, amsmath, amsfonts, extramarks, fancyhdr, tikz, tabstackengine}
+\usepackage{fullpage}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\newcommand{\nats}{\mathbb{N}}
+
+\begin{document}
+\begin{center}
+{\bf \Large \bf CSC240 Winter 2024 Quiz 3}\\
+%due 2:00pm on Friday January 26
+\end{center}
+
+Let $a,b,c,d \in \nats$ be such that $a^2 + b^2 + c^2 = d^2$.\\
+
+Give a well-structured informal proof that if $d$ is even, then $a$, $b$, and $c$ are all even.\\
+
+You may use the following facts without proof:
+\begin{enumerate}
+\item The sum of two even numbers is even.
+\item The sum of two odd numbers is even.
+\item The sum of an even number and an odd number is odd.
+\item The product of an even number and any natural number is even.
+\end{enumerate}
+
+\begin{proof}
+    We will prove the contrapositive of the statement, that is, if $a$, $b$, and $c$ are not all even, then $d$ is not even.\\
+
+    First, we consider 3 cases:
+
+    \setlength{\leftskip}{0.5cm}
+    Case 1: Only one of $a$, $b$, and $c$ is odd. W.l.o.g. we assume $a$ is odd. Then, $a=2k+1$ for some $k \in \nats$, $b=2j$, $c=2i$, for some $i,j\in\nats$. We rewrite the equation as $(2k+1)^2+(2j)^2+(2i)^2=d^2$, which can be expanded as $2(2k^2+2k+2j^2+2i^2)+1=d^2$, here $d$ must be odd so that $d^2$ is odd, otherwise $d^2$ will be even which is impossible.\\
+
+    Case 2: Two of $a, b, c$ are odd. W.l.o.g. we assume $a,b$ are odd. Then, $a=2k+1$, $b=2j+1$, $c=2i$, for some $i,j,k\in\nats$. We rewrite the equation as $(2k+1)^2+(2j+1)^2+(2i)^2=d^2$, which can be expanded as $4(k^2+k+j^2+j+i^2)+2=d^2$, here $d$ must be odd, otherwise if $d=2m$ for some $m\in\nats$, then $d^2=4m^2$, however the left hand side is not divisible by 4.\\
+    
+    Case 3: $a,b,c$ are all odd. Then, $a=2k+1$, $b=2j+1$, $c=2i+1$, for some $i,j,k\in\nats$. We rewrite the equation as $(2k+1)^2+(2j+1)^2+(2i+1)^2=d^2$, which can be expanded as $4(k^2+k+j^2+j+i^2+i+j)+3=d^2$, here $d$ must be odd, otherwise if $d=2m$ for some $m\in\nats$, then $d^2=4m^2$, however the left hand side is not divisible by 4.\\
+
+    \setlength{\leftskip}{0cm}
+    Thus, as all possible cases lead to $d$ being odd, we have proved the contrapositive of the statement, that is, if $a$, $b$, and $c$ are not all even, then $d$ is not even, completing our proof.\\
+    
+\end{proof}
+
+\end{document}

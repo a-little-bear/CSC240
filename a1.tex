@@ -62,9 +62,9 @@ Justify your answer.
     
 \vspace{.25in}\textbf{Solution}\vspace{.10in}\\
 
-The predicate is equivalent to ``The set G contains 40 people who don't know each other."
+The predicate is equivalent to ``The set G contains 40 people who don't know each other."\\
 
-First we can see the predicate is mainly formed by 2 AND connections, thus all 3 parts need to assert True. The first part is "A set of people H has 40 people", the second part is "no one in H knows each other", and the third part is "all people in H are also in G" which means H is a subset of G. Combining these 3 parts with the 3 quantifications, we obtained our sentence. 
+First we can see the predicate (beside the quantification parts) is mainly formed by 2 AND connections. The first part is "A set of people H has 40 people", the second part is "no one in H knows each other", and the third part is "all people in H are also in G" which means H is a subset of G. Combining these 3 parts with the 3 quantifications, we obtained our sentence. 
 
 \item
 Consider the following sentence in predicate logic.
@@ -77,32 +77,23 @@ Justify your answer.
  
 \vspace{.25in}\textbf{Solution}\vspace{.10in}\\
 
-The predicate is equivalent to "Either there are finitely many people within a group, or it contains 40 people who do not know each other."
-% "If a group contains infinitely many people, then it also contains 40 people who do not know each other."
-
-First, the predicate is logically equivalent to \begin{align*}
+The predicate is equivalent to "Any group of people either has fewer than a fixed number of people, or contains 40 strangers to each other."
+\\
+ First, the predicate is logically equivalent to 
+\begin{align*}
 \exists n \in \mathbb{N}. & \forall G \in \mathcal{P}(U). \exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.\\
 & (size(G)  < n) \oor [(size(H) = 40) \aand \\ & (\nnot(K(x,y)) \oor (x=y)) \aand \\ & (In(x ,G))].
 \end{align*}
 
-We can see there are 2 parts connected by $\oor$, for any set of people $G$, either the size of $G$ is finite (first part), or there are 40 people within the group who do not know each other (second part, similar to part a). 
+Now we move $\exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.$ within the second part (right side) of the $\oor$ connector, this is allowed becasue these quantifications have no affect on the first (left side) part,
 
-% Transform the $\oor$ connection to $\iimplies$,
+\begin{align*}
+    \exists n \in \mathbb{N}. & \forall G \in \mathcal{P}(U). (size(G)  < n) \oor \\ & [\exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H. (size(H) = 40) \aand  \\ & (\nnot(K(x,y)) \oor (x=y)) \aand (In(x ,G))].
+\end{align*}
 
-% \begin{align*}
-% \exists n \in \mathbb{N}. & \forall G \in \mathcal{P}(U). \exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.\\
-% & (size(G)  \geq n) \iimplies [(size(H) = 40) \aand \\ & (\nnot(K(x,y)) \oor (x=y)) \aand \\ & (In(x ,G))].
-% \end{align*}
-
-% Then move $\exists n\in\mathbb{N}$ within the hypothesis of $\text{ IMPLIES }$,
-
-% \begin{align*}
-% \forall G \in \mathcal{P}(U). & \exists H \in \mathcal{P}(U). \forall x \in H. \forall y \in H.\\
-% & (\forall n \in \mathbb{N}. size(G) \geq n) \iimplies [(size(H) = 40) \aand \\ & (\nnot(K(x,y)) \oor (x=y)) \aand \\ & (In(x ,G))].
-% \end{align*}
-
-% Now we can see the hypothesis is "the size of a group of people G is infinite", and the conclusion is "G contains 40 people who don't know each other", this is logically equivalent to "either the size of a group of people is finite, or it contains 40 people who don't know each other."
+We can now see the second (right side) part is precisely our Part A of this question. So, the first two quantifications give "there is a natural number n, for any sets of people G", then the first part of $\oor$ gives "the size of the set G is less than the natural number n", and the second part of $\oor$ gives "there is a set of 40 people who don't know each other and are all in the set of people G". Combining these 3 parts, we obtained our sentence, completing the justification. 
  
+
 \end{enumerate}
 
 
@@ -145,8 +136,8 @@ The statement is logically equivalent to
     [(f(w)=f(x))\oor(f(w)=f(y))\oor(f(w)=f(z))] \\
     \aand [\nnot(e(w,x)\aand(f(w)=f(x)))]].
 \end{multline*} 
-
-The part before IMPLIES has two parts connected by $\aand$. First, $$\nnot(e(a,b)\aand e(a,c)\aand e(a,d))\oor((b=c)\oor(b=d)\oor(c=d))$$ is logically equivalent to $$(e(a,b)\aand e(a,c)\aand e(a,d))\iimplies((b=c)\oor(b=d)\oor(c=d))$$, this means if a vertex is adjacent to 3 other vertices, then at least two of these 3 vertices are the same vertex. What this says is that the maximum degree is at most 2. Second, $$\exists g\in V.\exists h\in V. \exists i\in V. e(g,h)\aand e(g,i)\aand (\nnot(h=i))$$ means there is a vertex adjacent to 2 distinct vertices, this gives the maximum degree of the graph is at least 2. Combining these 2 we have the maximum degree of the graph is precisely 2.
+\\
+The part before IMPLIES has two parts connected by $\aand$. First, $$\forall a\in V.\forall b\in V.\forall c\in V.\forall d\in V.$$$$\nnot(e(a,b)\aand e(a,c)\aand e(a,d))\oor((b=c)\oor(b=d)\oor(c=d))$$ is logically equivalent to $$\forall a\in V.\forall b\in V.\forall c\in V.\forall d\in V.$$$$(e(a,b)\aand e(a,c)\aand e(a,d))\iimplies((b=c)\oor(b=d)\oor(c=d))$$, this means if a vertex is adjacent to 3 other vertices (may repeat the same vertex), then at least two of these 3 vertices are the same vertex. What this says is that the maximum degree is at most 2. Second, $$\exists g\in V.\exists h\in V. \exists i\in V. e(g,h)\aand e(g,i)\aand (\nnot(h=i))$$ means there is a vertex adjacent to 2 distinct vertices, this gives the maximum degree of the graph is at least 2. Combining these 2 we have the maximum degree of the graph is precisely 2.
 
 The part after IMPLIES also contains two main parts connected by $\aand$. First, $$\exists f\in\nats^V.\forall w\in V.\forall x\in V.\forall y\in V.\forall z\in V.(f(w)=f(x))\oor(f(w)=f(y))\oor(f(w)=f(z))$$ means there exists a colouring function which, for any 4 vertices, at least 2 of them must have the same colour, this gives a colouring function of the graph with at most 3 colours in the range of the function. Second,  $$\nnot(e(w,x)\aand(f(w)=f(x)))$$ gives it cannot be true that two vertices are adjacent and have the same colour, by definition this shows the function $f$ is a proper colouring function. Combining with the first part, the graph needs to have a proper colouring function which only has at most 3 colours in its range.
 

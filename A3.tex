@@ -1,0 +1,208 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{changepage}   % for the adjustwidth environment
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3cm}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+
+% Environment for writing formal proofs======================================
+%
+% \nl ends line and makes next line a Numbered Line
+% \ul ends line and makes next line an Unnumbered Line 
+% \n increases the level of indentation ("next")
+% \p decreases the level of indentation ("previous")
+%\firstline  to number the first line of a proof
+%
+% Example:
+% 
+% 1     let $x \in \nats$ be arbitrary
+% 2         let $y = x+1 \in \nats$
+% 3         $y > x$; property of $\nats$, 2
+% 4      $\exists y \in \nats. (y > x)$; construction 2, 3
+% 5  $\forall x \in \nats. \exists y \in \nats. (y > x)$; generalization 1,4
+%
+
+% this can be typed as follows:
+%
+% \begin{formal}
+% \firstline          <--- to number the first line of a proof
+% \n \label{gen-start} let $x \in \nats$ be arbitrary \nl  
+% \n let $y = x+1 \in \nats$ \label{defy} \nl
+% $y > x$; property of $\nats$, \lref{defy} \label{gt} \nl
+% \p $\exists y \in \nats. (y > x)$; \label{inside} construction \lref{defy},\lref{gt} \nl
+% \p $\forall x \in \nats. \exists y \in \nats. (y > x)$; generalization \lref{gen-start}, \lref{inside}
+% \end{formal}
+% 
+% You can use \labels anywhere in the code and \lref to refer to the line
+% number.  (This is done using smartref package.)
+%
+%to reset the line numbering counter:
+%\setcounter{linenum}{0} 
+
+\usepackage{smartref} % for referencing the line numbers
+\newcounter{linenum}
+\addtoreflist{linenum}
+\def\codeTabSpace{\hspace*{4mm}}
+\newenvironment{formal}%
+{\begin{tabbing}%
+\codeTabSpace \= \hspace*{20mm} \= \hspace*{20mm} \= \hspace*{20mm} \= \kill%
+}%
+{\end{tabbing}%
+}
+\newcounter{ind}
+\newcommand{\n}{\addtocounter{ind}{5}\hspace*{5mm}}
+\newcommand{\p}{\addtocounter{ind}{-5}\hspace*{-5mm}}
+\newcommand{\nl}{\\\stepcounter{linenum}{\scriptsize \arabic{linenum}}\>\hspace*{\value{ind}mm}}
+\newcommand{\ul}{\\\>\hspace*{\value{ind}mm}}
+\newcommand{\bl}{\\[-1.5mm]\>\hspace*{\value{ind}mm}}
+\newcommand{\firstline}{\stepcounter{linenum}{\scriptsize \arabic{linenum}}\>}
+\newcommand{\lref}[1]{\linenumref{#1}} % use this to refer to a line number
+% End of environment for writing formal proofs=====================================
+
+
+\begin{document}
+\begin{center}
+{\bf \Large \bf CSC240 Winter 2024 Homework Assignment 3}\\
+\end{center}
+
+My name and student number: Joseph Siu, 1010085701\\
+The list of people with whom I discussed this homework assignment:
+
+\begin{enumerate}
+\item
+Let ${\mathcal F}$ be the set of all functions from $D$ to $D$, where $D$ is a nonempty set.\\
+Consider the following two predicates
+with domain ${\mathcal F} \times {\mathcal F}$:
+\begin{eqnarray*}
+    P(f,g) &= &\exists y \in D. \forall x \in D.[ f(g(x)) \neq y] \mbox{  and }\\
+    Q(f,g) &= &\exists v \in D.[  \forall u \in D. (f(u) \neq v) \oor \forall u \in D. (g(u) \neq v)].
+\end{eqnarray*}
+
+Formally prove that $\forall f \in {\mathcal F}. \forall g \in {\mathcal F}.(P(f,g) \iimplies Q(f,g))$.\\
+Remember to number all lines, indent properly, and justify all your steps, including references to the appropriate line numbers, as described in Proof Outlines. Only do one step of the proof per line.
+
+\begin{proof}
+    \hfill
+    \begin{formal}
+        \firstline
+        \n Let $f \in \mathcal{F}$ be arbitrary; \nl
+
+        \n Let $g \in \mathcal{F}$ be arbitrary; \nl
+
+        \n \label{P} Assume $P(f,g)$; \nl
+
+        \n $P(f,g)\iif [\exists a\in D. \forall b\in D. (f(g(b))\neq a)]$; \nl
+
+        $\exists a\in D. \forall b\in D. (f(g(b))\neq a)$; modus ponens \nl
+
+        \n Let $y\in D$ such that $\forall b\in D. (f(g(b))\neq y)$; instantiation \nl
+
+        \n $(\forall d\in D. f(d)\neq y) \oor \nnot(\forall d\in D. f(d)\neq y)$; tautology \nl
+
+        Case 1. $\forall d\in D. f(d)\neq y$; \nl
+
+        \n $\forall d\in D. (f(d)\neq y)\oor \forall d\in D. (g(d)\neq y)$; proof of disjunction \nl
+
+        \p $\exists y\in D. [\forall d\in D. (f(d)\neq y)\oor \forall d\in D. (g(d)\neq y)]$ \nl
+
+        Case 2. $\nnot(\forall d\in D. f(d)\neq y)$;\nl
+
+        \n $\nnot(\forall d\in D. f(d)\neq y)\iif (\exists d\in D. f(d)=y)$; tautology \nl
+
+        $\exists d\in D. f(d)=y$; modus ponens \nl
+
+        \n Let $x\in D$ such that $f(x)=y$; instantiation \nl
+
+        \n To reach contradiction, assume $\exists e\in D. x=g(e)$;\nl
+
+        % \n $\nnot [\forall f\in D. (f(g(f))\neq y)]$;\nl
+
+        \n $f(x)=f(x)$; tautology \nl
+
+        $f(x)=f(g(e))$; substitution \nl
+
+        $f(g(e))\neq y$;\nl
+
+        $f(x)\neq y$; substitution \nl
+
+        \p $\forall p\in D. x\neq g(p)$; proof by contradiction \nl
+
+        \p $\forall p\in D. f(p)\neq x\oor \forall p\in D. g(p)\neq x$; proof of disjunction \nl
+
+        $\exists x\in D. [\forall p\in D. f(p)\neq x\oor \forall p\in D. g(p)\neq x]$; \nl
+
+        \p $\exists v\in D. [\forall p\in D. f(p)\neq x\oor \forall p\in D. g(p)\neq x]$; proof by cases \nl
+
+        \p $Q(f,g)$;\nl
+
+        \p $P(f,g)\iimplies Q(f,g)$;\nl
+
+        \p $\forall g\in \mathcal{F}. [P(f,g)\iimplies Q(f,g)]$;\nl
+
+        \p $\forall f\in \mathcal{F}. \forall g\in \mathcal{F}. [P(f,g)\iimplies Q(f,g)]$;
+
+    \end{formal}
+\end{proof}
+
+
+\item
+Recall that, if $p$ is a polynomial of degree $m \geq 1$, then there exist coefficients $a_i$ for  $0 \leq i \leq m$ such that $a_m \neq 0$ and, for all numbers $n$,
+$$p(n) =  \sum_{i=0}^m a_i n^i.$$
+Give a well-structured informal proof that, for any polynomial $p$ of degree at least 1 whose coefficients are natural numbers,
+there is a natural number $n$ such that $p(n)$ is not prime.
+
+
+
+
+\begin{proof}
+    \begin{adjustwidth}{1cm}{}
+    \end{adjustwidth}
+
+    \begin{adjustwidth}{0.5cm}{}
+        Assume $p$ is a polynomial of degree $m\geq 1$ whose coefficients are natural numbers.
+
+        \begin{adjustwidth}{1cm}{}
+            Case 1: $a_0 = 0$ or $a_0 = 1$;
+            \begin{adjustwidth}{1.25cm}{}
+                Let $n = 0\in\nats$;
+
+                \begin{adjustwidth}{1.5cm}{}
+                    \[p(n)=\sum_{i=0}^{m}a_i n^i=a_0\cdot 0^0+\sum_{i=1}^{m}a_i 0^i=a_0\]
+                \end{adjustwidth}
+                Since $0$ is not prime and $1$ is not prime, these imply $p(n)$ is also not prime.
+            \end{adjustwidth}
+            For Case 1, we have shown that there exists a natural number $n$ such that $p(n)$ is not prime.
+
+            Case 2: $a_0 \geq 2$;
+            \begin{adjustwidth}{1.25cm}{}
+                Let $n = a_0\in \nats$;
+
+                \begin{adjustwidth}{1.5cm}{}
+                    \[
+                        p(n)=a_0\cdot a_0^0 + \sum_{i=1}^m a_i a_0^i=a_0 + a_0\sum_{i=1}^m a_i a_0^{i-1} = a_0\left(1+\sum_{i=1}^m a_i a_0^{i-1}\right)\\
+                    \]
+
+                \end{adjustwidth}
+                    Since $a_0\in\nats$, $1+\displaystyle\sum_{i=1}^m a_i a_0^{i-1}\in \nats$, $a_0\neq 1$, and $\left(1+\displaystyle\sum_{i=1}^m a_i a_0^{i-1}\right) \geq (1+ a_m a_0^{m-1}) \geq (1+a_m)\geq 2 \neq 1$, these imply $p(n)$ is not prime.
+            \end{adjustwidth}
+            For Case 2, we have shown that there exists a natural number $n$ such that $p(n)$ is not prime.
+        \end{adjustwidth}
+        For all cases, we have shown that there is such natural number $n$ which makes $p(n)$ not a prime.
+    \end{adjustwidth}
+    Therefore, we conclude if $p$ is a polynomial of degree $m\geq1$ whose coefficients are natural numbers, then there is a natural number $n$ suc hthat $p(n)$ is not prime.
+\end{proof}
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,39 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pagestyle{empty}
+\usepackage{fullpage}
+
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+\newcommand{\nand}{\,\,\mathrm{NAND}\,\,}
+
+%%% Sets
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+
+\begin{document}
+\begin{center}
+{\bf \Large \bf CSC240 Winter 2024 Quiz 2}\\
+due 2:00pm on Friday January 19 
+\end{center}
+
+
+
+A 3-CNF formula is a formula in CNF in which every clause contains at most 3 literals.\\
+
+Consider the propositional formula  $E =$  ``$(((P \text{ OR } Q) \text{ OR } R) \text{ OR } \text{NOT}(S))$''.\\
+
+
+Explain why there is no 3-CNF formula containing only the variables $P, Q, R$, and $S$
+that is logically equivalent to $E$.\\\\\\
+
+To convert $E$ into 3-CNF, we need to distribute the OR operations over the AND oprations, but becasue $E$ has no AND operations, we cannot do this. So, since changing $E$ to a CNF formula will either change the logical value, or has a clause containing more than 3 literals, therefore we conclude that there is no 3-CNF formula containing only the variables $P, Q, R$, and $S$ that is logically equivalent to $E$, as needed.
+
+\end{document}

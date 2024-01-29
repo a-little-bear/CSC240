@@ -1,0 +1,205 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pagestyle{empty}
+\usepackage{fullpage}
+\usepackage{comment}
+
+\usepackage[margin=1in]{geometry}
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+\newcommand{\nand}{\,\,\mathrm{NAND}\,\,}
+
+%%% Sets
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+
+\begin{document}
+\begin{center}
+{\bf \Large \bf CSC240 Winter 2024 Homework Assignment 2}\\
+due January 25, 2024
+\end{center}
+
+My name and student number: Joseph Siu, 1010085701\\
+The list of people with whom I discussed this homework assignment:
+
+Liam Csiffary
+
+Sanchit Manchanda
+
+Serif Wu
+
+Hrithik Parag Shah
+
+Abhi Prajapati
+
+Sepehr Jafari
+
+
+\begin{enumerate}
+\item
+Let $\mathcal{S}$ denote the set consisting of all 16 binary connectives.
+For each binary connective $\star \in \mathcal{S}$, define the following propositional formulas:
+\begin{quote}
+    $A^{\star} = \text{``}((P \text{ OR } Q) \text{ XOR } \text{T}) \text{ IMPLIES } (P \star Q)\text{''}\\
+    B^{\star} = \text{``}(P \text{ OR } Q) \text{ IMPLIES } ((P \star Q) \text{ XOR } \text{T})\text{''}\\
+    C^{\star} = \text{``}((P \text{ OR } Q) \text{ XOR } P) \text{ IMPLIES } ((P \text{ OR } Q) \text{ XOR } (P \star Q))\text{''}\\
+    D^{\star} = \text{``}((P \text{ OR } Q) \text{ XOR } Q) \text{ IMPLIES } ((P \text{ OR } Q) \text{ XOR } (P \star Q))\text{''}$
+\end{quote}
+
+\begin{enumerate}
+\item For how many binary connectives $\star \in \mathcal{S}$ is the formula $A^\star$ a tautology?\\
+Justify your answer without using a truth table.\\
+
+$\bold{Claim}$. There are 8 possible binary connectives $\star \in \mathcal{S}$ such that the formula $A^\star$ is a tautology.
+
+$\bold{Justification}$. For implication, the formula is F only when the hypothesis is T and the conclusion is F. So, to let the formula be tautology, when $((P\oor Q)\xor T)$ is T, $(P\star Q)$ must also assert T. Thus, $P\star Q$ must be T when $(P\oor Q)$ is F. Becasue $(P\oor Q)$ is F only when both $P$ and $Q$ are F. Therefore, as we can see there are $2\times2\times2=8$ possible binary connectives $\star \in \mathcal{S}$ such that the formula $A^\star$ is a tautology, as needed (here as long as the truth of $\star$ is T when $P$ is F and $Q$ is F, the formula is still a tautology).\\
+
+
+
+\item For how many binary connectives $\star \in \mathcal{S}$ is the formula $B^\star$ a tautology?\\
+Justify your answer without using a truth table.
+
+$\bold{Claim}$. There are 2 possible binary connectives $\star\in S$ such that the formula $B^\star$ is a tautology.
+
+$\bold{Justification}$. For implication, the formula is F only when the hypothesis is T and the conclusion is F. So, to let the formula be tautology, when $(P\oor Q)$ is T, $((P\star Q)\xor T)$ must also assert T, that is, $P\star Q$ must be F when $(P\oor Q)$ is T. Combining the fact that 3 of the 4 cases of $(P\oor Q)$ are T, we can see there are only 2 possible binary connectives $\star\in S$ such that the formula $B^\star$ is a tautology, as needed.\\
+
+\item For how many binary connectives $\star \in \mathcal{S}$ is the formula $C^\star$ a tautology?\\
+Justify your answer without using a truth table.
+
+$\bold{Claim}$. There are 8 possible binary connectives $\star\in S$ such that the formula $C^\star$ is a tautology.
+
+$\bold{Jusitfication}$. For implication, the formula is F only when the hypothesis is T and the conclusion is F. So, to let the formula be tautology, when $[(P\oor Q)\xor P]$ is T, $((P\oor Q)\xor(P\star Q))$ must also assert T. So, since $[(P\oor Q)\xor P]$ is T only when $P$ is F and $Q$ is T, and to let $((P\oor Q)\xor(P\star Q))$ be T, $P\star Q$ must be F becasue in this case $(P\oor Q)$ is T. Hence, because the value of $(P\star Q)$ does not matter in 3 of the 4 cases of $P$ and $Q$, this gives $2\times2\times2=8$ possible binary connectives $\star\in S$ such that the formula $C^\star$ is a tautology, as needed.\\
+
+\item For how many binary connectives $\star \in \mathcal{S}$ is at least one of $A^\star$, $B^\star$, $C^\star$, or $D^\star$ a tautology?\\
+Justify your answer without using a truth table.
+
+$\bold{Claim}$. There are 14 possible binary connectives $\star\in S$ such that at least one of $A^\star$, $B^\star$, $C^\star$, or $D^\star$ is a tautology.
+
+$\bold{Justification}$. For the sake of convinience, we will first count the connectives that are impossible to let any of $A^\star$, $B^\star$, $C^\star$, or $D^\star$ be a tautology, then subtract the number from 16 and get our number. First, consider $C^\star$ and $D^\star$, from part (c) we can see $\star$ is impossible to be a connective that makes $C^\star$ a tautology when it asserts T when $P$ is F and $Q$ is T, similarly we can see $\star$ is impossible to be a connective that makes $D^\star$ a tautology when it asserts T when $P$ is T and $Q$ is F. So, there are $2\times2=4$ connectives that are impossible to make at least one of $C^\star$ or $D^\star$ a tautology. Combining with part (a), we can see the connectives must also assert F when $P$ is F and $Q$ is F so that $A^\star$ is not a tautology, this eliminated the possibility to only 2 connectives (to be impossible). Now, since these 2 connectives are also impossible to make $B^\star$ a tautology, we conclude these 2 connectives are the only ones that cannot make at least one of $A^\star$, $B^\star$, $C^\star$, or $D^\star$ a tautology. Hence, there are $2\times2\times2\times2-2=14$ possible binary connectives $\star\in S$ such that at least one of $A^\star$, $B^\star$, $C^\star$, or $D^\star$ is a tautology, as needed.\\
+
+\end{enumerate}
+
+
+
+\item 
+Let $U$ denote a set and let $P: U \times U \rightarrow \{\text{T}, \text{F}\}$ denote a binary predicate.
+Consider the following predicate logic formulas:
+\begin{align*}
+    A_1 &= \mbox{``}\forall u \in U. \forall v \in U. ([\forall w \in U. (P(w,u) \mbox{ IFF } P(w,v)))] \mbox{ IMPLIES} (u=v))\mbox{''}\\
+    A_2 &= \mbox{``}\exists u \in U. \forall v \in U. (\mbox{NOT}(P(v,u)))\mbox{''}\\
+    A_3 &= \mbox{``}\forall u \in U. \exists v \in U. \forall w \in U. (P(w,v) \mbox{ IFF } [\exists x \in U.(P(w,x) \mbox{ AND } P(x,u))])\mbox{''}\\
+    A_4 &= \mbox{``}\forall u \in U. \forall v \in U. \exists w \in U. \forall x \in U. [P(x,w) \mbox{ IFF } ((x=u) \mbox{ OR } (x = v))]\mbox{''}
+\end{align*}
+\begin{enumerate}
+
+\item Consider the interpretation where $U = \mathbb{N}$ and $P(u,v)$ is T if and only if $u < v$.\\
+Which of $A_1$, $A_2$, $A_3$, and $A_4$ are true under this interpretation? Justify your answer.
+
+$\bold{Claim}$. $A_1$ is true. 
+
+$\bold{Jusitfication}$. For $A_1$, consider 3 cases. 
+
+If $u < v$,  then we can always choose $w=u$ such that $P(w,u)$ is F and $P(w,v)$ is T. So, the hypothesis is F which makes the entire predicate logic formula T. 
+
+If $v < u$, similar to the preivous case, then we can always choose $w=v$ such that $P(w,v)$ is F and $P(w, u)$ is T. So the hypothesis is F which makes the entire predicate logic formula T.
+
+If $u=v$, then becasue the conlcusion of implication is T, this makes the entire predicate logic formula T too. 
+
+Hence, $A_1$ is true, as needed.\\
+
+$\bold{Claim}$. $A_2$ is true.
+
+$\bold{Jusitfication}$. For $A_2$, we can simply fix $u=0$, then $P(v,u)=P(v,0)$, since $P(v,0)$ if and only if $v<0$, thus $P(v,0)$ is F for all $v\in\nats$. So, the negation of $P(v,u)$ is T for all $v\in\nats$. Hence, $A_2$ is true, as needed.\\
+
+$\bold{Claim}$. $A_3$ is true.
+
+$\bold{Jusitfication}$. We first break the $\iif$ into forward and backward implications, after that, we rename the ambiguous variables, then, we change the formula into prenax normal form. From this form, we justify our claim.
+
+First, $A_3$ is equivalent to \begin{multline*}
+    \forall u\in U. \exists v\in U. \forall w\in U. [[P(w,v)\iimplies (\exists x\in U. (P(w,x)\aand P(x,u)))]\aand\\
+    [(\exists x\in U. (P(w,x) \aand P(x,u))\iimplies P(w,v))]].
+\end{multline*} Now, to avoid ambiguity, we change the second $x$ to $y$, that is, $A_3$ is now equivalent to \begin{multline*}
+    \forall u\in U. \exists v\in U. \forall w\in U. [[P(w,v)\iimplies (\exists x\in U. (P(w,x)\aand P(x,u)))]\aand\\
+    [(\exists y\in U. (P(w,y) \aand P(y,u))\iimplies P(w,v))]].
+\end{multline*} Then, we change the formula into prenax form, \begin{multline*}
+    \forall u\in U. \exists v\in U. \forall w\in U. \exists x\in U. \forall y\in U. [[P(w,v)\iimplies ((P(w,x)\aand P(x,u)))]\\\aand [((P(w,y) \aand P(y,u))\iimplies P(w,v))]].
+\end{multline*}
+
+Consider 2 cases. When $u=0$, we can simply fix $v=u=0$, then $P(w,v)=P(w,0)$ and $P(y,u)=P(y,0)$ are both F for all $w,y\in\nats$, thus the two implications are vacuously true.
+
+When $u>0$, that is, $u\geq1$, we choose $v=x=u-1$, then $w<v \iimplies w<x$ and $w<v \iimplies x<v+1=u$, so we can see both implications are always true. 
+
+Hence, $A_3$ is true, as needed.\\
+
+$\bold{Claim}$. $A_4$ is false.
+
+$\bold{Jusitfication}$. We show $A_4$ is false by showing its negation is T. That is, we want to show that \begin{multline*}
+    \exists u\in U. \exists v\in U. \forall w\in U. \exists x\in U. [[P(x,w)\aand \nnot ((x=u)\oor(x=v))]\oor\\
+    [((x=u)\oor(x=v))\aand \nnot (P(x,w))]] 
+\end{multline*} holds T.
+
+Consider $u=100$ and $v=100$, for all $w\in\nats$, if $w=0$, we choose $x=u$, then $P(x,w)$ is F and $((x=u)\oor (x=v))$ is T, showing the formula above holds T; if $w\neq0$, then choose $x=0$, then $P(x,w)$ is T and  $((x=u)\oor (x=v))$ is F, showing the formula above holds T. Hence, $A_4$ is false, as needed.\\
+
+
+
+\item Consider the interpretation where $U = \mathbb{N}$ and for $u, v \in \mathbb{N}$, predicate $P(u,v)$ is true if and only if the $u^{\text{th}}$ least significant digit in the binary expansion of $v$ is 1.\\
+Which of $A_1$, $A_2$, $A_3$, and $A_4$ are true under this interpretation? Justify your answer.
+
+$\bold{Claim}$. $A_1$ is true.
+
+$\bold{Jusitfication}$. The hypothesis of $A_1$ means, $u$ has the same $w^{\text{th}}$ least significant digit number as $v$ for all $w\in\nats$. So, this means $u=v$ which is precisely our conclusion, otherwise one of the digits of $u$ and $v$ must be 0, which contradicts the hypothesis. Hence, $A_1$ is true, as needed.\\
+
+$\bold{Claim}$. $A_2$ is true.
+
+$\bold{Jusitfication}$. Let $u=0$, then $P(v,u)$ is F for all $v\in\nats$, so the negation of $P(v,u)$ is T for all $v\in\nats$. Hence, $A_2$ is true, as needed.\\
+
+$\bold{Claim}$. $A_3$ is true.
+
+$\bold{Jusitfication}$. From Part (a), we changed $A_3$ equivalently to \begin{multline*}
+    \forall u\in U. \exists v\in U. \forall w\in U. \exists x\in U. \forall y\in U. [[P(w,v)\iimplies ((P(w,x)\aand P(x,u)))]\\\aand [((P(w,y) \aand P(y,u))\iimplies P(w,v))]]. 
+\end{multline*} Now, becasue there is no such natural number that the $w^{\text{th}}$ least significant digit is 1 for all $w\in\nats$, thus the first implication is vacuously true becasue of the for all quantifier of $w$. Moreover, if we fix $v=u$, then $P(y,u)\iimplies P(y,v)$ is always true. Hence, $A_3$ is true, as needed.\\ 
+
+$\bold{Claim}$. $A_4$ is true. 
+
+$\bold{Jusitfication}$. Let $w$ be the number where its $u^{\text{th}}$ least significant digit is 1 and its $v^{\text{th}}$ least significant digit is 1, and all other least significant digits are 0. Then, we can see $P(x,w)$ is T if and only if $x=u$ or $x=v$, which is precisely our if and only if formula, so $A_4$ is true, as needed.\\
+
+\item Is $A_4$ logically implied by the formula $A_1 \mbox{ AND } A_2\mbox{ AND }A_3$? Justify your answer.
+
+$\bold{Claim}$. $A_4$ is not logically implied by the formula $A_1 \mbox{ AND } A_2\mbox{ AND }A_3$.
+
+$\bold{Justification}$. Since in the interpretation of part (A), $A_4$ is false, but $A_1 \mbox{ AND } A_2\mbox{ AND }A_3$ is true, so $A_4$ is not logically implied by the formula $A_1 \mbox{ AND } A_2\mbox{ AND }A_3$, as needed.\\
+
+\item Is $A_2$ logically implied by the formula ``$A_1 \mbox{ AND } A_3\mbox{ AND }A_4$''? Justify your answer. 
+
+$\bold{Claim}$. $A_2$ is not logically implied by the formula ``$A_1 \mbox{ AND } A_3\mbox{ AND }A_4$.
+
+$\bold{Justification}$. Consider the interpretation where $U=\nats-\{0\}$ and for $u,v\in\nats-\{0\}$, predicate $P(u,v)$ is true if and only if the $(u-1)^{\text{th}}$ least significant digit in the binary expansion of $v$ is 1.
+
+Then, similar to Part (B), 
+
+For $A_1$, the hypothesis of $A_1$ is, $u,v$ have the same number for all least significant digits, this directly gives us $u=v$ which is out conclusion, otherwise contradicts the hypothesis. Thus $A_1$ holds true.
+
+For $A_2$, becasue there is no such $u\in U$ where all its least significant digits are 0, this implies $A_2$ is false.
+
+For $A_3$, first it is equivalent to \begin{multline*}
+    \forall u\in U. \exists v\in U. \forall w\in U. \exists x\in U. \forall y\in U. [[P(w,v)\iimplies ((P(w,x)\aand P(x,u)))]\\\aand [((P(w,y) \aand P(y,u))\iimplies P(w,v))]]. 
+\end{multline*} from part (A) and (B). 
+
+Now, since there is no such $v$ that has 1 for all least significant digits (we consider the leading 0's as least significant digits too), the first implication is vacuously true. Moreover, if we fix $v=u$, then $P(y,u)\iimplies P(y,v)$ is always true. Hence, $A_3$ is true.
+
+For $A_4$, let $w$ be the number where its $(u-1)^{\text{th}}$ least significant digit is 1 and its $(v-1)^{\text{th}}$ least significant digit is 1, and all other least significant digits are 0. Then, we can see $P(x,w)$ is T if and only if $x=u$ or $x=v$, which is precisely our if and only if formula, so $A_4$ is true.
+
+Therefore, in this interpretation $A_1,A_3,A_4$ are all T, however $A_2$ is F, showing $A_2$ is not logically implied by the formula $A_1\aand A_3\aand A_4$, completing our justification. 
+
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

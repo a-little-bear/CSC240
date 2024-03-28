@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{amsthm} 
+\usepackage{changepage}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{0cm}
+%%% Sets
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\reals}{\mathbb{R}}
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+
+\begin{document}
+
+\begin{center}
+{\Large CSC 240 Winter 2024 Quiz 4}
+\end{center}
+
+Give a well-structured informal proof by induction that,
+for all natural numbers $n$ and for all integers $m \geq 2$,
+$$
+\sum_{k=0}^n m^k = \frac{m^{n+1}-1}{m-1}.
+$$
+
+
+\begin{proof}[Proof by induction]\hfill
+
+    Let $P(n)="\displaystyle\sum_{k=0}^n m^k=\frac{m^{n+1}-1}{m-1}"$.
+
+    Consider the base case where $n=0$. Then, we can see $\displaystyle\sum_{k=0}^n m^k=m^n=\sum_{k=0}^0 m^k=m^0=1=\frac{m^{0+1}-1}{m-1}=\frac{m^{n+1}-1}{m-1}$, this shows $P(0)$ holds;
+
+    \begin{adjustwidth}{0.5cm}{}
+        Now, pick an arbitrary $n\in\nats$;
+
+        \begin{adjustwidth}{1cm}{}
+            Assume $P(n)$ holds, i.e., $\displaystyle\sum_{k=0}^n m^k=\frac{m^{n+1}-1}{m-1}$;
+
+            Then, we can see $\displaystyle\sum_{k=0}^{n+1} m^k=\displaystyle\sum_{k=0}^n m^k+m^{n+1}=\frac{m^{n+1}-1}{m-1}+m^{n+1}=\frac{m^{n+1}-1+m^{n+1}(m-1)}{m-1}=\frac{m^{n+1}-1+m^{n+2}-m^{n+1}}{m-1}=\frac{m^{n+2}-1}{m-1}=\frac{m^{(n+1)+1}-1}{m-1}$, we can see $P(n+1)$ also holds;
+        \end{adjustwidth}
+    \end{adjustwidth}
+
+    By induction, we can conclude that $P(n)$ holds for all $n\in\nats$, this completes the proof.
+\end{proof}
+
+\end{document}

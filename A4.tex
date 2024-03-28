@@ -1,0 +1,266 @@
+\documentclass[11pt]{alittlebear}
+
+\def\name{Joseph Siu}
+\def\course{CSC240 Winter 2024}
+\def\headername{Homework Assignment }
+\def\headernum{4}
+
+
+
+\begin{document}
+
+\newn{
+    My name and student number: Joseph Siu, 1010085701.
+
+    The list of people with whom I discussed this homework assignment:
+
+    Hrithik Parag Shah, Serif Wu, Sanchit Manchanda, Abhi Prajapati, Sepehr Jafari.
+}
+
+\newq{q1}{
+    Give a well-structured informal proof by induction  that, for each positive integer $n$ and each sequence $r = \{r_i\}_{i=1}^{n}$ of $n$ positive real numbers, 
+    $$ \prod_{i=1}^n \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum\limits_{i=1}^n r_i}{1 + \sum\limits_{i=1}^n r_i}. $$
+    \qbreak
+    \newl{l1}{
+        For any $x\in\R^+$ we have
+        \[-1<\frac{1-x}{1+x}<1 \T{ and } 0\leq\abs{\frac{1-x}{1+x}}<1.\]
+        \newp{[Proof of Lemma \ref{lemma:l1}]\hfill
+
+            \indenv{
+                Let $x\in\R^+$ be arbitrary;
+
+                Then we have $x>0$ and $2x>0$, which gives $-1<1<1+2x$;
+
+                Subtract $x$, then divide by $x+1$ (which is positive) we get $-1<\frac{1-x}{1+x}<1$;
+
+                Consider 2 cases of $-1<\frac{1-x}{1+x}<1$: $-1<\frac{1-x}{1+x}<0$ and $0\leq\frac{1-x}{1+x}<1$;
+
+                Case 1: assume $-1<\frac{1-x}{1+x}<0$;
+
+                \indenv{
+                    By definition of absolute value we have $\abs{\frac{1-x}{1+x}}=-\frac{1-x}{1+x}$;
+
+                    Multiply our inequality by $-1$ and we have $1>-\frac{1-x}{1+x}>0$;
+
+                    Substitute the absolute value and we have $0<\abs{\frac{1-x}{1+x}}<1$ which gives $0\leq\abs{\frac{1-x}{1+x}}<1$;
+                }
+
+                For Case 1 we have shown that $0\leq\abs{\frac{1-x}{1+x}}<1$;
+
+                Case 2: assume $0\leq\frac{1-x}{1+x}<1$;
+
+                \indenv{
+                    By definition of absolute value we have $\abs{\frac{1-x}{1+x}}=\frac{1-x}{1+x}$;
+
+                    Substitute the absolute value and we have $0\leq\abs{\frac{1-x}{1+x}}<1$;
+                }
+
+                For Case 2 we have shown that $0\leq\abs{\frac{1-x}{1+x}}<1$;
+
+                Since we have shown that $0\leq\abs{\frac{1-x}{1+x}}<1$ for all cases, we conclude $0\leq\abs{\frac{1-x}{1+x}}<1$;
+            }
+
+            Since our $x\in\R^+$ is arbitrary, hence we conclude that for any $x\in\R^+$ we have $-1<\frac{1-x}{1+x}<1$ and $0\leq\abs{\frac{1-x}{1+x}}<1$.
+        }
+    }
+
+    \newl{l2}{
+        For any $n\in\mathbb{Z}^+$. For any sequence $r=\{r_i\}^n_{i=1}$ of $n$ positive real numbers. If for some sequence $s$ that is an rearranged version of $r$ (e.g. rearrange $r_i$ in $r$ to non-increasing order) we have $ \prod\limits_{i=1}^n \frac{1-s_i}{1+s_i} \geq \frac{1 - \sum\limits_{i=1}^n s_i}{1 + \sum\limits_{i=1}^n s_i}$, then $ \prod\limits_{i=1}^n \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum\limits_{i=1}^n r_i}{1 + \sum\limits_{i=1}^n r_i} $ holds for $r$.
+        \newp{[Proof of Lemma \ref{lemma:l2}]
+            \hfill
+
+            \indenv{
+                Let $n\in\Z^+$ be arbitrary.
+                \indenv{
+                    Let $r=\{r_i\}^n_{i=1}$ be an arbitrary sequence of $n$ positive real numbers.
+                    \indenv{
+                        Assume $ \prod\limits_{i=1}^n \frac{1-s_i}{1+s_i} \geq \frac{1 - \sum_{i=1}^n s_i}{1 + \sum_{i=1}^n s_i} $ holds for some sequence $s$ that is an rearranged version of $r$;
+
+                        Because $s$ is an rearranged version of the finite sequence $r$, and since addition and multiplication are commutative for real numbers, we can rearrange the terms in the inequality to get $ \prod\limits_{i=1}^n \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^n r_i}{1 + \sum_{i=1}^n r_i} $.
+                    }
+                    Because $r$ is arbitrary, the implication holds for all such sequence $r$.
+                }
+                Because $n$ is arbitrary, the implication holds for all $n\in\Z^+$, for all such sequence $r$.
+            }
+            We conclude our lemma holds, as needed.
+        }
+    }
+
+    \newl{l3}{
+        \[\forall x\in\R^+.\forall y\in \R^+. \sqrbra{\frac{1-x+y}{1+x+y}\geq\frac{1-x}{1+x}}.\]
+        \newp{[Proof of Lemma \ref{lemma:l3}]\hfill
+
+            \indenv{
+                Let $x\in\R^+$ be arbitrary;
+                \indenv{
+                    Let $y\in\R^+$ be arbitrary;
+
+                    Since $x>0,y>0$, by arithmetic we have \begin{align*}
+                        yx&\geq-yx\\
+                        1-x+y+x-x^2+yx&\geq 1+x+y-x-x^2-yx\\
+                        (1+x)(1-x+y)&\geq(1-x)(1+x+y)\\
+                        \frac{1-x+y}{1+x+y}&\geq\frac{1-x}{1+x}
+                    \end{align*}
+                }
+                So, $\forall y\in \R^+. \sqrbra{\frac{1-x+y}{1+x+y}\geq\frac{1-x}{1+x}}.$
+            }
+            Hence, $\forall x\in\R^+.\forall y\in \R^+. \sqrbra{\frac{1-x+y}{1+x+y}\geq\frac{1-x}{1+x}}.$
+        }
+    }
+
+
+    \newl{l4}{
+        Let $n\in\mathbb{Z}^+$. Define the predicate $P(n)=$``For any sequence $r=\{r_i\}^{n}_{i=1}$ of $n$ positive real numbers such that $r_1>1$, $\abs{\prod\limits_{i=1}^{n} \frac{1-r_i}{1+r_i}} \leq \abs{\frac{1-r_1}{1+r_1}} \leq \abs{\frac{1-\sum_{i=1}^{n}r_i}{1+\sum_{i=1}^{n}r_i}}."$ Then $P(n)$ holds for all $n\in\Z^+$.
+
+        \newp{[Proof of Lemma \ref{lemma:l4} by induction]\hfill
+
+        
+
+        Consider the base case when $n=1$;
+        \indenv{
+            Let $r=\{r_i\}^{1}_{i=1}$ be an arbitrary sequence of $1$ positive real numbers such that $r_1>1$;
+        
+            $\abs{\prod\limits_{i=1}^{1} \frac{1-r_i}{1+r_i}} = \abs{\frac{1-r_1}{1+r_1}} = \abs{\frac{1-\sum_{i=1}^{1}r_i}{1+\sum_{i=1}^{1}r_i}}$;
+        }
+        Since $r$ is arbitrary, $P(1)$ holds.
+        \indenv{
+            Now let $n\in\Z^+$ be arbitrary;
+            \indenv{
+                Assume $P(n)$;   
+                \indenv{
+                    Let $r=\{r_i\}^{n+1}_{i=1}=\{r_i\}^{n}_{i=1}\circ\{r_i\}^{n+1}_{i=n+1}$ (concatenation in course note) be an arbitrary sequence of $n+1$ positive real numbers such that $r_1>1$;
+
+                    Since $\{r_i\}_{i=1}^n$ is covered by $P(n)$, we have $\abs{\prod\limits_{i=1}^{n} \frac{1-r_i}{1+r_i}} \leq \abs{\frac{1-r_1}{1+r_1}}$;
+
+                    Since $r_{n+1}\in\R^+$, by Lemma \ref{lemma:l1} we have $\abs{\frac{1-r_{n+1}}{1+r_{n+1}}}<1$;
+
+                    Combine the above 2 inequalities we get 
+                    
+                    $\abs{\prod\limits_{i=1}^{n+1} \frac{1-r_i}{1+r_i}}=\abs{\frac{1-r_{n+1}}{1+r_{n+1}}}\abs{\prod\limits_{i=1}^{n} \frac{1-r_i}{1+r_i}} \leq \abs{\frac{1-r_1}{1+r_1}} \abs{\frac{1-r_{n+1}}{1+r_{n+1}}}\leq \abs{\frac{1-r_1}{1+r_1}}$;
+
+                    Now, since the sum of positive numbers is positive, $n+1\geq2$, $r_1>1$, and by arithmetic we have the following:
+                    \begin{align*}
+                        -\textstyle\sum_{i=2}^{n+1}r_i&<\textstyle\sum_{i=2}^{n+1}r_i\\
+                        (r_1-1)\textstyle\sum_{i=2}^{n+1}r_i &< (r_1+1)\textstyle\sum_{i=2}^{n+1}r_i \T{ \quad(add $r_1\textstyle\sum_{i=2}^{n+1}r_i$)}\\
+                        \abs{(r_1-1)(r_1+1)+(r_1-1)\textstyle\sum_{i=2}^{n+1}r_i} &< \abs{(r_1-1)(r_1+1)+(r_1+1)\textstyle\sum_{i=2}^{n+1}r_i}\\
+                        \abs{(1-r_1)(1+r_1)+(1-r_1)\textstyle\sum_{i=2}^{n+1}r_i}&<\abs{(1-r_1)(1+r_1)-(1+r_1)\textstyle\sum_{i=2}^{n+1}r_i}\\
+                        \abs{(1-r_1)(1+r_1+\textstyle\sum_{i=2}^{n+1}r_i)}&<\abs{(1+r_1)(1-r_1-\textstyle\sum_{i=2}^{n+1}r_i)}\\
+                        \abs{\frac{1-r_1}{1+r_1}}&<\abs{\frac{1-\sum_{i=1}^{n+1}r_i}{1+\sum_{i=1}^{n+1}r_i}}
+                    \end{align*}
+
+                    Combining 2 inequalities: $\abs{\prod\limits_{i=1}^{n+1} \frac{1-r_i}{1+r_i}} \leq \abs{\frac{1-r_1}{1+r_1}} \leq \abs{\frac{1-\sum_{i=1}^{n+1}r_i}{1+\sum_{i=1}^{n+1}r_i}}$;
+                }
+                Since $r$ is arbitrary such sequence, $P(n+1)$ holds.
+            }
+        }
+        Hence, by induction, $P(n)$ holds for all $n\in\Z^+$.
+        }
+    }
+
+    \newp{[Proof of Question \ref{question:q1} by induction]\hfill
+
+        Define the predicate $Q(n)=``$For each sequence $r=\{r_i\}^n_{i=1}$ of $n$ positive real numbers, $\prod_{i=1}^n \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^n r_i}{1 + \sum_{i=1}^n r_i}.$''
+
+        Base Case: $n=1$;
+
+        \indenv{
+            Let $r=\{r_i\}^n_{i=1}$ be an arbitrary sequence of $n$ positive real numbers;
+
+            $\prod_{i=1}^1 \frac{1-r_i}{1+r_i} = \frac{1-r_1}{1+r_1} = \frac{1-\sum_{i=1}^1 r_i}{1+\sum_{i=1}^1 r_i}$;
+        }
+        Since $r$ is arbitrary, $Q(1)$ holds.
+        \indenv{
+            Let $n\in\Z^+$ be arbitrary;
+            \indenv{
+                Assume $Q(n)$ holds;
+                \indenv{
+                    Let $r=\{r_i\}^{n+1}_{i=1}$ be arbitrary sequence of $n+1$ positive real numbers;
+
+                    Let $s=\{r_i\}^{n+1}_{i=1}$ be an rearranged sequence of $r$ such that for all $i\in[1,n]\cap\N$, $s_i\geq s_{i+1}$ (i.e. non-increasing sequence);
+
+                    Consider 2 cases: $s_1\leq1$ and $s_1>1$;
+
+                    Case 1: assume $s_1\leq1$;
+                    \indenv{
+                        Since $Q(n)$, we have $\prod_{i=1}^n \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^n r_i}{1 + \sum_{i=1}^n r_i}$;
+
+                        Since $s$ is non-increasing, this implies $r_{n+1}\leq s_1\leq 1$;
+
+                        So, we get $r_{n+1}\leq1$ which implies $\frac{1-r_{n+1}}{1+r_{n+1}}\geq0$;
+
+                        Apply inductive hypothesis we get $$\prod_{i=1}^{n+1} \frac{1-r_i}{1+r_i} = \frac{1-r_{n+1}}{1+r_{n+1}}\prod_{i=1}^n \frac{1-r_i}{1+r_i} \geq \frac{1-r_{n+1}}{1+r_{n+1}}\frac{1 - \sum_{i=1}^n r_i}{1 + \sum_{i=1}^n r_i} = \frac{1-\sum_{i=1}^{n+1} r_i + r_{n+1}\sum_{i=1}^n r_i}{1+\sum_{i=1}^{n+1} r_i + r_{n+1}\sum_{i=1}^n r_i}$$
+
+                        By Lemma \ref{lemma:l3} we have $\frac{1-\sum_{i=1}^{n+1} r_i + r_{n+1}\sum_{i=1}^n r_i}{1+\sum_{i=1}^{n+1} r_i + r_{n+1}\sum_{i=1}^n r_i}\geq\frac{1-\sum_{i=1}^{n+1} r_i}{1+\sum_{i=1}^{n+1} r_i}$;
+
+                        Hence, we get $\prod_{i=1}^{n+1} \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^{n+1} r_i}{1 + \sum_{i=1}^{n+1} r_i}$;
+                    }
+                    We have shown that when $s_1\leq1$, $\prod_{i=1}^{n+1} \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^{n+1} r_i}{1 + \sum_{i=1}^{n+1} r_i}$ holds.
+
+                    Case 2: assume $s_1>1$;
+                    \indenv{
+                        By Lemma \ref{lemma:l4}, for all $m\in\Z^+$. $\abs{\prod_{i=1}^{m+1} \frac{1-s_i}{1+s_i}} \leq \abs{\frac{1 - \sum_{i=1}^{m+1} s_i}{1 + \sum_{i=1}^{m+1} s_i}}$;
+
+                        $s_1>1$ implies $\sum_{i=1}^{m+1} s_i>1$, thus $\frac{1 - \sum_{i=1}^{m+1} s_i}{1 + \sum_{i=1}^{m+1} s_i}<0$, to remove the absolute value sign we multiply both sides by -1, now $\prod_{i=1}^{m+1} \frac{1-s_i}{1+s_i}\geq-\abs{\prod_{i=1}^{m+1} \frac{1-s_i}{1+s_i}} \geq -\abs{\frac{1 - \sum_{i=1}^{m+1} s_i}{1 + \sum_{i=1}^{m+1} s_i}}=\frac{1 - \sum_{i=1}^{m+1} s_i}{1 + \sum_{i=1}^{m+1} s_i}$;
+
+                        By Lemma \ref{lemma:l2}, this implies $\forall m\in\Z^+. \prod_{i=1}^{m+1} \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^{m+1} r_i}{1 + \sum_{i=1}^{m+1} r_i}$;
+
+                        By specialization, we get $\prod_{i=1}^{n+1} \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^{n+1} r_i}{1 + \sum_{i=1}^{n+1} r_i}$;
+                    }
+                    We have shown that when $s_1>1$, $\prod_{i=1}^{n+1} \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^{n+1} r_i}{1 + \sum_{i=1}^{n+1} r_i}$ holds.
+
+                    We conclude $\prod_{i=1}^{n+1} \frac{1-r_i}{1+r_i} \geq \frac{1 - \sum_{i=1}^{n+1} r_i}{1 + \sum_{i=1}^{n+1} r_i}$ holds.
+                }
+                Since $r$ is arbitrary, $Q(n+1)$ holds.
+            }
+        }
+
+        Hence, by induction, $Q(n)$ holds for all $n\in\Z^+$.
+    }
+}
+
+\newq{q2}{
+%    An $n$-bit {\it gradually changing sequence} consists of all $2^n$ length $n$ bit strings such that
+%    \begin{itemize}
+%        \item any two consecutive strings in the sequence differ in exactly one position and
+%        \item the first string and the last string differ in exactly one position.
+%    \end{itemize}
+%    For instance, the following is a 3-bit gradually changing sequence:
+%    $$000, 100, 101, 111, 110, 010, 011, 001.$$
+%    Note that this sequence is not the unique. 
+%    The following is another example of a 3-bit gradually changing sequence:
+%    $$100, 101, 111, 110, 010, 011, 001, 000.$$
+
+%    Give a well-structured informal proof by induction that, for all $n \in \mathbb{Z}^+$, there exists an $n$-bit gradually changing sequence.
+%    \qbreak
+    \newp{[Proof of Question \ref{question:q2} by induction]\hfill
+
+        Define the predicate $P(n)=$``There exists an $n$-bit gradually changing sequence.'' 
+
+        Base Case $n=1$: Consider $0,1$, since the length of this sequence is $2^1=2$, all strings are unique, and satisfies the definitions (first and last strings differ in 1 position, and consecutive strings differ in 1 position), this sequence is a 1-bit gradually changing sequence, thus $P(1)$ holds.
+
+        \indenv{
+            Let $n\in\Z^+$ be arbitrary;
+            \indenv{
+                Assume $P(n)$;
+
+                By instantiation of $P(n)$, let $s=\{s_i\}_{i=1}^{2^n}$ be an $n$-bit gradually changing sequence;
+
+                Let $s^R=\{s_i^R\}_{i=1}^{2^n}$ be the reversal of $s$: since $s$ is gradually changing sequence, the uniqueness and length follows; the differ of consecutive strings follows as all strings still have the same strings next to them; the differ of first and last strings follows as the first and last strings are now swapped. Thus we conclude $s^R$ is also a $n$-bit gradually changing sequence;
+                
+                Consider $s'=\{0 s_i\}_{i=1}^{2^n}\circ\{1 s_i^R\}_{i=1}^{2^n}$: 
+                \begin{enumerate}[wide, labelwidth=!, labelindent=0pt]
+                    \item since $s$ and $s^R$ are gradually changing sequence, we have consecutive strings in $\{0 s_i\}_{i=1}^{2^n}$ and $\{1 s_i^R\}_{i=1}^{2^n}$ differ in only 1 position respectively;
+                    \item by definition of $s^R$ the last string $0 s_n$ in $\{0 s_i\}_{i=1}^{2^n}$  and the first string $1 s_n$ in $\{1 s_i^R\}_{i=1}^{2^n}$ differ only in the first position; 
+                    \item by definition of $s^R$ the first string $0 s_1$ in $\{0 s_i\}_{i=1}^{2^n}$  and the last string $1 s_1$ in $\{1 s_i^R\}_{i=1}^{2^n}$ also differ only in the first position;
+                    \item $s'$ is a sequence of $2^n+2^n=2^{n+1}$ strings by our concatenation;
+                    \item No string in $\{0 s_i\}_{i=1}^{2^n}$ is in $\{1 s_i^R\}_{i=1}^{2^n}$ and vice versa becasue of their first bit $0\neq1$. Moreover, all strings in $\{0 s_i\}_{i=1}^{2^n}$ and $\{1 s_i^R\}_{i=1}^{2^n}$ are unique respectively becasue $s$ and $s^R$ are gradually changing sequence. Combining these two facts, we have all strings in $\{0 s_i\}_{i=1}^{2^n}\circ\{1 s_i^R\}_{i=1}^{2^n}$ are unique;
+                    \item All strings in $\{0 s_i\}_{i=1}^{2^n}$ or $\{1 s_i^R\}_{i=1}^{2^n}$ are $n+1$ bits long becasue of our concatenation $0 s_i$ and $1 s_i^R$ for all $i\in[1,2^n]\cap\N$;
+                \end{enumerate}
+
+                Hence, since all definitions are satisfied, we conclude $s'$ is a $n+1$-bit gradually changing sequence, which by construction $P(n+1)$ holds.
+            }
+        }
+        Hence, by induction, $P(n)$ holds for all $n\in\Z^+$.
+    }
+}
+\end{document}

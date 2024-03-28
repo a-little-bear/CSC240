@@ -9,6 +9,8 @@
 \newcommand{\nats}{\mathbb{N}}
 \newcommand{\ints}{\mathbb{Z}}
 
+\usepackage[margin=1in]{geometry}
+
 %%% Logic
 \newcommand{\nnot}{\mathrm{NOT}}
 \newcommand{\aand}{\,\,\mathrm{AND}\,\,}
@@ -80,8 +82,19 @@
 My name and student number: Joseph Siu, 1010085701\\
 The list of people with whom I discussed this homework assignment:
 
-\begin{enumerate}
-\item
+Hrithik Parag Shah
+
+Serif Wu
+
+Joseph Siu 
+
+Sanchit Manchanda
+
+Abhi Prajapati
+
+Sepehr Jafari
+
+1.
 Let ${\mathcal F}$ be the set of all functions from $D$ to $D$, where $D$ is a nonempty set.\\
 Consider the following two predicates
 with domain ${\mathcal F} \times {\mathcal F}$:
@@ -97,67 +110,103 @@ Remember to number all lines, indent properly, and justify all your steps, inclu
     \hfill
     \begin{formal}
         \firstline
-        \n Let $f \in \mathcal{F}$ be arbitrary; \nl
+        \n Let $f$ be an arbitrary element of $\mathcal{F}$; \label{letf}\nl
 
-        \n Let $g \in \mathcal{F}$ be arbitrary; \nl
+        \n Let $g$ be an arbitrary element of $\mathcal{F}$; \label{letg}\nl
 
-        \n \label{P} Assume $P(f,g)$; \nl
+        \n Assume $P(f,g)$; \label{assumep}\nl
 
-        \n $P(f,g)\iif [\exists a\in D. \forall b\in D. (f(g(b))\neq a)]$; \nl
+        $\exists y\in D. \forall x\in D. (f(g(x))\neq y)$; by definition of $P(f,g)$: \lref{assumep} \label{pequiv}\nl
 
-        $\exists a\in D. \forall b\in D. (f(g(b))\neq a)$; modus ponens \nl
+        Let $w\in D$ be such that $\forall x\in D. (f(g(x))\neq w)$; instantiation \lref{pequiv}\label{lety}\nl
 
-        \n Let $y\in D$ such that $\forall b\in D. (f(g(b))\neq y)$; instantiation \nl
+        $(\forall u\in D. f(u)\neq w) \oor \nnot(\forall u\in D. f(u)\neq w)$; tautology \label{casetautology}\nl
 
-        \n $(\forall d\in D. f(d)\neq y) \oor \nnot(\forall d\in D. f(d)\neq y)$; tautology \nl
+        Case 1: Assume $\forall u\in D. f(u)\neq w$; \label{case1}\nl
 
-        Case 1. $\forall d\in D. f(d)\neq y$; \nl
+        \n $\forall u\in D. (f(u)\neq w)\oor \forall u\in D. (g(u)\neq w)$; proof of disjunction: \lref{case1}\label{case1a} \nl
 
-        \n $\forall d\in D. (f(d)\neq y)\oor \forall d\in D. (g(d)\neq y)$; proof of disjunction \nl
+        $\exists w\in D. [\forall u\in D. (f(u)\neq w)\oor \forall u\in D. (g(u)\neq w)]$; construction: \lref{lety}, \lref{case1a}\label{case1b1}\nl
 
-        \p $\exists y\in D. [\forall d\in D. (f(d)\neq y)\oor \forall d\in D. (g(d)\neq y)]$ \nl
+        $\exists v\in D. [\forall u\in D. (f(u)\neq v)\oor \forall u\in D. (g(u)\neq v)]$; \\
+        \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad substitution of bound variable $w$ for $v$: \lref{case1b1}\label{case1b}\nl
 
-        Case 2. $\nnot(\forall d\in D. f(d)\neq y)$;\nl
+        \p $(\forall u\in D. f(u)\neq w)\iimplies\exists v\in D. [\forall u\in D. (f(u)\neq v)\oor \forall u\in D. (g(u)\neq v)]$; \\
+        \quad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad direct proof: \lref{case1}, \lref{case1b} \label{tuatoimpy1}\nl
 
-        \n $\nnot(\forall d\in D. f(d)\neq y)\iif (\exists d\in D. f(d)=y)$; tautology \nl
+        Case 2: Assume $\nnot(\forall u\in D. f(u)\neq w)$;\label{case2}\nl
 
-        $\exists d\in D. f(d)=y$; modus ponens \nl
+        \n $\nnot(\forall u\in D. f(u)\neq w)\iif (\exists u\in D. \nnot(f(u)\neq w))$; \\
+        \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad\qquad\qquad\qquad\qquad tautology, negation of quantifier \label{case2a1}\nl
 
-        \n Let $x\in D$ such that $f(x)=y$; instantiation \nl
+        $\exists u\in D. \nnot(f(u)\neq w)$; modus ponens: \lref{case2}, \lref{case2a1}\label{case2a11}\nl
 
-        \n To reach contradiction, assume $\exists e\in D. x=g(e)$;\nl
+        $[\exists u\in D. \nnot(f(u)\neq w)]\iif[\exists u\in D. \nnot(\nnot(f(u)=w))]$; \\
+        \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad tautology, definition of $\neq$\label{case2a2}\nl
 
-        % \n $\nnot [\forall f\in D. (f(g(f))\neq y)]$;\nl
+        $\exists u\in D. \nnot(\nnot(f(u)=w))$; modus ponens: \lref{case2a11}, \lref{case2a2} \label{case2a22}\nl
 
-        \n $f(x)=f(x)$; tautology \nl
+        $[\exists u\in D. \nnot(\nnot(f(u)=w))]\iif[\exists u\in D. f(u)=w]$; \\
+        \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad\qquad\qquad\qquad tautology, definition of negation \label{case2a3}\nl
+        
+        $\exists u\in D. f(u)=w$; modus ponens: \lref{case2a22}, \lref{case2a3} \label{case2b}\nl
 
-        $f(x)=f(g(e))$; substitution \nl
+        Let $z\in D$ be such that $f(z)=w$; instantiation: \lref{case2b} \label{letx} \nl
 
-        $f(g(e))\neq y$;\nl
+        \n To obtain a contradiction, assume $\nnot(\forall p\in D. z\neq g(p))$; \label{contra}\nl
 
-        $f(x)\neq y$; substitution \nl
+        \n $\nnot(\forall p\in D. z\neq g(p))\iif (\exists p\in D. \nnot(z\neq g(p)))$; \\
+        \qquad\qquad\quad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad tautology, negation of quantifier \label{contratauto}\nl
 
-        \p $\forall p\in D. x\neq g(p)$; proof by contradiction \nl
+        $\exists p\in D. \nnot(z\neq g(p))$; modus ponens: \lref{contra}, \lref{contratauto} \label{contraexists1}\nl
 
-        \p $\forall p\in D. f(p)\neq x\oor \forall p\in D. g(p)\neq x$; proof of disjunction \nl
+        $(\exists p\in D. \nnot(z\neq g(p)))\iif (\exists p\in D. \nnot(\nnot(z=g(p))))$; \\
+        \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad tautology, definition of $\neq$ \label{contratauto2}\nl
 
-        $\exists x\in D. [\forall p\in D. f(p)\neq x\oor \forall p\in D. g(p)\neq x]$; \nl
+        $\exists p\in D. \nnot(\nnot(z=g(p)))$; modus ponens: \lref{contraexists1}, \lref{contratauto2} \label{contratauto3}\nl
 
-        \p $\exists v\in D. [\forall p\in D. f(p)\neq x\oor \forall p\in D. g(p)\neq x]$; proof by cases \nl
+        $(\exists p\in D. \nnot(\nnot(z=g(p))))\iif(\exists p\in D. z=g(p))$; \\
+        \qquad\qquad\quad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad tautology, definition of negation \label{contratauto4}\nl
 
-        \p $Q(f,g)$;\nl
+        $\exists p\in D. z=g(p)$; modus ponens: \lref{contratauto3}, \lref{contratauto4} \label{contraexists}\nl
 
-        \p $P(f,g)\iimplies Q(f,g)$;\nl
+        Let $e\in D$ be such that $z=g(e)$; instantiation: \lref{contraexists} \label{instantiatee}\nl
 
-        \p $\forall g\in \mathcal{F}. [P(f,g)\iimplies Q(f,g)]$;\nl
+        $f(g(e))\neq w$; specialization: \lref{instantiatee}, \lref{lety}\label{specializeytoe}\nl
 
-        \p $\forall f\in \mathcal{F}. \forall g\in \mathcal{F}. [P(f,g)\iimplies Q(f,g)]$;
+        $f(z)\neq w$; substitution of an occurence of $g(e)$ by $z$: \lref{specializeytoe}, \lref{instantiatee} \label{contrax}\nl
+
+        \p This is a contradiction: \lref{letx}, \lref{contrax}\label{contraoccur}\nl
+
+        \p $\forall p\in D. z\neq g(p)$; proof by contradiction: \lref{contra}, \lref{contraoccur}\label{bound}\nl
+
+        $\forall u\in D. z\neq g(u)$; substitution of bound variable $p$ for $u$: \lref{bound} \label{contradone}\nl
+
+        $\forall u\in D. f(u)\neq z\oor \forall u\in D. g(u)\neq z$; proof of disjunction: \lref{contradone} \label{contradisjunc}\nl
+
+        $\exists z\in D. [\forall u\in D. f(u)\neq z\oor \forall u\in D. g(u)\neq z]$; construction: \lref{letx}, \lref{contradisjunc}\label{hehe1}\nl
+
+        $\exists v\in D. [\forall u\in D. f(u)\neq v\oor \forall u\in D. g(u)\neq v]$; \\
+        \qquad\qquad\,\,\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad substitution of bound variable $z$ for $v$: \lref{hehe1} \label{hehe}\nl
+
+        \p $\nnot(\forall u\in D. f(u)\neq w)\iimplies \exists v\in D. [\forall u\in D. f(u)\neq v\oor \forall u\in D. g(u)\neq v]$; \\
+        \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad direct proof: \lref{case2}, \lref{hehe}\label{tuatoimpy2}\nl
+
+        $\exists v \in D.[  \forall u \in D. (f(u) \neq v) \oor \forall u \in D. (g(u) \neq v)]$; proof by cases: \lref{casetautology}, \lref{tuatoimpy1}, \lref{tuatoimpy2}\label{lasttautomo}\nl
+
+        $Q(f,g)$; by definition of $Q(f,g)$: \lref{lasttautomo}, \label{getq}\nl
+
+        \p $P(f,g)\iimplies Q(f,g)$; direct proof: \lref{assumep}, \lref{getq}\label{almostinside}\nl
+
+        \p $\forall g\in \mathcal{F}. [P(f,g)\iimplies Q(f,g)]$; generalization: \lref{letg}, \lref{almostinside}\label{inside}\nl
+        
+        \p $\forall f\in \mathcal{F}. \forall g\in \mathcal{F}. [P(f,g)\iimplies Q(f,g)]$; generalization: \lref{letf}, \lref{inside}\
 
     \end{formal}
 \end{proof}
 
-
-\item
+\newpage
+2.
 Recall that, if $p$ is a polynomial of degree $m \geq 1$, then there exist coefficients $a_i$ for  $0 \leq i \leq m$ such that $a_m \neq 0$ and, for all numbers $n$,
 $$p(n) =  \sum_{i=0}^m a_i n^i.$$
 Give a well-structured informal proof that, for any polynomial $p$ of degree at least 1 whose coefficients are natural numbers,
@@ -171,38 +220,52 @@ there is a natural number $n$ such that $p(n)$ is not prime.
     \end{adjustwidth}
 
     \begin{adjustwidth}{0.5cm}{}
-        Assume $p$ is a polynomial of degree $m\geq 1$ whose coefficients are natural numbers.
+        Assume $p$ is a polynomial of degree $m\geq 1$ whose coefficients are natural numbers;
 
-        \begin{adjustwidth}{1cm}{}
-            Case 1: $a_0 = 0$ or $a_0 = 1$;
-            \begin{adjustwidth}{1.25cm}{}
-                Let $n = 0\in\nats$;
+        We consider 3 cases of $a_0\in\nats$: $a_0$ is 0, 1, or greater than 1;
 
-                \begin{adjustwidth}{1.5cm}{}
-                    \[p(n)=\sum_{i=0}^{m}a_i n^i=a_0\cdot 0^0+\sum_{i=1}^{m}a_i 0^i=a_0\]
-                \end{adjustwidth}
-                Since $0$ is not prime and $1$ is not prime, these imply $p(n)$ is also not prime.
-            \end{adjustwidth}
-            For Case 1, we have shown that there exists a natural number $n$ such that $p(n)$ is not prime.
+        Case 1: $a_0 = 0$;
+        \begin{adjustwidth}{1.25cm}{}
+            Let $n = 0\in\nats$;
 
-            Case 2: $a_0 \geq 2$;
-            \begin{adjustwidth}{1.25cm}{}
-                Let $n = a_0\in \nats$;
+            $\displaystyle p(n)=\sum_{i=0}^{m}a_i n^i=a_0\cdot 0^0+\sum_{i=1}^{m}a_i 0^i=a_0;$
 
-                \begin{adjustwidth}{1.5cm}{}
-                    \[
-                        p(n)=a_0\cdot a_0^0 + \sum_{i=1}^m a_i a_0^i=a_0 + a_0\sum_{i=1}^m a_i a_0^{i-1} = a_0\left(1+\sum_{i=1}^m a_i a_0^{i-1}\right)\\
-                    \]
-
-                \end{adjustwidth}
-                    Since $a_0\in\nats$, $1+\displaystyle\sum_{i=1}^m a_i a_0^{i-1}\in \nats$, $a_0\neq 1$, and $\left(1+\displaystyle\sum_{i=1}^m a_i a_0^{i-1}\right) \geq (1+ a_m a_0^{m-1}) \geq (1+a_m)\geq 2 \neq 1$, these imply $p(n)$ is not prime.
-            \end{adjustwidth}
-            For Case 2, we have shown that there exists a natural number $n$ such that $p(n)$ is not prime.
+            Since $0$ is not prime, this implies $p(n)=a_0=0$ is also not prime;
         \end{adjustwidth}
-        For all cases, we have shown that there is such natural number $n$ which makes $p(n)$ not a prime.
+        For Case 1, we have shown that there exists a natural number $n$ such that $p(n)$ is not prime;
+
+        Case 2: $a_0 = 1$;
+        \begin{adjustwidth}{1.25cm}{}
+            Let $n = 0\in\nats$;
+
+            $\displaystyle p(n)=\sum_{i=0}^{m}a_i n^i=a_0\cdot 0^0+\sum_{i=1}^{m}a_i 0^i=a_0;$
+
+            Since $1$ is not prime, this implies $p(n)=a_0=1$ is also not prime;
+        \end{adjustwidth}
+        For Case 2, we have shown that there exists a natural number $n$ such that $p(n)$ is not prime;
+
+        Case 3: $a_0 \geq 2$;
+        \begin{adjustwidth}{1.25cm}{}
+            Let $n = a_0\in \nats$;
+
+            $\displaystyle
+                p(n)=\sum_{i=0}^m a_i a_0^i =a_0\cdot a_0^0 + \sum_{i=1}^m a_i a_0^i=a_0 + a_0\sum_{i=1}^m a_i a_0^{i-1} = a_0\left(1+\sum_{i=1}^m a_i a_0^{i-1}\right);
+            $
+
+            Now, since the addition and multiplication of natural numbers also produce natural numbers, we have $p(n)\in\nats$ and $1+\displaystyle\sum_{i=1}^m a_i a_0^{i-1}\in\nats$;
+
+            Moreover, because $a_0^0=1\geq1$ and $a_0^{p+1}\geq a_0^{p}$ for all $p\in\nats$, combining with the fact that the product of some nonnegative numbers is also nonnegative, we have $\left(1+\displaystyle\sum_{i=1}^m a_i a_0^{i-1}\right) \geq (1+ a_m a_0^{m-1})$;
+
+            Since $a_m\neq0$ implies $a_m\geq1$, and $m-1\geq0$, we also have that $1+ a_m a_0^{m-1} \geq (1+a_m)\geq 2>1$;
+            
+
+            Hence, because both $a_0$ and $\left(1+\displaystyle\sum_{i=1}^m a_i a_0^{i-1}\right)$ are natural numbers greater than 1, this means $p(n)=p(a_0)$ can be compose into a product of two natural numbers greater than 1, which implies $p(n)$ is not prime;
+        \end{adjustwidth}
+        For Case 3, we have shown that there exists a natural number $n$ such that $p(n)$ is not prime;
+
+        For all cases, we have shown that there is such natural number $n$ which makes $p(n)$ not a prime;
     \end{adjustwidth}
-    Therefore, we conclude if $p$ is a polynomial of degree $m\geq1$ whose coefficients are natural numbers, then there is a natural number $n$ suc hthat $p(n)$ is not prime.
+    Therefore, we conclude if $p$ is a polynomial of degree $m\geq1$ whose coefficients are natural numbers, then there is a natural number $n$ such that $p(n)$ is not prime.
 \end{proof}
 
-\end{enumerate}
 \end{document}

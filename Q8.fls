@@ -1,0 +1,48 @@
+PWD c:/Users/alitt/OneDrive - University of Toronto/Courses/Computer Science/CSC240/Latex/CSC240
+INPUT c:/Program Files/texlive/2023/texmf.cnf
+INPUT c:/Program Files/texlive/2023/texmf-dist/web2c/texmf.cnf
+INPUT c:/Program Files/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT c:/Users/alitt/OneDrive - University of Toronto/Courses/Computer Science/CSC240/Latex/CSC240/Q8.tex
+OUTPUT Q8.log
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/base/article.cls
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/base/article.cls
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/base/size10.clo
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/base/size10.clo
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/base/size10.clo
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/trig.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics/trig.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+INPUT ./Q8.aux
+INPUT ./Q8.aux
+INPUT Q8.aux
+OUTPUT Q8.aux
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT ./img/2024-03-21-11-17-04.png
+INPUT ./img/2024-03-21-11-17-04.png
+INPUT ./img/2024-03-21-11-17-04.png
+INPUT ./img/2024-03-21-11-17-04.png
+OUTPUT Q8.pdf
+INPUT ./img/2024-03-21-11-17-04.png
+INPUT c:/Program Files/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT Q8.aux
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb

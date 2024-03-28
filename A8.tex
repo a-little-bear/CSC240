@@ -1,0 +1,461 @@
+\documentclass[11pt, sakura, night, 1in]{hw}
+\def\course{CSC240 Winter 2024}
+\def\headername{Homework Assignment 6}
+\def\name{Joseph Siu}
+
+\usepackage{clsfiles/csc240}
+\usepackage{comment}
+\usepackage[noend, nocap]{clsfiles/alg}
+\newop{\A}{A}
+\newop{\B}{B}
+\newop{\aC}{C}
+\newop{\aD}{D}
+\newop{\E}{E}
+\newop{\SRT}{SRT}
+\newop{\AUX}{AUX}
+
+\usepackage{comment}
+
+\begin{document}
+
+My name and student number: Joseph Siu, 1010085701. Sanchit Manchanda, Ali Zaki Rashid.
+
+\begin{comment}
+Recall the algorithm \SRT\, that sorts an array \A$[1..n]$ into nondecreasing order when $n$ is a power of 2 and that calls an auxillary function \AUX.
+\newfunc{\tbf{SRT}($\A[1..n],n$)}{
+    \aif{$n>1$ \THEN}{
+        \as \SRT($\A[1..\frac{n}{2}],\frac{n}{2}$)
+        \as \SRT($\A[\frac{n}{2}+1..n],\frac{n}{2}$)
+        \as \AUX($\A[1..n],n$)
+    }
+}
+
+\newfunc{\tbf{AUX}($\A[1..n],n$)}{
+    \aif{$n>2$ \THEN}{
+        \afor{\ag{i}{1}\ato $\frac{n}{4}$ \DO}{
+            \as swap the value of \A$[i+\frac{n}{4}]$ and \A$[i+\frac{n}{2}]$
+        }
+        \as \AUX($\A[1..\frac{n}{2}],\frac{n}{2}$)
+        \as \AUX($\A[\frac{n}{2}+1..n],\frac{n}{2}$)
+        \as \AUX($\A[\bra{\frac{n}{4}+1}..\frac{3n}{4}], \frac{n}{2}$)
+        \aelif{$\A[1]>\A[2]$ \THEN}
+        \as swap the value of $\A[1]$ and $\A[2]$
+    }
+}
+
+\newq{1}{
+    What happens when \AUX($\A, 4$) is called, where $\A=[2,1,4,3]$? Briefly explain your answer.
+}
+\end{comment}
+
+\tbf{Claim of Question 1.} After \AUX($\A, 4$) is terminated, $\A$ remains the same as the initial $A=[2,1,4,3]$.
+
+We will use L1, L2 to represent ``line 1, line 2'' and so on for simplicity.
+
+\tit{Proof of Question 1.}
+
+First, call \AUX($\A, 4$).
+    
+(\AUX($\A[1..4], 4$)). On L1 since $4>2$, we enter L2. On L2 and L3 we swap the values of $\A[2]$ and $\A[3]$. Now we have $A=[2,4,1,3]$. After that, on L4 we call \AUX($\A[1..2],2$), to avoid ambiguity, let $\A'[1..2]=\A[1..2]$ be the alias array passed into \AUX($\A[1..2],2$). By alias we mean that swaps performed on, e.g., $\A'[1..2]$ will also affect $\A[1..2]$.
+
+(\AUX($\A[1..4], 4$) $\ra$ \AUX($\A'[1..2],2$)). Since $\nnot(2>2)$, we jump to L7. Since $\nnot(A'[1]>A'[2])$, no swap has performed from \AUX($\A'[1..2],2$). We terminates our \AUX($\A'[1..2],2$) after this.
+
+(\AUX($\A[1..4], 4$)). On L5 we call \AUX($\A[3..4],2$), to avoid ambiguity, let $\A''[1..2]=\A[3..4]$ be the alias array passed into \AUX($\A[3..4],2$).
+
+(\AUX($\A[1..4], 4$) $\ra$ \AUX($\A''[1..2],2$)). Since $\nnot(2>2)$, we jump to L7. Since $\nnot(A''[1]>A''[2])$, no swap has performed from \AUX($\A''[1..2],2$). We terminates our \AUX($\A''[1..2],2$) after this.
+
+(\AUX($\A[1..4], 4$)). On L6 we call \AUX($\A[2..3],2$), to avoid ambiguity, let $\A'''[1..2]=\A[2..3]$ be the alias array passed into \AUX($\A[2..3],2$).
+
+(\AUX($\A[1..4], 4$) $\ra$ \AUX($\A'''[1..2],2$)). Since $\nnot(2>2)$, we jump to L7. Since $4>1$, that is, $\A'''[1]>\A'''[2]$, we enter L8 and swap the values of $\A'''[1]$ and $\A'''[2]$. Now we have $\A'''=[1,4]$. We terminates our \AUX($\A'''[1..2],2$) after this. Now we have $\A=[2,1,4,3]$.
+
+(\AUX($\A[1..4], 4$)). After L6 has performed, we terminate our call of \AUX($\A[1..4],4$). Now we have $\A=[2,1,4,3]$, which justifies our claim.   
+
+\begin{comment}
+    
+\newq{2}{
+    Give specifications that are satisfied by \AUX\, and from which you can prove that \SRT\, is a correct sorting algorithm when $n$ is a power of 2.
+}
+\end{comment}
+
+Define the set $S=\{2^a\mid a\in\Z^+\}$, since $S\subseteq\N$, it has a total order.
+
+\tbf{Claim of Question 2.} \AUX($\A[1..n], n$)\, satisfies the following specifications:
+
+\Precon\tbf{s}:
+
+\begin{enumerate}
+    \item $n\in S$, the elements $\A[1..n]$ are from the same totally ordered set.
+    \item $\A[1..\frac{n}2]$ and $\A[\bra{\frac{n}2+1}..n]$ are sorted in non-decreasing order. Namely\\ $\forall i\in\Z^+. \forall j\in\Z^+. \sqrbra{\bra{1\le i<j\le \frac{n}{2}}\iimplies \bra{\A[i]\le \A[j]}},$ and \\$\forall i\in\Z^+. \forall j\in\Z^+. \sqrbra{\bra{\frac{n}{2}+1\le i<j\le n}\iimplies \bra{\A[i]\le \A[j]}}.$
+\end{enumerate}
+
+\Postcon\tbf{s}:
+
+\begin{enumerate}
+    \item $n$ and the multiset of elements in $\A[1..n]$ are not changed. % That is, the elements in $\A[1..n]$ afterwards are a permutation of the elements in $\A[1..n]$ before the \AUX($\A[1..n], n$)\, has been called.
+    \item $\A[1..n]$ is sorted in non-decreasing order: $\forall i\in\Z^+. \forall j\in\Z^+. \sqrbra{\bra{1\le i<j\le n}\iimplies \bra{\A[i]\le \A[j]}}.$
+\end{enumerate}
+
+\Termi: The algorithm terminates.
+
+\tbf{Justification.} First, from question $n$ must be a power of 2, and to compare the first 2 elements of $\A[1..n]$ we $n$ has to be at least $2^1$, this is precisely how we defined our $S$. Moreover, to compare the elements $\A[1..n]$ they need to be in the same totally ordered domain. Furthermore, the algorithm should terminate whenever it is executed to be correct, and at that time our given $n$ should not be changed. Also, since this is the auxillary function of a sorting algorithm, the multiset of $\A[1..n]$ should not be changed, and $\A[1..n]$ should be sorted in non-decreasing order since we are swaping the larger elements from beginning to end (right).
+
+\begin{comment}
+    
+\newq{3}{
+    Prove that \AUX\, satisfies the specifications in your answer to question 2.
+}
+
+\end{comment}
+
+\begin{comment}
+    
+\tbf{Lemma.} For all $n\in S$, for all $n'\in S$, for any array $\A[1..n]$ with elements from a totally ordered set and is sorted in non-decreasing order, for any array $\A'[1..n']$ with elements from the same totally ordered set and is sorted in non-decreasing order. If $\A[n]\le\A'[1]$, then $\A[1..n]\cd\A'[1..n']$ is sorted in non-decreasing order.
+
+\tit{Proof of Lemma.}
+
+Let $\A''[1..(n+n')]=\A[1..n]\cd \A'[1..n']$. We want \\$[\A[n]\le\A'[1]]\iimplies\sqrbra{\forall i\in\Z^+. \forall j\in\Z^+.  \sqrbra{(1\le i<j\le n+n')\iimplies \bra{\A''[i]\le \A''[j]}}}$.
+
+\indenv{
+    Assume $[\A[n]\le\A'[1]]$.
+    \indenv{
+        Let $i\in\Z^+$ be arbitrary;
+        \indenv{
+            Let $j\in\Z^+$ be arbitrary;
+            \indenv{
+                Assume $(1\le i<j\le n+n')$.
+                \begin{proofcases}
+                    \case $1\le i<j\le n$. Since $\A[1..n]$ is sorted in non-decreasing order, by specification and modus ponens we have $\A[i]\le\A[j]$, by definition of concatenation we have $\A''[i]=\A[i]$, $\A''[j]=\A[j]$, thus $\A''[i]\le\A''[j]$. For Case 1 we have shown $\A''[i]\le\A''[j]$.
+                    \case $n+1\le i<j\le n+n'$. Since $\A'[1..n']$ is sorted in non-decreasing order, by specification and modus ponens we have $\A'[i-n]\le\A'[j-n]$, by definition of concatenation we have $\A''[i]=\A'[i-n]$, $\A''[j]=\A'[j-n]$, thus $\A''[i]\le\A''[j]$. For Case 2 we have shown $\A''[i]\le\A''[j]$.
+                    \case $1\le i\le n$, $n+1\le j\le n+n'$. Since we assumed $[\A[n]\le\A'[1]]$, and $\A[1..n]$ and $\A'[1..n']$ are sorted in non-decreasing order, we have $\A[i]\le\A[n]\le\A'[1]\le\A'[j-n]$, by definition of concatenation we have $\A''[i]=\A[i]$, $\A''[j]=\A'[j-n]$, thus $\A''[i]\le\A''[j]$. For Case 3 we have shown $\A''[i]\le\A''[j]$.
+                \end{proofcases}
+
+                For all cases we have shown $\A''[i]\le\A''[j]$. Thus we conclude $\A''[i]\le\A''[j]$.
+            }
+
+            By direct proof, $(1\le i<j\le n+n')\iimplies(\A''[i]\le\A''[j])$
+        }
+
+        Since $j\in\Z^+$ is arbitrary, $\forall j\in\Z^+. (1\le i<j\le n+n')\iimplies(\A''[i]\le\A''[j])$.
+    }
+
+    Since $i\in\Z^+$ is arbitrary, $\forall i\in\Z^+. \forall j\in\Z^+.  \sqrbra{(1\le i<j\le n+n')\iimplies \bra{\A''[i]\le \A''[j]}}$.
+}
+
+By direct proof, $[[\A[n]\le\A'[1]]]\iimplies\sqrbra{\forall i\in\Z^+. \forall j\in\Z^+.  \sqrbra{(1\le i<j\le n+n')\iimplies \bra{\A''[i]\le \A''[j]}}}$.
+\end{comment}
+
+\tit{Proof of Question 3 by induction on $S$.}
+
+For $n\in S$, let $P(n)=``$for all array $\A[1..n]$ with elements from a totally ordered set and $\A[1..\frac{n}2]$ and $\A[\bra{\frac{n}2+1}..n]$ are sorted in non-decreasing order, if \AUX($\A[1..n],n$) is performed, then it eventually halts, at which time $\A[1..n]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..n]$ are unchanged''.
+
+To prove $\forall n\in S.P(n)$, it is equivalent to prove $\forall n\in\Z^+.P(2^n)$ by our definition of $S$. That is, we will first show $P(2^1)$ holds as the base case, then for arbitrary $n\in\Z^+$, we will assume $P(2^n)$ and show $P(2^{n+1})$.
+
+Base Case: $n=1$.
+\indenv{
+    Let $\A[1..2^1]$ be arbitrary array with elements from a totally ordered set, and $\A[1..1]$ and $\A[2..2]$ are sorted in non-decreasing order (which are trivially sorted in non-decreasing order for all array when $n=1$).
+
+    Assume $\AUX(\A[1..2], 2)$ is called. 
+    
+    Since $\nnot(2>2)$, we jump to L7:
+    \begin{proofcases}
+        \case $A[1]>A[2]$.
+        \indenv{
+            We enter L8 and swap the values of $\A[1]$ and $\A[2]$. Now $\A[1..2]$ is sorted in non-decreasing order, and the multiset of elements in $\A[1..2]$ is unchanged. We terminates our \AUX($\A[1..2],2$) after this. No assignment to $n$ thus $n$ is unchanged.
+        }
+        For Case 1 we have shown the call halts and at that time $A[1..2]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..2]$ are unchanged.
+        \case $\nnot(A[1]>A[2])$.
+        \indenv{
+            Since $\nnot(A[1]>A[2])$, which is equivalent to $A[1]\le A[2]$, this already shows that $\A[1..2]$ is sorted in non-decreasing order, and the multiset of elements $\A[1..2]$ is trivially unchanged. We terminates our \AUX($\A[1..2],2$) after this. No assignment to $n$ thus $n$ is unchanged.
+        }
+        For Case 2 we have shown the call halts and at that time $A[1..2]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..2]$ are unchanged.
+    \end{proofcases}
+
+    For all cases we have shown the call halts and at that time $\A[1..2]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..2]$ are unchanged. Thus we conclude the call halts and at that time $\A[1..2]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..2]$ are unchanged.
+
+    By direct proof, we have shown if $\AUX(\A[1..2],2)$ is performed, then it eventually halts, at which time $\A[1..2]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..2]$ are unchanged.
+}
+
+Since $A[1..2^1]$ is arbitrary, by definition we have shown $P(2^1)$.
+
+\indenv{
+    Let $n\in\Z^+$ be arbitrary;
+    \indenv{
+        Assume $P(2^n)$.
+
+        \indenv{
+            Let $\A[1..2^{n+1}]$ be arbitrary array with elements from a totally ordered set, and $\A[1..2^n]$ and $\A[\bra{2^n+1}..2^{n+1}]$ are sorted in non-decreasing order.
+
+            Assume $\AUX(\A[1..2^{n+1}], 2^{n+1})$ is called.
+
+            Since $n\ge 1$, this implies $n+1\ge 2$ and so $2^{n+1}\ge 2^2=4$. Thus $2^{n+1}>2$ and we enter L2. \\
+
+            Because $2^n\ge2$, $\A[1..2^n]$ and $\A[(2^n+1)..2^{n+1}]$ both contain at least 2 and an even number of elements respectively, so this means we are allowed to split the arrays equally (w.r.t. the size) respectively so that there is no empty array or invalid index. For the sake of clarification: let $\B[1..2^{n-1}]=\B$ (that is, let $\B[1..2^{n-1}]$, where we will also use $\B$ to represent such array), $\aC[1..2^{n-1}]=\aC$, $\aD[1..2^{n-1}]=\aD$, $\E[1..2^{n-1}]=\E$ be a copy, which will not be changed, (for simplicity, we will assume our array copies throughout this proof will not be changed when the original array has been modified) of the original array $\A[1..2^{n-1}]$, $\A[\bra{2^{n-1}+1}..2^n]$, $\A[2^n+1..\bra{2^n+2^{n-1}}]$, $\A[\bra{2^n+2^{n-1}+1}..2^{n+1}]$ respectively. We will also denote $\A$ for $\A[1..2^{n+1}]$.\\
+
+            For simplicity, we will simply say sorted instead of sorted in decreasing order throughout this proof.\\
+
+            At the start of L2, by our construction, we have now $\A=\B\cd\aC\cd\aD\cd\E$ (concatenation of arrays).
+
+            Since we assumed $\A[1..2^n]=\B\cd\aC$ and $\A[\bra{2^n+1}..2^{n+1}]=\aD\cd\E$ are sorted, we have $\B,\aC,\aD,\E$ are also sorted.
+
+            Now, on L2 and L3, we swap the values of $\A[i+2^{n+1-2}]$ and $\A[i+2^{n+1-1}]$ for $i\in[2^{n+1-2}]$ (set of integers from 1 to $2^{n+1-2}$ as introduced in assignment 6). After this, we have $\A=\B\cd\aD\cd\aC\cd\E$, so we can see the multiset of elements in $\A$ is unchanged compared to the initial $\A[1..n]$ which was passed from the call (for simplicity we will simply say ``unchanged'' instead of ``unchanged compared to the initial $\A[1..n]$ which was passed from the call'').\\
+
+            On L4, we call $\AUX(\A[1..2^n, 2^n)$. Since we assumed $P(2^n)$, by specialization and modus ponens, we have $\AUX(\A[1..2^n, 2^n)$ terminates and at that time $\A[1..2^n]$ is sorted. Also, the multiset of elements in $\A[1..2^n]$ is unchanged, thus, the multiset of elements in $\A$ is also unchanged.
+
+            Now, let $B'[1..2^{n-1}]=B', D'[1..2^{n-1}]=D'$ be a copy of $\A[1..2^{n-1}], \A[\bra{2^{n-1}+1}..2^n]$ respectively. After L4 we have $\A=\B'\cd\aD'\cd\aC\cd\E$, and $\B'$, $\aD'$, $\B'\cd\aD'$ are sorted respectively.\\
+
+            On L5, we call $\AUX(\A[\bra{2^n+1}..2^{n+1}], 2^n)$. Since we assumed $P(2^n)$, by specialization and modus ponens, we have $\AUX(\A[\bra{2^n+1}..2^{n+1}], 2^n)$ terminates and at that time $\A[\bra{2^n+1}..2^{n+1}]$ is sorted. Also, the multiset of elements in $\A[\bra{2^n+1}..2^{n+1}]$ is unchanged, thus, the multiset of elements in $\A$ is also unchanged.
+
+            Now, let $\aC'[1..2^{n-1}]=\aC', \E'[1..2^{n-1}]=\E'$ be a copy of $\A[\bra{2^n+1},\bra{2^n+2^{n-1}}]$, $\A[\bra{2^n+2^{n-1}+1}..2^{n+1}]$ respectively. After L5 we have $\A=\B'\cd\aD'\cd\aC'\cd\E'$, and $\aC', \E'$, $\aC'\cd\E'$ are sorted respectively.\\
+
+            On L6, we call $\AUX(\A[\bra{2^{n-1}+1}..\bra{2^n+2^{n-1}}], 2^n)$. Since we assumed $P(2^n)$, by specialization and modus ponens, we have $\AUX(\A[\bra{2^{n-1}+1}..\bra{2^n+2^{n-1}}], 2^n)$ terminates and at that time $\A[\bra{2^{n-1}+1}..\bra{2^n+2^{n-1}}]$ is sorted. Also, the multiset of elements in $\A[\bra{2^{n-1}+1}..\bra{2^n+2^{n-1}}]$ is unchanged, thus, the multiset of elements in $\A$ is also unchanged.
+
+            Now, let $\aD''[1..2^{n-1}]=\aD''$, $\aC''[1..2^{n-1}]=\aC''$ be a copy of $\A[\bra{2^{n-1}+1}..\bra{2^n}]$ and $\A[\bra{2^n+1}..\bra{2^n+2^{n-1}}]$ respectively. After L6 we have $\A=\B'\cd\aD''\cd\aC''\cd\E'$, and $\aD''$, $\aC''$ are sorted respectively.\\
+
+            After L6 has performed, we are about to terminate our call of \AUX($\A[1..2^{n+1}], 2^{n+1}$), thus we have shown \AUX($\A[1..2^{n+1}], 2^{n+1}$) eventually halts.\\
+
+            Since for all lines the multiset of elements in $\A$ is unchanged, we conclude the multiset of elements in $\A$ immediately before halts (and thus when it halts) is also unchanged. Also, there is no assignment to $n$ thus $n$ is unchanged.\\
+
+            Now we show that $\A=\B'\cd\aD''\cd\aC''\cd\E'$ immediately before halts (and thus when it halts) is sorted. 
+
+            To this end, we will first prove some lemmas.
+            
+            Let $\A'[1..2^{n+1}]=\A'$ be the sorted permutation of $\A$, since the multiset of $\A$ is unchanged, this means $\A'$ is also the sorted permutation of our initial $\A$ which was passed from the call $\AUX(\A[1..2^{n+1}], 2^{n+1})$.\\
+
+            \tbf{Lemma 1.} $\B'=\A'[1..2^{n-1}]$, that is, $\B'$ is the array containing $2^{n-1}$ smallest elements in $\A$.
+
+            \tit{Proof of Lemma 1.}
+
+            To prove Lemma 1, since by construction of $\B'$ we know $\B'$ is the array containing $2^{n-1}$ smallest elements in $\B\cd\aD$, so it is equivalent to show that all $2^{n-1}$ smallest elements in $\A$ are also in $\B\cd\aD$. In other words, there does not exists $a\in\aC\cd\E$ such that $a$ is strictly smaller than the largest element in $\B'$.
+
+            \indenv{
+                To obtain a contradiction, assume there exists $a\in\aC\cd\E$ such that $a$ is strictly smaller than the largest element in $\B'$. Instantiate such $a$.
+
+                By definition of array concatenation, this implies $a\in\aC$ or $a\in\E$. 
+                \begin{proofcases}
+                    \case $a\in\aC$.
+                    \indenv{
+                        Since $\B\cd\aC$ is sorted, and the size of $\B$ is $2^{n-1}$, this shows there are at least $2^{n-1}$ elements in ($\B$ and thus in) $\B\cd\aD$ that are at most $a$.
+
+                        Also, by assumption $a$ is strictly smaller than the largest element in $\B'$, where the size of $\B'$ is also $2^{n-1}$, this implies there exists an element $b\in\B'$ such that $b>a$. Instantiate such $b$.
+
+                        However, on the other hand, there exists at least $2^{n-1}$ elements in $\B\cd\aD$ that are at most $a$ thus strictly less than $b$. This contradicts the definition of $\B'$: $b\in\B'$ implies $b$ is one of the first $2^{n-1}$ smallest elements in $\A$.
+                    }
+                    Hence we obtained a contradiction in Case 1.
+                    \case $a\in\E$.
+                    \indenv{
+                        Since $\aD\cd\E$ is sorted, and the size of $\aD$ is $2^{n-1}$, this shows there are at least $2^{n-1}$ elements in ($\aD$ and thus in) $\B\cd\aD$ that are at most $a$.
+
+                        Also, by assumption $a$ is strictly smaller than the largest element in $\B'$, where the size of $\B'$ is also $2^{n-1}$, this implies there exists an element $b\in\B'$ such that $b>a$. Instantiate such $b$.
+
+                        However, on the other hand, there exists at least $2^{n-1}$ elements in $\B\cd\aD$ that are at most $a$ thus strictly less than $b$. This contradicts the definition of $\B'$: $b\in\B'$ implies $b$ is one of the first $2^{n-1}$ smallest elements in $\A$.
+                    }
+                    Hence we obtained a contradiction in Case 2.
+                \end{proofcases}
+
+                For all cases we obtained contradiction, thus we conclude this is a contradiction.
+            }
+
+            By contradiction, we have shown that all $2^{n-1}$ smallest elements in $\A$ are also in $\B\cd\aD$ (and thus in $\B'$ by construction), so $\B'=\A'[1..2^{n-1}]$. Hence we conclude Lemma 1.
+            
+            \tbf{Lemma 2.} $\E'=\A'[\bra{2^n+2^{n-1}+1}..2^{n+1}]$, that is, $\E'$ is the array containing $2^{n-1}$ largest elements in $\A$.
+
+            \tit{Proof of Lemma 2.}
+
+            We will follow similar steps as in the proof of Lemma 1. To prove Lemma 2, since by construction of $\E'$ we know $\E'$ is the array containing $2^{n-1}$ largest elmeents in $\aC\cd\E$, so it is equivalent to show that all $2^{n-1}$ largest elements in $\A$ are also in $\aC\cd\E$. In other words, there does not exists $a\in\B\cd\aD$ such that $a$ is strictly larger than the smallest element in $\E'$.
+
+            \indenv{
+                To obtain a contradiction, assume there exists $a\in\B\cd\aD$ such that $a$ is strictly larger than the smallest element in $\E'$. Instantiate such $a$.
+
+                By definition of array concatenation, this implies $a\in\B$ or $a\in\aD$. 
+                \begin{proofcases}
+                    \case $a\in\B$.
+                    \indenv{
+                        Since $\B\cd\aC$ is sorted, and the size of $\aC$ is $2^{n-1}$, this shows there are at least $2^{n-1}$ elements in ($\aC$ and thus in) $\aC\cd\E$ that are at least $a$.
+
+                        Also, by assumption $a$ is strictly larger than the smallest element in $\E'$, where the size of $\E'$ is also $2^{n-1}$, this implies there exists an element $b\in\E'$ such that $b<a$. Instantiate such $b$.
+
+                        However, on the other hand, there exists at least $2^{n-1}$ elements in $\aC\cd\E$ that are at least $a$ thus strictly greater than $b$. This contradicts the definition of $\E'$: $b\in\E'$ implies $b$ is one of the last $2^{n-1}$ largest elements in $\A$.
+                    }
+                    Hence we obtained a contradiction in Case 1.
+                    \case $a\in\aD$.
+                    \indenv{
+                        Since $\aD\cd\E$ is sorted, and the size of $\E$ is $2^{n-1}$, this shows there are at least $2^{n-1}$ elements in ($\E$ and thus in) $\aC\cd\E$ that are at least $a$.
+
+                        Also, by assumption $a$ is strictly larger than the smallest element in $\E'$, where the size of $\E'$ is also $2^{n-1}$, this implies there exists an element $b\in\E'$ such that $b<a$. Instantiate such $b$.
+
+                        However, on the other hand, there exists at least $2^{n-1}$ elements in $\aC\cd\E$ that are at least $a$ thus strictly greater than $b$. This contradicts the definition of $\E'$: $b\in\E'$ implies $b$ is one of the last $2^{n-1}$ largest elements in $\A$.
+                    }
+                    Hence we obtained a contradiction in Case 2.
+                \end{proofcases}
+                
+                For all cases we obtained contradiction, thus we conclude this is a contradiction.   
+            }
+
+            By contradiction, we have shown that all $2^{n-1}$ largest elements in $\A$ are also in $\aC\cd\E$ (and thus in $\E'$ by construction), so $\E'=\A'[\bra{2^n+2^{n-1}+1}..2^{n+1}]$. Hence we conclude Lemma 2.
+            
+            \tbf{Lemma 3.} If $\B'$, $\aD''\cd\aC''$, and $\E'$ are sorted respectively, and $\B'[2^{n-1}]\le\aD''[1]$ and $\aC''[2^{n-1}]\le\E'[1]$, then $\B'\cd\aD''\cd\aC''\cd\E'=\A$ is sorted.
+
+            \tit{Proof of Lemma 3.} See below.
+            
+            So, by Lemma 1, 2, 3 and modus ponens we conclude $\B'\cd\aD''\cd\aC''\cd\E'=\A$ is also sorted, thus by the uniqueness of sorted permutation $\A=\A'$.  
+
+            By proof of conjunction, \AUX($\A[1..n],n$) eventually halts, at which time $\A[1..n]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..n]$ are unchanged.
+
+            By direct proof, if \AUX($\A[1..n],n$) is performed, then it eventually halts, at which time $\A[1..n]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..n]$ are unchanged.
+        }
+        
+        Since $\A[1..2^{n+1}]$ is arbitrary, by generalization we have shown $P(2^{n+1})$.
+
+    }
+}
+
+By induction, we have $\forall n\in S.P(n)$. So, \AUX($\A[1..n],n$) satisfies the specifications as in our Question 2.
+
+\tit{Proof of Lemma 3.}
+
+\indenv{
+    Assume $\B'$, $\aD''\cd\aC''$, and $\E'$ are sorted respectively, and $\B'[2^{n-1}]\le\aD''[1]$ and $\aC''[2^{n-1}]\le\E'[1]$.
+    \indenv{
+        Let $i\in\Z^+$ be arbitrary;
+        \indenv{
+            Let $j\in\Z^+$ be arbitrary;
+            \indenv{
+                Assume $(1\le i<j\le 2^{n+1})$.
+                \begin{proofcases}
+                    \case $k2^{n-1}+1\le i < j\le (k+1)2^{n-1}$ for $k\in\{0,1,2,3\}$. 
+                    
+                    \indenv{Then since $\B'$, $\aD''\cd\aC''$, and $\E'$ are sorted, (by specialization and modus ponens) $\A[i]\le\A[j]$.}
+                    
+                    For Case 1 $\A[i]\le\A[j]$.
+                    \case $1\le i\le 2^{n-1}$, $k2^{n-1}+1\le j\le (k+1)2^{n-1}$ for $k\in\{1,2\}$. 
+                    
+                    \indenv{Then $\A[i]\le\B'[2^{n-1}]\le\aD''[1]\le\A[j]$.}
+                    
+                    For Case 2 $\A[i]\le\A[j]$.
+                    \case $1\le i\le 2^{n-1}$, $3\cd2^{n-1}+1\le j\le 2^{n+1}$.
+                    
+                    \indenv{Then $\A[i]\le\B'[2^{n-1}]\le\aD''[1]\le\aC''[2^{n-1}]\le\E'[1]\le\A[j]$.}
+                    
+                    For Case 3 $\A[i]\le\A[j]$.
+                    \case $2^{n-1}\le i < j\le 3\cd2^{n-1}$. 
+                    
+                    \indenv{Then since $\aD''\cd\aC''$ is sorted, (by specialization and modus ponens) $\A[i]\le\A[j]$.}
+                    
+                    For Case 4 $\A[i]\le\A[j]$.
+                    \case $2^{n-1}\le i \le 3\cd2^{n-1}, 3\cd2^{n-1}+1\le j\le 2^{n+1}$. 
+                    
+                    \indenv{Then $\A[i]\le\aC''[2^{n-1}]\le\E'[1]\le\A[j]$.}
+                    
+                    For Case 5 $\A[i]\le\A[j]$.
+                \end{proofcases}
+
+                For all cases $\A[i]\le\A[j]$, thus $\A[i]\le\A[j]$.
+            }
+            By direct proof, $(1\le i<j\le 2^{n+1})\iimplies(\A[i]\le\A[j])$.
+
+        }
+        Since $j\in\Z^+$ is arbitrary, $\forall j\in\Z^+. (1\le i<j\le 2^{n+1})\iimplies(\A[i]\le\A[j])$.
+
+    }
+    Since $i\in\Z^+$ is arbitrary, $\forall i\in\Z^+. \forall j\in\Z^+.  \sqrbra{(1\le i<j\le 2^{n+1})\iimplies \bra{\A[i]\le \A[j]}}$.
+}
+
+By direct proof, we conclude If $\B'$, $\aD''\cd\aC''$, and $\E'$ are sorted respectively, and $\B'[2^{n-1}]\le\aD''[1]$ and $\aC''[2^{n-1}]\le\E'[1]$, then $\B'\cd\aD''\cd\aC''\cd\E'=\A$ is sorted.
+
+
+\begin{comment}
+    To this end, since $\A[1..2^{n-1}]$ is sorted in non-decreasing order on L4 and remains unchanged after that, $\A[\bra{2^{n-1}+1}..\bra{2^{n}+2^{n-1}}]$ is sorted in non-decreasing order on L6 and remains unchanged after that, and $\A[\bra{2^{n}+2^{n-1}+1}..2^{n+1}]$ is sorted in non-decreasing order on L5 and remains unchanged after that, it suffices to show that $\A[2^{n-1}]\le\A[2^{n-1}+1]$ and $\A[2^{n}+2^{n-1}]\le\A[2^{n}+2^{n-1}+1]$, then it follows that $\A$ immediately before halts is in non-decreasing order. \\
+
+    First, since at this moment we have $\A=\B'\cd\aD''\cd\aC''\cd\E'$, so $\A[2^{n-1}]= \B'[2^{n-1}]$ and $\A[2^{n-1}+1]= \aD''[1]$. Because $\aD''\cd\aC''$ has the same multiset as $\aD'\cd\aC'$ from L6, and $\aD''\cd\aC'', \aD', \aC'$ are in non-decreasing orders, so $\A[2^{n-1}+1]= \aD''[1]$ implies ($\A[2^{n-1}+1]=\aD'[1]$ or $\A[2^{n-1}+1]=\aC'[1]$).
+
+    Since we assumed $\A[2^{n-1}+1]= \aD''[1]$, by modus ponens we have $\A[2^{n-1}+1]=\aD'[1]$ or $\A[2^{n-1}+1]=\aC'[1]$.
+    \begin{proofcases}
+        \case $\A[2^{n-1}+1]=\aD'[1]$.
+        \indenv{
+            Since $\B'$ and $\aD'$ are in non-decreasing orders, and $A[2^{n-1}]=\B[2^{n-1}]$, thus combining with $\B'[2^{n-1}]\le \aD'[1]$ we get $\A[2^{n-1}]= \B'[2^{n-1}]\le \aD'[1]= \A[2^{n-1}+1]$.
+        }
+        For Case 1 we have shown that $\A[2^{n-1}]\le \A[2^{n-1}+1]$.
+        \case $\A[2^{n-1}+1]=\aC'[1]$.
+        \indenv{
+            
+        }
+        For Case 2 we have shown that $\A[2^{n-1}]\le \A[2^{n-1}+1]$.
+    \end{proofcases}
+
+    For all cases we have shown that $\A[2^{n-1}]\le \A[2^{n-1}+1]$. Hence we conclude $\A[2^{n-1}]\le \A[2^{n-1}+1]$.\\
+    
+    Second, since at this moment we have $\A=\B'\cd\aD''\cd\aC''\cd\E'$, so $\A[2^{n}+2^{n-1}]\in \aC''$ and $\A[2^{n}+2^{n-1}+1]\in \E'$. Because $\aD''\cd\aC''$ has the same multiset as $\aD'\cd\aC'$ from L6, $\A[2^{n}+2^{n-1}]\in \aC''$ implies ($\A[2^{n}+2^{n-1}]\in\aD'$ or $\A[2^{n}+2^{n-1}]\in\aC'$).
+
+    Since we assumed $\A[2^{n}+2^{n-1}]\in \aC''$, by modus ponens we have $\A[2^{n}+2^{n-1}]\in\aD'$ or $\A[2^{n}+2^{n-1}]\in\aC'$.
+
+    \begin{proofcases}
+        \case $\A[2^{n}+2^{n-1}]\in\aD'$.
+        \indenv{
+            
+        }
+        For Case 1 we have shown that $\A[2^{n}+2^{n-1}]\le \A[2^{n}+2^{n-1}+1]$.
+        \case $\A[2^{n}+2^{n-1}]\in\aC'$.
+        \indenv{
+            
+        }
+        For Case 2 we have shown that $\A[2^{n}+2^{n-1}]\le \A[2^{n}+2^{n-1}+1]$.
+    \end{proofcases}
+\end{comment}
+
+\begin{comment}
+    \newq{4}{
+    Prove that \SRT\, is correct. Your may assume that \AUX\, satisfies the specifications in your answer to question 2.
+}
+\end{comment}
+
+Define the set $S'=\{2^a\mid a\in\N\}$, since $S'\subseteq\N$, it has a total order.
+
+\tit{Proof of Question 4 by induction on $S'$.}
+
+Consider the specifications of $\SRT(\A[1..n], n)$:
+
+\Precon: $n\in S'$, the elements $\A[1..n]$ are from the same totally ordered set.
+
+\Postcon: $n$ and multiset of elements in $\A[1..n]$ are unchanged. $\A[1..n]$ sorted in nondecreasing order.
+
+\Termi: The algorithm terminates.
+
+For $n\in S'$, let $Q(n)=``$for all array $\A[1..n]$ with elements from a totally ordered set, if \SRT($\A[1..n],n$) is performed, then it eventually halts, at which time $\A[1..n]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..n]$ are unchanged''. We will prove $\forall n\in S'.Q(n)$, equivalently $\forall n\in\N.Q(2^n)$.
+
+Base Case: $n=0$.
+\indenv{
+    Let $\A[1..2^0]$ be arbitrary array with elements from a totally ordered set.
+
+    Assume $\SRT(\A[1..1], 1)$ is called.
+
+    Since $\nnot(1>1)$, we halts, $\A[1..1]$ is trivially sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..1]$ are trivially unchanged.
+
+    By proof of conjunction and direct proof, we have shown if $\SRT(\A[1..1],1)$ is performed, then it eventually halts, at which time $\A[1..1]$ is sorted in non-decreasing order, $n$ and the multiset of elements in $\A[1..1]$ are unchanged.
+}
+
+Since $\A[1..2^0]$ is arbitrary, by definition we have shown $Q(2^0)$.
+
+\indenv{
+    Let $n\in\N$ be arbitrary;
+    \indenv{
+        Assume $Q(2^n)$.
+        \indenv{
+            Let $\A[1..2^{n+1}]$ be arbitrary array with elements from a totally ordered set. Assume $\SRT(\A[1..2^{n+1}], 2^{n+1})$ is called. Then $n+1\ge1$ implies $2^{n+1}\ge2$, so $2^{n+1}>2$ and we enter L1 to L2.
+
+            On L2, by inductive hypothesis $Q(2^n)$, so by specialization and modus ponens on $Q(2^n)$ we have $\AUX(\A[1..2^n],2^n)$ terminates and at that time $\A[1..2^n]$ is sorted in non-decreasing order, $2^n$ and the multiset of elements in $\A[1..2^n]$ are unchanged.
+
+            On L3, by inductive hypothesis $Q(2^n)$, so by specialization and modus ponens on $Q(2^n)$ we have $\AUX(\A[\bra{2^n+1}..2^{n+1}],2^n)$ terminates and at that time $\A[\bra{2^n+1}..2^{n+1}]$ is sorted in non-decreasing order, $2^n$ and the multiset of elements in $\A[\bra{2^n+1}..2^{n+1}]$ are unchanged.
+
+            Now, since the array $\A[1..2^{n+1}]$ and $2^{n+1}$ have met the preconditions of \AUX($\A[1..2^{n+1}],2^{n+1}$), on L4 we call \AUX($\A[1..2^{n+1}],2^{n+1}$). By Question 3, we have shown \AUX($\A[1..2^{n+1}],2^{n+1}$) eventually halts, at which time $\A[1..2^{n+1}]$ is sorted in non-decreasing order, $2^{n+1}$ and the multiset of elements in $\A[1..2^{n+1}]$ are unchanged. After L4 we halt $\SRT(\A[1..2^{n+1}],2^{n+1})$.
+
+            So, by proof of conjunction and direct proof, we have if $\SRT(\A[1..2^{n+1}], 2^{n+1})$ is performed, then it halts, and that time $\A[1..2^{n+1}]$ is sorted in non-decreasing order, $2^{n+1}$ and the multiset of elements in $\A[1..2^{n+1}]$ are unchanged.
+        }
+
+        Since $\A[1..2^{n+1}]$ is arbitrary, by generalization we have shown $Q(2^{n+1})$.
+    }
+}
+
+By induction, we have shown $\forall n\in\N. Q(2^n)$, equivalently $\forall n\in S'.Q(n)$, that is, \SRT\; is correct for all possible input.
+
+
+\end{document}

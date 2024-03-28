@@ -1,0 +1,409 @@
+\documentclass[11pt]{alittlebear}
+
+
+\def\name{Joseph Siu}
+\def\course{CSC240 Winter 2024}
+\def\headername{Homework Assignment }
+\def\headernum{5}
+
+\usepackage{comment}
+
+\begin{document}
+\newn{
+    My name and student number: Joseph Siu, 1010085701.
+
+    Sanchit Manchanda, Sepehr Jafari.
+}
+\begin{comment}
+\newq{q1}{
+    Give a well-structured informal proof by {\bf strong induction} that for any propositional formula $f$ built from propositional variables using only conjunction, disjunction, and negation, there exists a propositional formula $g$ in negation normal form that is logically equivalent to $f$ and has the same number of occurrences of propositional variables as in $f$.
+}
+\end{comment}
+\newm{
+    Recall the recursively defined set $NNF$ of propositional formulas in negation normal form as follows:
+
+    Base Case: For any propositional variable $P$, $P \in NNF$, $\nnot(P)\in NNF$.
+
+    Constructor Case: If $f,f'\in NNF,$ then $(f\aand f')\in NNF$ and $(f\oor f')\in NNF$.\\
+
+    Consider the recursively defined set $S$ as follows:
+
+    Base Case: For any propositional variable $P$, $P \in S$.
+
+    Constructor Case: If $f, f'\in S$, then $(f \aand f')\in S$, $(f \oor f')\in S$, and $\nnot (f)\in S$.\\
+}
+\newl{l1}{
+    If $g'\in NNF$, then there exist $g\in NNF$ such that $\nnot(g')\iif g$ and $g',g$ have the same number of variables.
+}
+\newp{[Proof of Lemma 1 by strong induction]\hfill
+
+    For any propositional formula $f$, let $N_v(f)$=``\# of occurrences of propositional variables in $f$;'' let $N_c(f)$=``\# of connectors ($\aand,\oor,\nnot$) in $f$.''
+
+    For any $n\in\Z^+$, let $M(n)=``\forall f\in NNF.O(n,f)''$ where $$O(n,f) = ``[n=N_v(f)\iimplies[\exists g\in NNF.(N_v(f)=N_v(g))\aand(\nnot(f)\iif g)]].''$$
+    We now prove $\forall n\in\Z^+. M(n)$ by strong induction on $n$.
+    \indenv{
+        Base Case: $n=1$;
+
+        \indenv{
+            Let $f\in NNF$ be arbitrary, then either $1= N_v(f)$ or $1\neq N_v(f)$;
+
+            Case 1: $1\neq N_v(f)$;
+            \indenv{
+                Since $1\neq N_v(f)$, the implication of $O(1,f)$ is vacuously true. 
+            }
+            For Case 1 we have shown $O(1,f)$.
+
+            Case 2: $1=N_v(f)$;
+            \indenv{
+                There can be only 2 possible cases for $f$: $f=P$ and $f=\nnot(P)$ for some propositional variable $P$.
+
+                Case 2.1: $f=P$;
+                \indenv{
+                    Let $g=\nnot(P)\in NNF$;
+
+                    Since $N_v(f)=N_v(g)$, and $\nnot(f)=\nnot(P)\iif \nnot(P)=g$, we have $O(1,f)$.
+                }
+                For Case 2.1 we have shown $O(1,f)$.
+
+                Case 2.2: $f=\nnot(P)$;
+                \indenv{
+                    Let $g=P\in NNF$;
+
+                    Since $N_v(f)=N_v(g)$, and $\nnot(f)=\nnot(\nnot(P))\iif P=g$, we have $O(1,f)$.
+                }
+                For Case 2.2 we have shown $O(1,f)$.
+
+                For all cases of Case 2 we have shown $O(1,f)$, thus $O(1,f)$.
+                
+            }
+            For Case 2 we have shown $O(1,f)$.
+
+            For all cases of $n=1$ we have shown $O(1,f)$, thus $O(1,f)$.
+        }
+        Since $f$ is arbitrary, we have shown $\forall f\in NNF. O(1,f)$, thus $M(1)$.
+
+        \indenv{
+            Let $n\in\Z^+-\{1\}$ be arbitrary;
+
+            \indenv{
+                Assume $\forall i\in\Z^+.[i<n\iimplies M(i)]$;
+
+                \indenv{
+                    Let $f\in NNF$ be arbitrary, then either $n= N_v(f)$ or $n\neq N_v(f)$;
+
+                    Case 1: $n\neq N_v(f)$;
+                    \indenv{
+                        Since $n\neq N_v(f)$, the implication of $O(n,f)$ is vacuously true, thus $O(n,f)$.
+                    }
+
+                    For Case 1 we have shown $O(n,f)$.
+
+                    Case 2: $n=N_v(f)$;
+                    \indenv{
+                        Since $N_v(f)=n>1$, this implies $f$ is not a propositional variable (not constructed from the base case), thus consider 2 cases (of the constructor cases): $f=(f'\aand f'')$ and $f=(f'\oor f'')$ for some $f',f''\in NNF$.
+
+                        Case 2.1: $f=(f'\aand f'')$;
+                        \indenv{
+                            Since $1\leq N_v(f')<n$ and $1\leq N_v(f'')<n$, apply inductive hypothesis we have there exist $g',g''\in NNF$ such that $N_v(f')=N_v(g')$ and $N_v(f'')=N_v(g'')$ and $\nnot(f')\iif g'$ and $\nnot(f'')\iif g''$;
+
+                            By Demorgan's Law, we have $\nnot(f)=\nnot(f'\aand f'')\iif (\nnot(f')\oor \nnot(f''))$;
+
+                            By substition of equivalent formula, we have $\nnot(f)\iif (g'\oor g'')$ where $g'\oor g''\in NNF$ by our constructor cases;
+
+                            Let $g=(g'\oor g'')\in NNF$, then $N_v(g)=N_v(g'\oor g'')=N_v(g')+N_v(g'')=N_v(f') + N_v(f'')=N_v(f)$;
+                        }
+                        Thus, for Case 2.1 we have $O(n,f)$.
+
+                        Case 2.2: $f=(f'\oor f'')$;
+                        \indenv{
+                            Since $1\leq N_v(f')<n$ and $1\leq N_v(f'')<n$, apply inductive hypothesis we have there exist $g',g''\in NNF$ such that $N_v(f')=N_v(g')$ and $N_v(f'')=N_v(g'')$ and $\nnot(f')\iif g'$ and $\nnot(f'')\iif g''$;
+
+                            By Demorgan's Law, we have $\nnot(f)=\nnot(f'\oor f'')\iif (\nnot(f')\aand \nnot(f''))$;
+
+                            By substition of equivalent formula, we have $\nnot(f)\iif (g'\aand g'')$ where $g'\aand g''\in NNF$ by our constructor cases;
+
+                            Let $g=(g'\aand g'')\in NNF$, then $N_v(g)=N_v(g'\aand g'')=N_v(g')+N_v(g'')=N_v(f') + N_v(f'')=N_v(f)$;
+                        }
+                        Thus, for Case 2.2 we have $O(n,f)$.
+
+                        For all cases of Case 2 we have shown $O(n,f)$, thus $O(n,f)$.
+                    }
+                    For Case 2 we have shown $O(n,f)$.
+
+                    For all cases of $N_v(f)$ we have shown $O(n,f)$, thus $O(n,f)$.
+                }
+                Since $f$ is arbitrary, we have shown $\forall f\in NNF. O(n,f)$, thus $M(n)$.
+            }
+        }
+        By strong induction, we have shown $\forall n\in\Z^+. M(n)$.
+        
+    }
+}
+\newp{[Proof of Question 1 by strong induction]\hfill
+
+    Consider $f\in S$, $n\in\N$, define $$Q(n, f)=``\exists g\in NNF. [N_c(f)=n\iimplies ((f \iif g) \aand (N_v(f)=N_v(g)))].''$$
+
+    Consider $n\in\N$, define $P(n)$ = ``$\forall f\in S. Q(n, f)$.''
+
+    To prove $\forall n\in\N. P(n),$ consider the base case when $n=0$. \
+    \indenv{
+        Let $f\in S$ be arbitrary;
+
+        Consider 2 cases of $f$: $N_c(f)=0$ and $N_c(f)\neq0$.
+
+        Case 1: Assume $N_c(f)=0$;
+        \indenv{
+            Since there is no connector in $f$, this implies $f$ is a propositional variable, which directly gives $f\in NNF$, thus $Q(0, f)$.
+        }
+        For Case 1 we have shown $Q(0, f)$.
+
+        Case 2: Assume $N_c(f)\neq0$;
+        \indenv{
+            Since $N_c(f)\neq0$, the implication of $Q(0, f)$ is vacuously true. Moreover, because $NNF$ is non-empty, by picking any $g\in NNF$ we can conclude $Q(0, f)$.
+        }
+        For Case 2 we have shown $Q(0, f)$.
+
+        Thus, since all cases are true, we have shown $Q(0,f)$.
+    }
+    Since $f$ is arbitrary, we have shown $\forall f\in S. Q(0, f)$, thus $P(0)$.
+    \indenv{
+        Now, let $n\in\Z^+$ be arbitrary;
+        \indenv{
+            Assume $\forall i\in\N. [i<n\iimplies P(i)]$;
+
+            \indenv{
+                Let $f\in S$ be arbitrary;
+
+                Consider 2 cases of $f$: $N_c(f)=n$ and $N_c(f)\neq n$.
+
+                Case 1: Assume $N_c(f)=n$;
+                \indenv{
+                    Consider 2 cases of $f$: $f$ is a propositional variable and $f$ is not a propositional variable (i.e. a formula with connectors).
+
+                    Case 1.1: Assume $f$ is a propositional variable;
+                    \indenv{
+                        Since $f$ is a propositional variable, $f\in NNF$, thus $Q(n, f)$.
+                    }
+                    For Case 1.1 we have shown $Q(n, f)$.
+
+                    Case 1.2: Assume $f$ is not a propositional variable;
+                    \indenv{
+                        Since $f\in S$ and is not constructed from the base case, thus consider 2 cases: $[\exists f'\in S. f=\nnot(f')]$, and $[\exists f'\in S.\exists f''\in S.f=(f'\star f'')]$ where $\star\in\{\aand,\oor\}$.
+
+                        Case 1.2.1: Assume $\exists f'\in S. f=\nnot(f')$;
+                        \indenv{
+                            This implies $N_c(f')=n-1\geq0$, thus by specialization of our inductive hypothesis, $Q(n-1,f')$;
+
+                            By instantiation, let $g'\in NNF$ be such that $N_c(f')=n-1\iimplies ((f' \iif g') \aand (N_v(f')=N_v(g')))$; 
+
+                            Since $g'\in NNF$, by Lemma \ref{lemma:l1} and Demorgan's Law, we have $\exists g\in NNF. (\nnot(g')\iif g) \aand (N_v(g)=N_v(g'))$, let $g\in NNF$ be such formula;
+
+                            By use of conjunction $\nnot(f')\iif g$; and by substitution of equivalent formula $f=\nnot(f')=\nnot(g')$, we have $f\iif g$;
+
+                            By use of conjunction, we have $N_v(f)=N_v(f')=N_v(g')=N_v(g)$;
+                        }
+                        For Case 1.2.1 we have shown $Q(n, f)$.
+
+                        Case 1.2.2: Assume $\exists f'\in S.\exists f''\in S.f=(f'\star f'')$;
+                        \indenv{
+                            Since $0\geq N_c(f')<n$ and $0\geq N_c(f'')<n$, by specialization of our inductive hypothesis, $Q(n-1,f')$ and $Q(n-1,f'')$;
+
+                            By instantiation, let $g'\in NNF$ be such that $N_c(f')=n-1\iimplies ((f' \iif g') \aand (N_v(f')=N_v(g')))$;
+
+                            By instantiation, let $g''\in NNF$ be such that $N_c(f'')=n-1\iimplies ((f'' \iif g'') \aand (N_v(f'')=N_v(g'')))$;
+
+                            Since $g'\in NNF$ and $g''\in NNF$, by definition of $NNF$, $(g'\star g'')\in NNF$;
+
+                            Now we have $f=(f'\star f''), (f'\star f'') \iif (g'\star g''), $ and $(g'\star g'') \in NNF$;
+
+                            Also, $N_v(f)=N_v(f')+N_v(f'')=N_v(g')+N_v(g'')=N_v(g)$;
+                        }
+                        For Case 1.2.2 we have shown $Q(n, f)$.
+
+                        For all cases of Case 1.2 we have shown $Q(n, f)$, thus $Q(n, f)$.
+                    }
+                    For Case 1.2 we have shown $Q(n, f)$.
+
+                    For all cases of Case 1 we have shown $Q(n, f)$, thus $Q(n, f)$.
+                }
+                For Case 1 we have shown $Q(n, f)$.
+
+                Case 2: Assume $N_c(f)\neq n$;
+                \indenv{
+                    Since $N_c(f)\neq n$, the implication of $Q(n, f)$ is vacuously true, moreover, since $NNF$ is non-empty, by picking any $g\in NNF$ we can conclude $Q(n, f)$.
+                }
+                For Case 2 we have shown $Q(n, f)$.
+
+                For all cases of $f$ we have shown $Q(n, f)$, thus $Q(n, f)$.
+            }
+            Since $f$ is arbitrary, we have shown $\forall f\in S. Q(n, f)$, thus $P(n)$.
+        }
+    }
+    By strong induction, we have shown $\forall n\in\N. P(n)$.
+}
+\newpage
+\begin{comment}
+\newn{
+    Consider the following game between Alice and Bob.
+    A \textit{position} in the game is defined by a triple $(X,Y,t)$, where 
+    $X$ and $Y$ are disjoint sets of truth assignments to a set of $n$ propositional variables $\{P_i \mid 1 \leq i \leq n\}$ and $t  \in \ints^+$.
+    The initial position of the game is decided in advance by a referee.
+
+    The game proceed by rounds. Each round begins with a move by Alice followed by a response from Bob.
+    Starting from the current position $(X,Y,t)$ of a round,
+    Alice first chooses one of $X$ or $Y$ (say she chooses the set $X$).
+    She then picks subsets $X'$ and $X''$ such that $X = X' \cup X''$ and integers $t' , t'' \in \ints^+$  such that $t = t' + t''$.
+    She hands the triples $(X', Y, t')$ and $(X'', Y, t'')$ to Bob, who respond to this move by choosing either $(X', Y, t')$ or $(X'', Y, t'')$ as the new position for the next round.
+
+    The game ends when it reaches a position $(X^*, Y^*, 1)$, where $X^* \subseteq X$ and $Y^* \subseteq Y$.
+    Alice wins the game if there exists some $1 \leq i \leq n$ such that $\tau(P_i) \neq \tau'(P_i)$ for all $\tau \in X^*$ and $\tau' \in Y^*$.
+    Otherwise, Bob wins the game.
+
+    We say that a position $(X,Y,t)$ is \textit{promising} if Alice has a winning strategy starting from position $(X,Y,t)$. A winning strategy means that  Alice can choose her moves (which may depends on the responses from Bob) in a way such that she is guaranteed to win the game.
+}
+\end{comment}
+\begin{comment}
+\newq[Part A]{q2}{
+    Give a recursive definition for the set of all promising positions.
+}
+\end{comment}
+\newm{Solution to Question 2 - Part A.\hfill
+
+    Fix $n\in\Z^+$. Consider the recursively defined set $PP$ of promising positions as follows:
+
+    Let $X,Y$ be sets of truth assignments to a set of $n$ propositional variables $\{P_i \mid 1 \leq i \leq n\}$, and let $t\in\ints^+$.
+
+    Base Cases: 
+    \begin{enumerate}
+        \item If $X=\emptyset$ or $Y=\emptyset$, then $(X,Y,s)\in PP$ for all $s\in\Z^+$.
+        \item If there exists $1\leq i\leq n$ such that $\tau(P_i) \neq \tau'(P_i)$ for all $\tau \in X$ and $\tau' \in Y$, then $(X,Y,s)\in PP$ for all $s\in\Z^+$.
+    \end{enumerate}
+
+    Constructor Cases: \begin{enumerate}
+        \item If $(X,Y,t)\in PP$, then $(X,Y,t+1)\in PP$.
+        \item If $(X,Y,t)\in PP$ and $(X,Y',t')\in PP$, then $(X,Y\cup Y',t+t')\in PP$.
+        \item If $(X,Y,t)\in PP$ and $(X',Y,t')\in PP$, then $(X\cup X',Y,t+t')\in PP$.
+    \end{enumerate}
+
+    Base Case 1 makes sense since if one of $X,Y$ is empty then Alice wins vacuously due to the quantifiers. 
+    
+    Base Case 2 directly comes from the definition of Alice's winning condition (these cases do overlap thus ambiguous). 
+
+    Constructor Case 1 is valid since we can simply seperate $(X,Y,t+1)$ into $(X,Y,t)$ and $(\nil,\nil,1)$, then by assumption and base cases both are promising positions. 
+    
+    Constructor Cases 2, 3 directly come from the definition of the game. 
+
+    If $X,Y$ are disjoint, $X, Y'$ are disjoints, so is $X, Y\cup Y'$; same for $X\cup X', Y$.
+
+    Note that we can also define the Base Case 1 to be only $(X,Y,1)$ instead of all $s\in\Z^+$ s.t. $(X,Y,s)$, becasue of our Constructor Case 1, this is valid. However, for the sake of convinience for the proofs relating to $PP$, we define it as such.
+}
+\tcbcnt{question}{1}
+\begin{comment}
+\newq[Part B]{q3}{
+    Give a well-structured informal proof by  {\bf structural induction} that for any propositional formula $f$ in negation normal form, for any set $X$ of truth assignments that make $f$ true, for any set $Y$ of truth assignments that make $f$ false, and for any integer $t \geq N_v(f)$, $(X,Y,t)$ is a promising position.
+}
+\end{comment}
+\newp{[Proof of Question 2 - Part B by structural induction]\hfill
+
+    Consider $f\in NNF$, define $Q(f)$ = ``for any set $X$ of truth assignments that make $f$ true, for any set $Y$ of truth assignments that make $f$ false, and for any integer $t \geq N_v(f)$, $(X,Y,t)$ is a promising position.'' 
+
+    Now we prove $\forall f\in NNF. Q(f)$ by structural induction on $f$.
+
+    \indenv{
+        Let $f\in NNF$ be arbitrary;
+
+        Base Case: 
+                
+        \indenv{
+            Let $X$ be an arbitrary set of truth assignments that make $f$ true;
+            \indenv{
+                Let $Y$ be an arbitrary set of truth assignments that make $f$ false;
+
+                Consider 2 cases:
+                        
+                Case 1: $f=P_1$ for some propositional variable $P_1$;
+                \indenv{
+                    If $X=\nil$ or $Y=\nil$, then $(X,Y,t)$ is covered by base case 1 of the recursive definition of $PP$;
+
+                    If $X\neq\nil$ and $Y\neq\nil$, it can only be the case that $X=\{\tau\}$ and $Y=\{\tau'\}$ for some truth assignments $\tau,\tau'$ such that $\tau(P_1)=T$ and $\tau'(P_1)=F$;
+
+                    So, by letting $i=1$, we have constructed such index $i$ that $\tau(P_i) \neq \tau'(P_i)$ for all $\tau \in X$ and $\tau' \in Y$, thus $(X,Y,1)\in PP$;
+
+                    Since $N_v(f)=1$, by constructor case 1 of $PP$, we have $(X,Y,t)\in PP$ for all $t\geq N_v(f)$;
+                }
+                For Case 1 we have shown $(X,Y,t)\in PP$ for all $t\geq N_v(f)$.
+
+                Case 2: $f=\nnot(P_1)$ for some propositional variable $P_1$;
+                \indenv{
+                    If $X=\nil$ or $Y=\nil$, then $(X,Y,t)$ is covered by base case 1 of the recursive definition of $PP$;
+
+                    If $X\neq\nil$ and $Y\neq\nil$, it can only be the case that $X=\{\tau\}$ and $Y=\{\tau'\}$ for some truth assignments $\tau,\tau'$ such that $\tau(P_1)=F$ and $\tau'(P_1)=T$;
+
+                    So, by letting $i=1$, we have constructed such index $i$ that $\tau(P_i) \neq \tau'(P_i)$ for all $\tau \in X$ and $\tau' \in Y$, thus $(X,Y,1)\in PP$;
+
+                    Since $N_v(f)=1$, by constructor case 1 of $PP$, we have $(X,Y,t)\in PP$ for all $t\geq N_v(f)$;
+                }
+                For Case 2 we have shown $(X,Y,t)\in PP$ for all $t\geq N_v(f)$.
+            }
+            Since $Y$ is arbitrary, we have shown for all such $Y$, $ (X,Y,t)\in PP$ for all $t\geq N_v(f)$.
+        }
+        Since $X$ is arbitrary, we have shown for all such $X$, for all such $Y$, $(X,Y,t)\in PP$ for all $t\geq N_v(f)$. Thus, $Q(f)$.
+
+        Constructor Cases: 
+        \indenv{
+            Assume $Q(f')$ and $Q(f'')$ for $f',f''\in NNF$ such that $f=(f'\star f''),$ where $\star\in\{\aand,\oor\}$.
+            \indenv{
+                Let $X$ be an arbitrary set of truth assignments that make $f$ true;
+                \indenv{
+                    Let $Y$ be an arbitrary set of truth assignments that make $f$ false;
+
+                    Consider 2 cases of $\star$: $(\star=\aand)$ and $(\star=\oor)$.
+
+                    Case 1: Assume $\star=\aand$;
+                    \indenv{
+                        By assumption, for all set $X'$ of truth assignments that make $f'$ true, for all set $Y'$ of truth assignments that make $f'$ false, and for all integer $t'\geq N_v(f')$, $(X',Y',t')$ is a promising position;
+
+                        By assumption, for all set $X''$ of truth assignments that make $f''$ true, for all set $Y''$ of truth assignments that make $f''$ false, and for all integer $t''\geq N_v(f'')$, $(X'',Y'',t'')$ is a promising position;
+
+                        For any $\tau\in X$, to make $f$ true, $\tau$ must make $f'$ true and $f''$ true, thus $\tau\in X'$ and $\tau\in X''$. This implies $X\subseteq X'\cap X''$;
+
+                        For any $\tau'\in Y$, to make $f$ false, $\tau'$ must make $f'$ false or $f''$ false, thus $\tau'\in Y'$ or $\tau'\in Y''$. This implies $Y\subseteq Y'\cup Y''$;
+
+                        By specialization, and $X\subseteq X'\cap X''$ and $Y\subseteq Y'\cup Y''$, we fix $X'=X''=X$, and choose $Y',Y''$ such that $Y=Y'\cup Y''$;
+
+                        Then, by constructor case 2 of $PP$, we have $(X,Y',t')=(X',Y',t')\in PP$ and $(X,Y'',t'')=(X'',Y'',t'')\in PP$, which implies $(X,Y'\cup Y'',t'+t'')=(X,Y,t'+t'')\in PP$. Moreover, $t'+t''\geq N_v(f') + N_v(f'') = N_v(f)$;
+
+                        By constructor case 1 of $PP$, we have $(X,Y,t)\in PP$ for all $t\geq N_v(f)$;
+                    }
+                    For Case 1 we have shown $(X,Y,t)\in PP$ for all $t\geq N_v(f)$.
+
+                    Case 2: Assume $\star=\oor$;
+                    \indenv{
+                        By assumption, for all set $X'$ of truth assignments that make $f'$ true, for all set $Y'$ of truth assignments that make $f'$ false, and for all integer $t'\geq N_v(f')$, $(X',Y',t')$ is a promising position;
+
+                        By assumption, for all set $X''$ of truth assignments that make $f''$ true, for all set $Y''$ of truth assignments that make $f''$ false, and for all integer $t''\geq N_v(f'')$, $(X'',Y'',t'')$ is a promising position;
+
+                        For any $\tau\in X$, to make $f$ true, $\tau$ must make $f'$ true or $f''$ true, thus $\tau\in X'$ or $\tau\in X''$. This implies $X\subseteq X'\cup X''$;
+
+                        For any $\tau'\in Y$, to make $f$ false, $\tau'$ must make $f'$ false and $f''$ false, thus $\tau'\in Y'$ and $\tau'\in Y''$. This implies $Y\subseteq Y'\cap Y''$;
+
+                        By specialization, and $X\subseteq X'\cup X''$ and $Y\subseteq Y'\cap Y''$, we fix $Y'=Y''=Y$, and choose $X',X''$ such that $X=X'\cup X''$;
+
+                        Then, by constructor case 3 of $PP$, we have $(X',Y,t')=(X',Y',t')\in PP$ and $(X'',Y,t'')=(X'',Y'',t'')\in PP$, which implies $(X'\cup X'',Y,t'+t'')=(X,Y,t'+t'')\in PP$. Moreover, $t'+t''\geq N_v(f') + N_v(f'') = N_v(f)$;
+
+                        By constructor case 1 of $PP$, we have $(X,Y,t)\in PP$ for all $t\geq N_v(f)$;
+                    }
+                    For Case 2 we have shown $(X,Y,t)\in PP$ for all $t\geq N_v(f)$.
+
+                    For all cases of $\star$ we have shown $(X,Y,t)\in PP$ for all $t\geq N_v(f)$.
+                }
+                Since $Y$ is arbitrary, we have shown for all such $Y$, $(X,Y,t)\in PP$ for all $t\geq N_v(f)$.
+
+            }
+            Since $X$ is arbitrary, we have shown for all such $X$, for all such $Y$, $(X,Y,t)\in PP$ for all $t\geq N_v(f)$. Thus, $Q(f)$.
+        }
+    }
+    By structural induction, we have shown $\forall f\in NNF. Q(f)$.
+}
+
+\end{document}

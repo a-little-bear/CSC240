@@ -1,0 +1,27 @@
+\documentclass[11pt, sakura, night, 1in]{LatexTemplate/hw}
+\def\course{CSC240 Winter 2024}
+\def\headername{Homework Assignment 10}
+\def\name{Joseph Siu}
+
+\useclspackage{csc240}
+\useclspackage[noend, nocap]{alg}
+
+\begin{document}
+
+For any language $S\subseteq \Si^*$, define $C(S)=\{x\in\Si^*\mid \exists w\in\Si^*. y\in\Si^*.(xwxy\in S)\}$.
+
+For example, if $S=\{ababc,aabaab\}$, then $C(S)=\{\la,a,aa,ab,aab\}$.
+
+\tbf{Question 1.} Describe the language $S=L(((01)^*+1^*)^*)=\{z\in\{0,1\}^*\mid \dots\}$ by replacing the $\dots$ with at most 10 words. ($z$ counts as one word.) Briefly justify your answer.
+
+\tbf{Question 2.} Describe the language $T=L\bra{\overline{\overline{\ph}\cd00\cd\overline{\ph}}}=\{x\in\{0,1\}^*\mid \dots\}$ by replacing the $\dots$ with at most 10 words. ($x$ counts as one word.) Briefly justify your answer.
+
+\tbf{Question 3.} Explain why $C(S)=T$.
+
+\tbf{Question 4.} Give any deterministic finite automaton $M=(Q,\Si,\de,q_0,F)$, construct a finite automaton $M'=(Q',\Si,\de',q_0',F')$ such that $L(M')=C(L(M))$.
+
+\tbf{Question 5.} briefly describe how $M'$ works.
+
+\tbf{Question 6.} Prove that $L(M')=C(L(M))$.
+
+\end{document}

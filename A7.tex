@@ -1,0 +1,431 @@
+\documentclass[11pt, sakura, night, 1in]{hw}
+\def\course{CSC240 Winter 2024}
+\def\headername{Homework Assignment 6}
+\def\name{Joseph Siu}
+
+\usepackage{clsfiles/csc240}
+\usepackage[noend, nocap]{clsfiles/alg}
+\newop{\A}{A}
+\newop{\SRT}{SRT}
+\newop{\AUX}{AUX}
+
+\usepackage{comment}
+
+\begin{document}
+
+My name and student number: Joseph Siu, 1010085701. Sanchit Manchanda, Ali Zaki Rashid.
+
+Assume $n$ is a power of 2.
+Consider the algorithm SRT that sorts an array $A[1..n]$ into nondecreasing order.
+Note that the algorithm SRT calls an auxiliary function AUX.
+
+\begin{comment}
+
+\newfunc{\tbf{SRT}$(\A[1..n],n)$:}{
+        \aif{$n>1$ then}{
+            \as $\SRT(\A[1..\frac{n}{2}],\frac{n}{2})$
+            \as $\SRT(\A[(\frac{n}{2}+1)..n],\frac{n}{2})$
+            \as $\AUX(\A[1..n],n)$
+        }
+    }
+
+\newfunc{\tbf{AUX}($\A[1..n],n$):}{
+    \aif{$n>2$ then}{
+        \afor{\ag{i}{1}\ato $\frac{n}{4}$ do}{
+            \as swap the value of $A[i+\frac{n}{4}]$ and $A[i+\frac{n}{2}]$
+        }
+        \as $\AUX(\A[1..\frac{n}{2}],\frac{n}{2})$
+        \as $\AUX(\A[(\frac{n}{2}+1)..n],\frac{n}{2})$
+        \as $\AUX(\A[(\frac{n}{4}+1)..\frac{3n}{4}],\frac{n}{2})$
+    \aelif{$A[1]>A[2]$ then}
+        \as swap the value of $A[1]$ and $A[2]$
+    }
+}
+
+\newq{1}{
+    Give recursive definitions of functions $U(n')$ and $L(n')$, which are, respectively, a good upper bound and a good lower bound on the wrost case number of steps performed by AUX($A[1..n'],n'$), where steps are array element comparisons and swap operations.
+
+    Justify your answers and remember to define the domains of your functions.
+}
+\end{comment}
+
+\tbf{Question 1.}
+
+For all $i\in\Z^+$, let $n'=2^i$ where $n'\in\Z^+$. Define \[U:\{2^i\mid i\in\Z^+\}\to\N, U(2^i)=U(n')=\begin{cases}
+    2 & \text{if } i=1,\\
+    \frac{n'}{4} + 3\cd U\bra{\frac{n'}{2}} & \text{if } i>1.
+\end{cases},\] and \[L:\{2^i\mid i\in\Z^+\}\to\N, L(2^i)=L(n')=\begin{cases}
+    1 & \text{if } i=1,\\
+    \frac{n'}{4} + 3\cd L\bra{\frac{n'}{2}} & \text{if } i>1.
+\end{cases}.\] Here the domains for $U$ and $L$ are $\{2^i\mid i\in\Z^+\}$ (are all powers of 2 except $2^0$). Since AUX is an auxilliary function of SRT, and within SRT, AUX will be called only when $n'>1$, that is, $n'\ge 2^1$, and our comparison $A[1]>A[2]$ when $n'\le 2$ only makes sense when $n'\ge 2 = 2^1$. Moreover, since we assumed $n$ is a power of $2$, this implies our domain covers all possible values of the calls of AUX with respect to SRT.
+\newcl{1}{
+    The functions $U$ and $L$ are well defined.
+}
+
+Let $B$ denote the set where $B=\{2^i\mid i\in\Z^+\}$. Since $B$ is a subset of $\Z^+$, this implies $B$ has a well ordering, and where we can apply induction on $i\in\Z^+$ to show $n'=2^i\in B$ hold for all $i\in\Z^+$.
+
+\newp{[Proof of Claim \ref{claim:cl1} by strong induction on $i\in\Z^+$]\hfill
+
+    For all $n'\in B$ where $n'=2^i$ for some $i\in\Z^+$, define the predicate $S(n')=$``$U(n')\in\N$ and $L(n')\in\N$.''
+
+    Now, to show the functions $U$ and $L$ are well defined, it suffices to show $\forall n'\in B. S(n')$ as we have verified the domains of $U$ and $L$ are well defined. This is equivalent to show $\forall i\in\Z^+. S(2^i)$.
+
+    Base Case: $i=1$. 
+    \indenv{
+        Then $U(2^1)=2\in\N$ and $L(2^1)=1\in\N$ are well defined.
+    }
+    So, $S(2^1)$ holds.
+
+    Inductive Step: 
+    \indenv{
+        Let $i\in\Z^+$ be arbitrary;
+        \indenv{
+            Assume $\forall j\in\Z^+. (j\le i)\iimplies S(2^i)$, that is, $\forall j\in\Z^+. (j\le i)\iimplies (U(2^j)\in\N \aand L(2^j)\in\N)$.
+
+            \begin{proofcases}
+                \case $i=1$. 
+                \indenv{
+                    Then $U(2^2)=\frac{2^2}{4} + 3\cd U\bra{\frac{2^2}{2}} = 1 + 3 \cd U(2^1) = 1 + 3\cd 2 = 7\in\N$ and $L(2^2)=\frac{2^2}{4} + 3\cd L\bra{\frac{2^2}{2}} = 1 + 3 \cd L(2^1) = 1 + 3\cd 1 = 4\in\N$.
+                }
+                For Case 1 $U(2^2)$ and $L(2^2)$ are well defined.
+                \case $i\ge 2$. 
+                \indenv{
+                    Then since $U(2^i)\in\N$ and $L(2^i)\in\N$ by inductive hypothesis (specialization and modus ponens, and definition of $S$), we have $U(2^{i+1})=\frac{2^{i+1}}{4} + 3\cd U\bra{\frac{2^{i+1}}{2}} = \frac{2^{i+1}}{4} + 3\cd U(2^i)\in\N$ and $L(2^{i+1})=\frac{2^{i+1}}{4} + 3\cd L\bra{\frac{2^{i+1}}{2}} = \frac{2^{i+1}}{4} + 3\cd L(2^i)\in\N$. Here $\frac{2^{i+1}}{4}\in\N$ since $i\ge 2$ implies $i-1\ge 1$ and so $i-1\in\N$ and $\frac{2^{i+1}}{4}=2^{i+1-2}=2^{i-1}\in\N$.
+                }
+                For Case 2 $U(2^2)$ and $L(2^2)$ are well defined.
+            \end{proofcases}
+
+            For all cases $S(2^{i+1})$, thus $S(2^{i+1})$.
+        }
+    }
+
+    By strong induction, we have shown $\forall n'\in B. S(n')$.
+}
+
+\tbf{Justification.} 
+
+For $i\in\Z^+$, for array $A$, define the predicate $Q(i, A)=$``If $A$ is well defined on index from 1 to $2^i$ where such elements are from a totally ordered domain, then $U(2^i)$ is an upper bound on the worst case number of steps performed by AUX($A[1..2^i],2^i$) and $L(2^i)$ is a lower bound on the worst case number of steps performed by AUX($A[1..2^i],2^i$), where steps are array element comparisons and swap operations.''
+
+For $i\in\Z^+$, define $P(i)=``$For all array $A$. $Q(i, A)$.''
+
+\newl{1}{
+    $\forall i\in\Z^+, P(i)$.
+}
+
+\newp{[Proof of Lemma \ref{lemma:l1} by strong induction on $i\in\Z^+$]\hfill
+
+    Base Case: $i=1$.
+    \indenv{
+        Let array $A$ be arbitrary;
+        \indenv{
+            Assume $A$ is well defined on index from 1 to $2^1=2$ and all such elements are from a totally ordered domain.
+    
+            Consider AUX($A[1..2^1], 2)$. In this case since $\nnot(2>2)$, we will execute line 7 after line 1. First we compare $A[1]$ and $A[2]$, if $A[1]<A[2]$, then the execution is terminated, which gives the lower bound of 1 step for the execution of AUX($A[1..2^i],2^i$). If $A[1]>A[2]$, then we move into line 8 and swap the values of $A[1]$ and $A[2]$, then terminate the call, which gives the upper bound of $1+1=2$ steps for the execution of AUX($A[1..2^i],2^i$). 
+        }
+        By direct proof, we have shown $Q(1, A)$.
+    }
+
+    Since $A$ is arbitrary, we have shown $P(1)$.
+
+    Inductive Step: 
+    \indenv{
+        Let $i\in\Z^+$ be arbitrary;
+        \indenv{
+            Assume $\forall j\in\Z^+. (j\le i)\iimplies P(j)$.
+
+            \indenv{
+                Let array $A$ be arbitrary;
+                \indenv{
+                    Assume $A$ is well defined on index from 1 to $2^{i+1}$ where such elements are from a totally ordered domain.
+
+                    $i\in\Z^+$ implies $i+1\ge 2$ and so $2^{i+1}\ge 4$.
+
+                    Consider AUX($A[1..2^{i+1}], 2^{i+1})$. In this case since $2^{i+1}>2$, we will execute into line 2. From line 2 and 3, there are precisely $\frac{2^{i+1}}{4}$ steps performed, here $\frac{2^{i+1}}{4}$ must be a positive integer since $\frac{2^{i+1}}{4}=\frac{2^{i+1}}{2^2}=2^{i+1-2}=2^{i-1}$ and $i\in\Z^+$ implies $i-1\ge 0$ and for all $j\in\N$, $2^j\in\Z^+$.
+
+                    Since $\frac{2^{i+1}}{2}=2^i$. By inductive hypothesis (specialization and modus ponens) $P(i)$.
+
+                    By specialization, we have $Q(i, A)$. That is, $U(2^i)$ is an upper bound and $L(2^i)$ is a lower bound on the worst case number of steps performed by AUX($A[1..2^i],2^i$) (we ignore our definition of steps, as they are defined previously).
+
+                    So, on line 4, 5, and 6, a minimum of $L(2^i)$ steps and a maximum of $U(2^i)$ steps are performed respectively. So, from line 4 to line 6, a minimum of $3\cd L(2^i)$ steps and a maximum of $3\cd U(2^i)$ steps are performed.
+
+                    Hence, from line 2 to line 6, a minimum of $\frac{2^{i+1}}{4}+3L(2^i)$ steps and a maximum of $\frac{2^{i+1}}{4}+3\cd U(2^i)$ steps are performed. Since the execution terminates right after line 6, we conclude that the number of steps performed by AUX($A[1..2^{i+1}],2^{i+1}$) is bounded below by $\frac{2^{i+1}}{4}+3\cd L(2^i)$ and bounded above by $\frac{2^{i+1}}{4}+3U(2^i)$.
+                }
+
+                By definition of $U$ and $L$ and indirect proof, we have shown $Q(i+1, A)$.
+            }
+
+            Since $A$ is arbitrary, we have shown $P(i+1)$.
+        }
+    }
+
+    By strong induction, we have shown $\forall i\in\Z^+, P(i)$.
+}
+
+Therefore, by Lemma 1 we have shown that $U$ and $L$ are indeed the upper and lower bounds on the worst case number of steps performed by AUX($A[1..n'],n'$) respectively where $n'=2^i$ for some $i\in\Z^+$.
+
+Moreover, for the sake of simplicity and `good', we have chosen the above definitions, and they are also not trivial bounds since our base definition and recursion definition are chosen accordingly to the procedure.
+
+\begin{comment}
+\newq{2}{
+    Solve the recurrence $U(n')$ using the method of repeated substitution and verify.
+
+    Do not use asymptotic notation.
+}
+\end{comment}
+
+\tbf{Question 2.}
+
+We first solve the recurrence $U(n')$ using the method of repeated substitution.
+
+For $U(n')$ where $n'=2^i$ for some $i\in\Z^+$:
+\begin{proofcases}
+    \case $i=1$. Then $U(n')=U(2^1)=2$ is already defined explicitely.
+    \case $i\ge 2$. Then we have \begin{align*}
+        U(n)=U(2^i) &= \frac{2^i}{4} + 3\cd U\bra{\frac{2^i}{2}}\\
+        &=\frac{2^i}{4} + 3\sqrbra{\frac{2^{i-1}}{4} + 3 U\bra{\frac{2^{i-1}}{2}}}\\
+        &=\frac{2^i}{4} + \frac{3\cd 2^i}{8} + 9\cd U\bra{\frac{2^{i-2}}{2}}\\
+        &=\frac{2^i}{4}\sqrbra{\sum_{j=0}^1\bra{\frac{3}{2}}^j} + 3^2\cd U\bra{\frac{2^{i-2}}{2}}\\
+        \frac{2^i}{4} + \frac{3\cd 2^i}{8} + 9\cd U\bra{\frac{2^{i-2}}{2}}&=\frac{2^i}{4} + \frac{3\cd 2^i}{8} + 9\sqrbra{\frac{2^{i-2}}{4} + 3\cd U\bra{\frac{2^{i-2}}{2}}}\\
+        &=\frac{2^i}{4} + \frac{3\cd 2^i}{8} + \frac{9\cd2^{i-2}}{4} + 27 \cd U\bra{\frac{2^{i-2}}{2}}\\
+        &=\frac{2^i}{4}\sqrbra{\sum_{j=0}^2\bra{\frac{3}{2}}^j} + 3^3\cd U\bra{\frac{2^{i-3}}{2}}\\
+        &\vdots\\
+        &=\frac{2^i}{4}\sqrbra{\sum_{j=0}^{i-2}\bra{\frac{3}{2}}^j} + 3^{i-1}\cd U\bra{\frac{2^{2}}{2}}\\
+        &=\frac{2^i}{4}\sqrbra{\sum_{j=0}^{i-2}\bra{\frac{3}{2}}^j} + 3^{i-1}\cd U\bra{2^1}\\
+        &=\frac{2^i}{4}\sqrbra{\sum_{j=0}^{i-2}\bra{\frac{3}{2}}^j} + 3^{i-1}\cd 2
+    \end{align*}
+    where the summation and the exponentiations are well defined since $i\ge 2$ implies $i-2\ge 0$ and $i-1\ge 1$. 
+\end{proofcases}
+
+We now verify the explicite form using induction.
+\newcl{2}{
+    For $U(n')$ where $n'\in B$, that is, $n'=2^i$ for some $i\in\Z^+$, $U(n')$ has the explicite form \[U(n')=U(2^i)=\begin{cases}
+        2 & \text{if } i=1,\\
+        \frac{2^i}{4}\sqrbra{\ds\sum_{j=0}^{i-2}\bra{\frac{3}{2}}^j} + 3^{i-1}\cd 2 & \text{if } i>1.
+    \end{cases}.\]
+}
+\newp{[Proof of Claim \ref{claim:cl2} by induction]\hfill
+
+    For $i\in\Z^+$, define the predicate $R(i)=$``$U(2^i)$ has the explicite form as in Claim \ref{claim:cl2}.''
+
+    Base Case: $i=1$. Then $U(2^1)=2$ which matches the explicite form. So $R(1)$ holds.
+    
+    Inductive Step:
+    \indenv{
+        Let $i\in\Z^+$ be arbitrary;
+        \indenv{
+            Assume $R(i)$.
+
+            \begin{proofcases}
+                \case $i=1$. 
+                \indenv{
+                    Then $\frac{2^2}{4}\sqrbra{\sum_{j=0}^{2-2}\bra{\frac{3}{2}}^j} + 3^{2-1}\cd 2 = 1 + 3\cd 2 = 7$ which matches $U(2^2)=\frac{2^2}{4} + 3\cd U\bra{2^{2-1}} = 1 + 3\cd 2 = 7$. So $R(2)$ holds.
+                }
+                For Case 1 we have shown $R(i+1)$.
+                \case $i\ge 2$.
+                \indenv{
+                    By definition of $U$ we have  \begin{align*}
+                        U(2^{i+1}) &= \frac{2^{i+1}}{4}+3\cd U(2^i)\\
+                        &= \frac{2^{i+1}}{4}+3\cd U(2^i),
+                        \alt{since $i\ge 2$ and we assumed $R(i)$, we have}
+                        &= \frac{2^{i+1}}{4}+3\cd \bra{\frac{2^i}{4}\sqrbra{\sum_{j=0}^{i-2}\bra{\frac{3}{2}}^j} + 3^{i-1}\cd 2}\\
+                        &= \frac{2^{i+1}}{4}\sqrbra{1 + \frac{3}{2}\ds\sum_{j=0}^{i-2}\bra{\frac{3}{2}}^j} + 3^{(i+1)-1}\cd2\\
+                        &= \frac{2^{i+1}}{4}\sqrbra{1 + \ds\sum_{j=0}^{i-2}\bra{\frac{3}{2}}^{j+1}} + 3^{(i+1)-1}\cd2\\
+                        &= \frac{2^{i+1}}{4}\sqrbra{\bra{\frac{3}{2}}^0 + \ds\sum_{j=1}^{(i+1)-2}\bra{\frac{3}{2}}^{j}} + 3^{(i+1)-1}\cd2\\
+                        &= \frac{2^{i+1}}{4}\sqrbra{\ds\sum_{j=0}^{(i+1)-2}\bra{\frac{3}{2}}^{j}} + 3^{(i+1)-1}\cd2
+                    \end{align*}
+                }
+                For Case 2 we have shown $R(i+1)$.
+            \end{proofcases}
+
+            For all cases $R(i+1)$, thus $R(i+1)$.
+
+        }
+    }
+
+    By induction, we have shown $\forall i\in\Z^+, R(i)$.
+
+}
+
+\begin{comment}
+\newq{3}{
+    Give a recursive definition of the function $T(n)$, which represents a good upper bound on the worst case number of steps performed by SRT($A[1..n],n$), where steps are array element comparisons and swap operations.
+
+    Justify your answer and remember to define the domain of your function.
+}
+\end{comment}
+
+\tbf{Question 3.}
+
+Define the set $C=\{2^i\mid i\in\N\}$. Since $C$ is a subset of $\N$, thus $C$ has a well ordering. So we may apply induction on $i\in\N$ to show $n=2^i\in C$ holds for all $i\in\N$.
+
+\newcl{3}{
+    For $n\in\Z^+$ where $n\in C$, that is, $n=2^i$ for some $i\in\N$, define \[T:C\to\N, T(n)=T(2^i)=\begin{cases}
+        0 & \text{if } i=0,\\
+        2\cd T(2^{i-1}) + U(2^i) & \text{if } i>0.
+    \end{cases}.\]
+
+    Then, our $T(n)$ is well defined and represents a good upper bound on the worst case number of steps performed by SRT($A[1..n],n$) for any array $A$ that is well defined on index from 1 to $n$ where such elements are from a totally ordered domain.
+}
+
+\newcl{4}{
+    The function $T(n)$ is well defined.
+}
+
+\newp{[Proof of Claim \ref{claim:cl4}]\hfill
+
+    First we can see the domain of $T$ is well defined according to the question.
+
+    Now we show the codomain is well defined. To this end, for $n\in C$ where $n=2^i$ for some $i\in\N$, define the predicate $W(n)=W(2^i)=$``$T(2^i)\in\N$.'' 
+
+    Now we show $\forall i\in\N. W(2^i)$.
+
+    Base Case: $i=0$. 
+    \indenv{
+        Then $T(2^0)=0\in\N$.
+    }
+    So, $W(2^0)$ holds.
+
+    Inductive Step:
+    \indenv{
+        Let $i\in\N$ be arbitrary;
+        \indenv{
+            Assume $\forall j\in\N. (j\le i)\iimplies W(2^j)$.
+
+            \begin{proofcases}
+                \case $i=0$.
+                \indenv{
+                    Then $T(2^1)=2\cd T(2^0) + U(2^1) = 2\cd 0 + 2 = 2\in\N$.
+                }
+                For Case 1 $W(2^{i+1})$ holds.
+                \case $i\ge 1$.
+                \indenv{
+                    Then $T(2^{i+1})=2\cd T(2^i) + U(2^{i+1}) = 2\cd T(2^i) + U(2^{i+1})$. By inductive hypothesis $T(2^i)\in\N$, and from our previous claim $U(2^{i+1})\in\N$, so $T(2^{i+1})\in\N$.
+                }
+                For Case 2 $W(2^{i+1})$ holds.
+            \end{proofcases}
+
+            For all cases $W(2^i)$, thus $W(2^i)$.
+        }
+    }
+
+    By induction, we have shown $\forall n\in C. W(n)$.
+
+    Therefore, we conclude that $T(n)$ is well defined.
+}
+
+Now, we show that $T(n)$ is indeed an upper bound (during the proof we can also see why it is a `good' upper bound).
+
+For $i\in\N$, for array $A$, define the predicate $V(i, A)$=``If $A$ is well defined on index from 1 to $2^i$ where such elements are from a totally ordered domain, then $T(2^i)$ is an upper bound on the worst case number of steps performed by SRT($A[1..2^i],2^i$), where steps are array element comparisons and swap operations.''
+
+For $i\in\N$, define $X(i)=``$For all array $A$. $V(i, A)$.''
+
+\newl{2}{
+    $\forall i\in\N, X(i)$.
+}
+
+\newp{[Proof of Lemma \ref{lemma:l2} by strong induction on $i\in\N$]\hfill
+
+    Base Case: $i=0$.
+    \indenv{
+        Let array $A$ be arbitrary;
+        \indenv{
+            Assume $A$ is well defined on index from 1 to $2^0=1$ and all such elements are from a totally ordered domain.
+    
+            Consider SRT($A[1..1], 1$). In this case since $\nnot(1>1)$, no step has been executed. So the number of steps performed by SRT($A[1..1],1$) is 0. Since $T(2^0)=0$, we have $T(2^0)$ is an upper bound on the worst case number of steps performed by SRT($A[1..1],1$).
+        }
+        By direct proof, we have shown $V(0, A)$.
+    }
+
+    Since $A$ is arbitrary, we have shown $X(0)$.
+    \indenv{
+        Let $i\in\N$ be arbitrary;
+        \indenv{
+            Assume $\forall j\in\N. (j\le i)\iimplies X(j)$.
+
+            \indenv{
+                Let array $A$ be arbitrary;
+                \indenv{
+                    Assume $A$ is well defined on index from 1 to $2^{i+1}$ where such elements are from a totally ordered domain.
+
+                    Consider SRT($A[1..2^{i+1}], 2^{i+1}$). In this case since $2^{i+1}>1$, we will execute into line 2. On line 2 and 3, their steps are bounded by $T(2^i)$ respectively by inductive hypothesis (specialization and modus ponens), and from our previous claim $U(2^{i+1})$ is an upper bound on the worst case number of steps performed by AUX($A[1..2^{i+1}],2^{i+1}$). So, the number of steps performed by SRT($A[1..2^{i+1}],2^{i+1}$) is bounded above by $2\cd T(2^i) + U(2^{i+1}) = T(2^{i+1})$.
+                }
+
+                By definition of $T$ and direct proof, we have shown $V(i+1, A)$.
+            }
+
+            Since $A$ is arbitrary, we have shown $X(i+1)$.
+        }
+    }
+
+    By strong induction, we have shown $\forall i\in\N, X(i)$.
+}
+
+
+\begin{comment}
+\newq{4}{
+    Solve the recurrence $T(n)$ using the method of repeated substitution and verify.
+
+    Do not use asymptotic notation.
+}
+\end{comment}
+
+\tbf{Question 4.}
+
+Similar to Question 2, we repeatly substitute our recursive definition and we can see that: For $n\in\N$ where $n\in C$, that is, $n=2^i$ for some $i\in\N$, define \[T'(n)=T'(2^i)=\begin{cases}
+    0 & \text{if } i=0,\\
+    \ds\sum_{j=1}^i (2^{i-j}\cd U(2^j)) & \text{if } i>0.
+\end{cases}.\]
+
+We now prove this by strong induction:
+
+\newcl{5}{
+    For all $n\in C$. $T(n)=T'(n)$.
+}
+
+\newp{[Proof of Claim \ref{claim:cl5} by strong induction on $i\in\N$]\hfill
+
+    For $n\in C$, that is, $n=2^i$ for some $i\in\N$, define the predicate $Y(n)=Y(2^i)=$``$T(2^i)=T'(2^i)$.''
+
+    Now we show $\forall i\in\N. Y(2^i)$.
+
+    Base Case: $i=0$.
+    \indenv{
+        Then $T(2^0)=0$ and $T'(2^0)=0$.
+    }
+    So, $Y(2^0)$ holds.
+
+    Inductive Step:
+    \indenv{
+        Let $i\in\N$ be arbitrary;
+        \indenv{
+            Assume $\forall j\in\N. (j\le i)\iimplies Y(2^j)$.
+
+            \begin{proofcases}
+                \case $i=0$.
+                \indenv{
+                    Then $T(2^1)=2\cd T(2^0) + U(2^1) = 2\cd 0 + 2 = 2$ and $T'(2^1)=\sum_{j=1}^1 (2^{1-j}\cd U(2^j)) = 1\cd U(2^1) = 2$.
+                }
+                For Case 1 $Y(2^{i+1})$ holds.
+                \case $i\ge 1$.
+                \indenv{
+                    Then $T'(2^{i+1})=\sum_{j=1}^{i+1} (2^{(i+1)-j}\cd U(2^j))=\sum_{j=1}^{i} (2^{(i+1)-j}\cd U(2^j))+(U(2^{i+1}))=2\sum_{j=1}^{i} (2^{i-j}\cd U(2^j))+(U(2^{i+1}))$. By inductive hypothesis (specialization and modus ponens) $T(2^i)=T'(2^i)$, so by substitution and definition of $T', T$, we have $T'(2^{i+1}) = 2\sum_{j=1}^{i} (2^{i-j}\cd U(2^j))+(U(2^{i+1})) = 2\cd T'(2^i) + U(2^{i+1}) = 2 \cd T(2^i) + U(2^{i+1}) = 2\cd T(2^{i+1})$.
+                }
+                For Case 2 $Y(2^{i+1})$ holds.
+            \end{proofcases}
+
+            For all cases $Y(2^i)$, thus $Y(2^i)$.
+        }
+    }
+
+    By strong induction, we have shown $\forall n\in C. Y(n)$.
+
+}
+
+Therefore, by Claim \ref{claim:cl5} we can see $T'$ is the equivalent explicite formula of $T$, as required.
+
+In conclusion, we have succesfully solved the good upper bounds for the worst case number of steps performed by AUX and SRT, and we have verified our solutions using inductions. Despite there might exists some more tighten bounds to this question, for the sake of simplicity and verification, we have chosen the above definitions.
+
+Also, for Question 4's repeating substitutions, since it is precisely following the same procedure as in Question 2, we simply ommited the steps, however as we have verified the correctness of the explicite formulas, we can be confident that the repeated substitutions are correct.
+
+
+\end{document}

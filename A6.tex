@@ -1,0 +1,564 @@
+\documentclass[11pt, brown, sepia, 1in]{hw}
+\def\course{CSC240 Winter 2024}
+\def\headername{Homework Assignment 6}
+\def\name{Joseph Siu}
+
+\usepackage{clsfiles/csc240}
+
+\usepackage{comment}
+
+
+
+\begin{document}
+% \coverpage[clsfiles/stars]
+\newn{
+    My name and student number: Joseph Siu, 1010085701.
+
+    Sanchit Manchanda, Sepehr Jafari.
+}
+
+\newq{1}{
+    For $n \in \ints^+$, let $[n]$ denote the set $\{i  \in \ints^+ \ |\ i \leq n\}$.\\
+    For each $n \in \ints^+$, each function $f:[n]\rightarrow \{0,1\}$, and each non-empty subset $I \subseteq [n]$, define the {\em restriction} of $f$ to $I$ to be the function $\restr{f}{I}:I \rightarrow \{0,1\}$ where, for each $x \in I$,
+    $$
+    \restr{f}{I}(x) = f(x).
+    $$
+
+    Give a well-structured informal proof using double induction that, for each $k \in \ints^+$, each $n \in \ints^+$, and each subset $F$ of functions from $[n]$ to $\{0,1\}$,
+    if $n \geq k$ and
+    $$
+    |F| > \sum_{i=0}^{k-1} \binom{n}{i},
+    $$
+    then there exists a subset $I \subseteq [n]$ with $|I| = k$ such that $\{\restr{f}{I} : f \in F\}$ is the set of all functions from $I$ to $\{0,1\}$.
+
+    You may use the following fact, known as Pascal's Identity, without proof.
+
+    {\tbf{ Lemma}}:
+    $\forall k \in \ints^+. \forall n \in \ints^+. \left[\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1}\right].$
+}
+\newl{1}{
+    For all $n\in\Z^+$, for all $k\in\Z^+$, if $n\geq k$, then
+    \[\sum_{i=0}^{k-1} \binom{n}{i}\geq 2^k - 1.\]
+}
+
+\newp{[Proof of Lemma \ref{lemma:l1} by double induction]\hfill
+
+    For all $n\in \Z^+$, for all $k\in \Z^+$, define the predicates $P(n)$, and $Q(n,k)$ as follows:
+
+    $Q(n,k) = ``n\geq k\iimplies \sum_{i=0}^{k-1} \binom{n}{i}\geq 2^k-1$'';
+
+    $P(n) = ``\forall k\in \Z^+. Q(n,k)''$.
+
+    We will prove $\forall n\in \Z^+. P(n)$ by double induction.
+
+    Base Case: Consider $n=1$. 
+
+    \indenv{
+        Let $k\in\Z^+$ be arbitrary;
+
+        \begin{proofcases}
+            \case $1=k$.
+
+            \indenv{
+                In this case we have that $\sum_{i=0}^{1-1}\binom{1}{i}=\binom{1}{0}=1\geq 2^1-1=1$. Thus, $Q(1,k)$ holds.
+            }
+
+            For Case 1, we have shown $Q(1,k)$.
+
+            \case $1<k$.
+
+            \indenv{
+                In this case since $n<k$, the implication of $Q(1,k)$ is vacuously true. Thus, $Q(1,k)$ holds.
+            }
+
+            For Case 2, we have shown $Q(1,k)$.
+        \end{proofcases}
+
+        For all cases, we have shown $Q(1,k)$.
+    }
+
+    Since $k\in\Z^+$ was arbitrary, we have shown $P(1)$.
+
+    \indenv{
+        Let $n\in\Z^+$ be arbitrary;
+
+        \indenv{
+            Assume $P(n)$;
+
+            Base Case: Since $\sum_{i=0}^{1-1}\binom{n+1}{i}=\binom{n+1}{0}=1\geq 2^1-1=1$, we have $Q(n+1,1)$.
+
+            \indenv{
+                Let $k\in\Z^+$ be arbitrary;
+
+                \indenv{
+                    Assume $Q(n+1,k)$;
+
+                    \begin{proofcases}
+                        \case $n+1<k+1$.
+                        \indenv{
+                            In this case, since $n+1<k+1$, the implication of $Q(n+1,k+1)$ is vacuously true. Thus, $Q(n+1,k+1)$ holds.
+                        }
+
+                        For Case 1, we have shown $Q(n+1,k+1)$.
+
+                        \case $n+1\geq k+1$.
+                        \indenv{
+                            First by Lemma we have $\sum_{i=0}^k\binom{n+1}{i}=\binom{n+1}{0}+\sum_{i=1}^k\binom{n+1}{i}=\binom{n+1}{0}+\sum_{i=1}^k\bra{\binom{n}{i}+\binom{n}{i-1}}=1+\sum_{i=1}^k\binom{n}{i}+\sum_{i=1}^{k}\binom{n}{i-1}=\binom{n}{0}+\sum_{i=1}^k\binom{n}{i}+\sum_{i=1}^{k}\binom{n}{i-1}=\sum_{i=0}^k\binom{n}{i}+\sum_{i=0}^{k-1}\binom{n}{i}$.
+
+                            Since we assumed $P(n)$, by specialization we have $\sum_{i=0}^{k}\binom{n}{i}\geq 2^{k+1}-1$ and $\sum_{i=0}^{k-1}\binom{n}{i}\geq 2^k-1$. Thus, we have $\sum_{i=0}^k\binom{n+1}{i}=\sum_{i=0}^{k}\binom{n}{i}+\sum_{i=0}^{k-1}\binom{n}{i}\geq 2^{k+1}-1+2^k-1\geq 2^{k+1}-1$ since $2^k\geq1$ for all $k\in\N$.
+                        }
+
+                        For Case 2, we have shown $Q(n+1,k+1)$.
+                    \end{proofcases}
+
+                    For all cases, we have shown $Q(n+1,k+1)$.
+
+                }
+            }
+
+            By induction, we have shown $\forall k\in\Z^+. Q(n+1,k)$. Thus, we have shown $P(n+1)$.
+        }
+    }
+
+    Therefore, by induction $\forall n\in\Z^+. P(n)$ holds.
+}
+\begin{comment}
+    \newl{2}{
+        For any $n\in\Z^+$, for any $F$ a subset of functions from $[n]$ to $\{0,1\}$ with $|F|\geq 2$, we have 
+        \[\exists I\subseteq[n].I\neq\nil\iimplies[\forall f\in F. \forall f'\in F-\{f\}. \bra{\exists z\in I. \bra{\restr{f}{I}(z)\neq\restr{f'}{I}(z)}}].\]
+    }
+    
+\newp{[Proof of Lemma \ref{lemma:l2} by contradiction]\hfill
+
+    For all $n\in\Z^+$. For all subset of functions $F$ from $[n]$ to $\{0,1\}$ with $|F|\geq2$, define the predicate $P(n,F)=``\exists I\subseteq[n].I\neq\nil\iimplies[\forall f\in F.\forall f'\in F-\{f\}.\bra{\exists z\in I. \bra{\restr{f}{I}(z)\neq\restr{f'}{I}(z)}}].''$ 
+
+    \indenv{
+        Let $n\in\Z^+$ be arbitrary;
+        \indenv{
+            Let $F\subseteq \{0,1\}^{[n]}$ such that $|F|\geq2$ be arbitrary;
+            
+            \indenv{
+                To obtain a contradiction, assume $\nnot (P(n,F))$, that is, $$\forall I\subseteq[n].I\neq\nil\aand[\exists f\in F.\exists f'\in F-\{f\}.\bra{\forall z\in I. \bra{\restr{f}{I}(z)=\restr{f'}{I}(z)}}].$$
+
+                \indenv{
+                    Let $I=[n]\neq\nil$, by specialization of our assumption, we have $\exists f\in F.\exists f'\in F-\{f\}.\bra{\forall z\in [n]. \bra{\restr{f}{[n]}(z)=\restr{f'}{[n]}(z)}}$.
+
+                    Let $g\in F$ and $g'\in F-\{g\}$ be such that $\forall z\in [n]. \bra{\restr{g}{[n]}(z)=\restr{g'}{[n]}(z)}$.
+
+                    Since all elements of $F$ are unique, we have $\forall f\in F.\forall f'\in F-\{f\}.\bra{\exists y\in[n]. f(y)\neq f'(y)}$.
+
+                    By specialization of the above line, we have $\exists y\in[n]. g(y)\neq g'(y)$, this is equivalent to $\nnot\bra{\forall y\in[n]. g(y)=g'(y)}$.      
+
+                    Since $I=[n]$, we have $\restr{g}{I}=g$ and $\restr{g'}{I}=g'$, thus by substitution we have $\nnot\bra{\forall z\in I.\restr{g}{I}(z)=\restr{g'}{I}(z)}$.
+                }
+
+                Since both $\bra{\forall z\in I. \restr{g}{I}(z)=\restr{g'}{I}(z)}$ and $\nnot\bra{\forall z\in I. \restr{g}{I}(z)=\restr{g'}{I}(z)}$, we have reached a contradiction.
+            }
+
+            Thus, by contradiction, we have shown $P(n,F)$.
+
+        }
+
+        Since $F$ was arbitrary, we have shown for any $F$ a subset of functions from $[n]$ to $\{0,1\}$ with $|F|\geq2$, we have $P(n,F)$.
+
+    }
+
+    Since $n$ was arbitrary, we have shown for any $n\in\Z^+$, for any $F$ a subset of functions from $[n]$ to $\{0,1\}$ with $|F|\geq2$, we have $P(n,F)$. This completes our proof (of lemma 2).
+}
+\end{comment}
+
+\newp{[Proof of Question 1 by double induction]\hfill
+
+    For all $k\in\Z^+$, for all $n\in\Z^+$, for all $F$ as a subset of functions from $[n]$ to $\{0,1\}$, define the predicates $P(k)$, $Q(n,k)$, $R(n,k,F)$ as follows:
+
+    $R(n,k,F)=$$$``\sqrbra{\bra{n\geq k\aand |F|>\ds\sum_{i=0}^{k-1}\binom{n}{i}}\iimplies\bra{\exists I\subseteq[n]. (|I|=k) \aand  \{\restr{f}{I}: f\in F\}=\{0,1\}^{I}}}.''$$
+
+    $Q(n,k) = ``\forall F\subseteq\{0,1\}^{[n]}.R(n,k,F)$
+
+    $P(k) = ``\forall n\in\Z^+. Q(n,k)''$.
+
+    We will prove $\forall k\in\Z^+. P(k)$ by double induction.
+
+    Base Case: 
+    
+    Consider $k=1, n=1$. 
+
+    \indenv{
+        Let $F\subseteq\{0,1\}^{[1]}$ be arbitrary;
+
+        \begin{proofcases}
+            \case $|F|\leq1$.
+
+            \indenv{
+                Since $|F|\leq1=\sum_{i=0}^{1-1}\binom{1}{i}$, the implication of $R(1,1,F)$ is vacuously true.
+            }
+
+            For Case 1, we have shown R(1,1,F).
+
+            \case $|F|>1$.
+
+            \indenv{
+                Since $F\subseteq\{0,1\}^{[1]}$, $|F|\geq2$, and $\abs{\{0,1\}^{[1]}}=2$, it follows that $F=\{0,1\}^{[1]}$. Now, let $F=\{f_1,f_2\}$ for some functions $f_1,f_2:[1]\to\{0,1\}$. By picking $I=[1]$, we have $|I|=1$, and $\{\restr{f}{I}: f\in F\}=F=\{0,1\}^{[1]}=\{0,1\}^{I}$.
+            }
+
+            For Case 2, we have shown R(1,1,F).
+        \end{proofcases}
+
+        For all cases, we have shown $R(1,1,F)$, thus we conclude $R(1,1,F)$.
+    }
+
+    Since $F$ was arbitrary, we have shown $Q(1,1)$.
+
+    \indenv{
+        Let $n\in\Z^+$ be arbitrary;
+
+        \indenv{
+            Assume $Q(n,1)$;
+
+            \indenv{
+                Let $F\subseteq\{0,1\}^{[n+1]}$ be arbitrary;
+
+                \begin{proofcases}
+
+                    \case $|F|\leq\sum_{i=0}^{1-1}\binom{n+1}{i}$.
+
+                    \indenv{
+                        The implication of $R(n+1,1, F)$ is vacuously true.
+                    }
+
+                    For Case 1 we have shown $R(n+1,1,F)$.
+
+                    \case $|F|>\sum_{i=0}^{1-1}\binom{n+1}{i}$.
+                    
+                    \indenv{
+                        Since $|F|>\sum_{i=0}^{1-1}\binom{n+1}{i}=1$, we have $|F|\geq2$. This implies there exists two distinct functions, namely $\exists f\in F.\exists f'\in F-\{f\}.\bra{\exists z\in[n+1]. f(z)\neq f'(z)}$. Let $g\in F$, $g'\in F-\{g\}$, and $z\in[n+1]$ be such instances, then by constructing $I=\{z\}\subseteq[n+1]$, we have $|I|=1$ and $\{\restr{f}{I}: f\in F\}=\{0,1\}^{I}$.
+                    }
+
+
+                    For Case 2 we have that $R(n+1,1,F)$.
+
+                    %\indenv{
+                    %By Lemma \ref{lemma:l2}, let $I\subseteq[n+1]$ be such that $\forall f\in F. \forall f'\in F-\{f\}. \bra{\exists z\in I. \bra{\restr{f}{I}(z)\neq\restr{f'}{I}(z)}}$.
+
+
+                        %By specialization of our assumption $Q(n,1)$, we have $\exists I\subseteq[n]. (|I|=1) \aand  \curbra{\restr{\bra{\restr{f}{[n]}}}{I}: f\in F}=\{0,1\}^{I}$, let $I'$ be such $I\subseteq[n]$;
+
+                        %Since $|I|=1$ and $\curbra{\restr{\bra{\restr{f}{[n]}}}{I'}: f\in F}=\{\restr{f}{I'}: f\in F\}$, by substitution, we have $\exists I'\subseteq[n]\subseteq[n+1]. (|I'|=1) \aand  \{\restr{f}{I'}: f\in F\}=\{0,1\}^{I'}$.
+                    %}
+                \end{proofcases}
+
+                For all cases, we have shown $R(n+1,1,F)$, thus we conclude $R(n+1,1,F)$.
+            }
+
+            Since $F$ was arbitrary, we have shown $Q(n+1,1)$.
+        }
+    
+    }
+
+    By induction, we have shown $\forall n\in\Z^+. Q(n,1)$. Thus, we have shown $P(1)$.
+
+    \indenv{
+        Let $k\in\Z^+$ be arbitrary;
+        \indenv{
+            Assume $P(k)$;
+
+            Base Case: 
+            \indenv{
+                Let $F\subseteq\{0,1\}^{[1]}$ be arbitrary;
+
+                Since $1<k+1$, this shows the implication of $R(1,k+1,F)$ is vacuously true.
+            }
+
+            Since $F$ was arbitrary, we have shown $Q(1,k+1)$.
+
+            \indenv{
+                Let $n\in\Z^+$ be arbitrary;
+                \indenv{
+                    Assume $Q(n,k+1)$;
+
+                    \indenv{
+                        Let $F\subseteq\{0,1\}^{[n+1]}$ be arbitrary;
+
+                        \begin{proofcases}
+                            \case $|F|\leq\sum_{i=0}^{k}\binom{n+1}{i}$.
+
+                            \indenv{
+                                The implication of $R(n+1,k+1,F)$ is vacuously true.
+                            }
+
+                            For Case 1 we have shown that $R(n+1,k+1,F)$.
+                            
+                            \case $|F|>\sum_{i=0}^{k}\binom{n+1}{i}$.
+
+                            \indenv{
+                                By Lemma this implies \begin{align*}
+                                    |F| &> \sum_{i=0}^{k}\binom{n+1}{i}\\
+                                    &=\binom{n+1}{0}+\sum_{i=1}^{k}\binom{n+1}{i}\\
+                                    &=1+\sum_{i=1}^k\bra{\binom{n}{i}+\binom{n}{i-1}}\\
+                                    &=\binom{n}{0}+\sum_{i=1}^k\binom{n}{i}+\sum_{i=1}^k\binom{n}{i-1}\\
+                                    &=\sum_{i=0}^k\binom{n}{i}+\sum_{i=1}^{k}\binom{n}{i-1}\\
+                                    &=\sum_{i=0}^k\binom{n}{i}+\sum_{i=0}^{k-1}\binom{n}{i}
+                                \end{align*}
+
+                                \subcase If $\abs{\curbra{\restr{f}{[n]}:f\in F}}>\ds\sum_{i=0}^k\binom{n}{i}$:
+
+                                By Specialization of assumption $Q(n,k+1)$ this implies there exists a subset $I\subseteq[n]$ such that $|I|=k+1$ and $\{\restr{f}{I}: f\in F\}=\{0,1\}^{I}$ by assumption $Q(n,k+1)$.
+
+                                For subcase 2.1 we have shown that $R(n+1,k+1,F)$.
+
+                                \subcase If $\abs{\curbra{\restr{f}{[n]}:f\in F}}\leq\ds\sum_{i=0}^k\binom{n}{i}$:
+
+                                By multipling both sides we have $-\abs{\curbra{\restr{f}{[n]}:f\in F}}\geq-\ds\sum_{i=0}^k\binom{n}{i}$
+
+                                Add this inequality to the previous inequality at Case 2, we have $|F|-\abs{\curbra{\restr{f}{[n]}:f\in F}}>\sum_{i=0}^k\binom{n}{i}+\sum_{i=0}^{k-1}\binom{n}{i}-\sum_{i=0}^k\binom{n}{i}=\sum_{i=0}^{k-1}\binom{n}{i}$.
+
+                                By Lemma 1 and above, since $|F|-\abs{\curbra{\restr{f}{[n]}:f\in F}}\geq\sum_{i=0}^{k-1}\binom{n}{i}+1\geq 2^k$, thus this means there are two disjoint subsets $I_1,I_2\subseteq F$ such that $|\{\restr{f}{[n]}: f\in I_1\}|=|\{\restr{f}{[n]}: f\in I_2\}|=2^k$ and $\{\restr{f}{[n]}: f\in I_1\}=\{\restr{f}{[n]}: f\in I_2\}$ so that the cardinality of $F$ can decrease at least $2^k$ when we are restricting the domains of the functions in $F$ to $[n]$.
+
+                                Now, since $\{\restr{f}{[n]}:f\in I_1\}\subseteq \{\restr{f}{[n]}:f\in F\}$ and $|\{\restr{f}{[n]}: f\in I_1\}|=2^k$, this implies $|\{\restr{f}{[n]}:f\in F\}|\geq 2^k\geq\sum_{i=0}^{k-1}\binom{n}{i}+1$, hence by specialization of the assumption $P(k)$ we have $Q(n,k)$, hence $\exists I'\subseteq[n].|I'|=k\aand\{\restr{\bra{\restr{f}{[n]}}}{I'}: f\in F\}=\{0,1\}^{I'}$. 
+
+                                By constructing $I=I'\cup\{n+1\}$, since $\{\restr{f}{I}: f\in F\}\subseteq\{0,1\}^{I}$ which implies $\abs{\{\restr{f}{I}: f\in F\}}\leq\abs{\{0,1\}^I}$ (there exists an injection), and $\abs{\{\restr{f}{I}: f\in F\}}\geq 2\cd2^{k}=2^{k+1}=\abs{\{0,1\}^I}$ by our disjoint $I_1,I_2$ (the cardinality of $\{\restr{f}{I}:f\in F\}$ is at least $\{0,1\}^I$). Since both sets are finite, so they must have the same number of elements. Moreover, because of $\{\restr{f}{I}: f\in F\}\subseteq\{0,1\}^{I}$, this also shows they are equal as sets. Hence, $|I|=k+1$ and $\{\restr{f}{I}: f\in F\}=\{0,1\}^{I}$.
+
+                                Since we have constructed such $I$, for subcase 2.2 we have shown that $R(n+1,k+1,F)$.
+                            }
+
+                            For Case 2, we have shown that $R(n+1,k+1,F)$.
+                        \end{proofcases}
+
+                        For all cases We have shown that $R(n+1,k+1,F)$. Thus, we conclude $R(n+1,k+1,F)$.
+                    }
+
+                    Since $F$ was arbitrary, we have shown $Q(n+1,k+1)$.
+                }
+            }
+
+            By induction, we have shown $\forall n\in\Z^+. Q(n,k+1)$. Thus, we have shown $P(k+1)$.
+        }
+    }
+
+    By induction, we have shown $\forall k\in\Z^+. P(k)$.
+}
+
+\newq{2}{
+    A {\em cyclic shift} of a sequence $\{s_i\}_{i=1}^n$ is a sequence $\{s'_i\}_{i=1}^n$ such that,
+    for some $k \in [n]$ and
+    %positive integer  $k \le n$,
+    for all $1 \le i \le n$,  the $i$'th term of this sequence is $s'_i =  s_{((i + k -1) \bmod n)+ 1}$.\\
+    For example, the sequence 3,4,5,1,2  is a cyclic shift of the sequence 1,2,3,4,5, where $k = 2$.
+
+    The  {\em prefix sums} of a sequence $\{s_i\}_{i=1}^n$ of numbers
+    are the numbers $\sum_{i=1}^m s_i$ for $1 \le m \le n$.
+    For example, the prefix sums of the sequence 1,2,3,4,5 are  the numbers 1,3,6,10, and 15.
+
+    For all $n \in \ints^+$, 
+    let $\text{OE}_n$ denote the set of finite sequence $\{r_i\}_{i=1}^{2n}$ of integers such that
+    \begin{itemize}
+    \item
+    $r_i > 0$ if $i$ is odd,
+    \item
+    $r_i < 0$ if $i$ is even, and
+        \item $\sum\limits_{i=1}^{2n} r_i \geq 0$.
+    \end{itemize}
+
+    Using the well-ordering principle, give a well-structured informal proof that, for all $n \in \ints^+$ and all
+    sequences $r \in \text{OE}_n$, there is a cyclic shift of $r$ all of whose prefix sums are non-negative.
+}
+
+\newl{2}{
+    For any $n\in\Z^+$. For any $r=\{r_i\}_{i=1}^{2n}\in\text{OE}_n$. Let CS$(r)$ denote the set of all cyclic shift of $r$, then for any $r'=\{r_i'\}_{i=1}^{2n}\in\T{CS}(r)$, we have $\sum_{i=1}^{2n}r_i=\sum_{i=1}^{2n}r_i'$.
+}
+
+\newp{[Proof of Lemma 2]\hfill
+
+    \indenv{
+        Let $n\in\Z^+$ be arbitrary;
+        \indenv{
+            Let $r=\{r_i\}_{i=1}^{2n}\in\text{OE}_n$ be arbitrary;
+            
+            \indenv{
+                Let $r'\in\T{CS}(r)$ be arbitrary;
+
+                By definition of CS$(r)$, we have $\exists k\in[2n].\forall i\in[2n].r'_i=r_{((i+k-1)\bmod 2n)+1}$.
+                
+                We first show the function $f:[2n]\to[2n]$ defined by $f(i)=((i+k-1)\bmod 2n)+1$ is a bijective function.
+
+                To this end, we show that $f$ is injective.
+                \indenv{
+                    Assume $f(i)=f(j)$ for some $i,j\in[2n]$.
+
+                    Then, we have $((i+k-1)\bmod 2n)+1=((j+k-1)\bmod 2n)+1$;
+                    
+                    By cancellation, we have $(i+k-1)\bmod 2n=(j+k-1)\bmod 2n$;
+
+                    This implies $i+k-1=j+k-1+2nm$ for some $m\in\Z$;
+
+                    By cancellation, we have $i=j+2nm$;
+
+                    \indenv{
+                        To obtain a contradiction, assume $m\neq0$.
+
+                        Then, we have $i=j+2nm\geq j+2n$ or $i=j+2nm\leq j-2n$.
+
+                        \begin{proofcases}
+                            \case If $i=j+2nm\geq j+2n$, then we have $i=j+2nm\geq j+2n$. This implies $i-j\geq2n$. However, since $i,j\in[2n]$, we notice $1\leq i\leq 2n$ and $1\leq j\leq 2n$, so $i-j\leq 2n-1<2n$. This is a contradiction.
+                            \case If $i=j+2nm\leq j-2n$, then we have $i=j+2nm\leq j-2n$. This implies $i-j\leq-2n$. However, since $i,j\in[2n]$, we notice $1\leq i\leq 2n$ and $1\leq j\leq 2n$, so $i-j\geq 1-2n>-2n$. This is a contradiction.
+                        \end{proofcases}
+
+                        For all cases contradiction occured.
+                    }
+
+                    Hence, by contradiction we have shown $m=0$. This implies $i=j$.
+                }
+                Hence, by definition of injective, we have shown $f$ is injective.
+
+                Now, we show that $f$ is surjective.
+                \indenv{
+                    Let $y\in[2n] $ be arbitrary.
+
+                    \begin{proofcases}
+                        \case If $y=1$, then we have $f(-k+1+2n)=(((-k+1+2n+k-1)\bmod 2n)+1)=((2n)\bmod 2n)+1=0+1=1$.
+
+                        For Case 1 all $y\in[2n]$ can be achieved by $f$.
+
+                        \case If $y\neq1$, that is, $y>1$.
+                        \indenv{
+                            \subcase If $y\geq k$, then we have $y-k\in[2n]$, and $f(y-k)=((y-k+k-1)\bmod 2n)+1=((y-1)\bmod 2n)+1=y-1+1=y$.
+
+                            For this subcase $y$ can be achieved by $f$.
+
+                            \subcase If $y<k$, then we have $1-2n\leq y-k < 0$ and so $1\leq y-k+2n< 2n$ and $y-k+2n\in[2n]$, and $f(y-k+2n)=((y-k+2n+k-1)\bmod 2n)+1=((y+2n-1)\bmod 2n)+1=y-1+1=y$
+
+                            For this subcase $y$ can be achieved by $f$.
+                        }
+
+                        Since for all subcases of Case 2 $y$ can be achieved by $f$, this shows for Case 2 all $y\in[2n]$ can be achieved by $f$.
+                    \end{proofcases}
+
+                    For all cases, $y$ can be achieved by $f$.
+                }
+
+                Since $y$ was arbitrary, we have shown $f$ is surjective by definition.
+
+                Since $f$ is both injective and surjective, we have shown $f$ is bijective.
+
+                Hence $\sum_{i=1}^{2n}r_i=\sum_{i=1}^{2n}r_{f(i)}=\sum_{i=1}^{2n}r_i'$ since addition is commutative and $f$ is bijective.
+            }
+
+            Since $r'\in\T{CS}(r)$ was arbitrary, we have shown $\forall r'\in\T{CS}(r).\sum_{i=1}^{2n}r_i=\sum_{i=1}^{2n}r_i'$.
+        }
+
+        Since $r\in\text{OE}_n$ was arbitrary, we have shown $\forall r\in\text{OE}_n.\forall r'\in\T{CS}(r).\sum_{i=1}^{2n}r_i=\sum_{i=1}^{2n}r_i'$.
+    }
+
+    Since $n\in\Z^+$ was arbitrary, we have shown $\forall n\in\Z^+.\forall r\in\text{OE}_n.\forall r'\in\T{CS}(r).\sum_{i=1}^{2n}r_i=\sum_{i=1}^{2n}r_i'$.
+}
+
+\newp{[Proof of Question 2 by Well Ordering]\hfill
+
+    For $n\in\Z^+$, let $P(n)$ denote the statement ``$\forall r\in\text{OE}_n.\exists r'\in\T{CS}(r).\forall m\in\Z^+.1\leq m\leq 2n.\sum_{i=1}^m r_i'\geq0$''. We will show $\forall n\in\Z^+.P(n)$ by well ordering.
+
+    \indenv{
+        To obtain a contradiction assume $\exists n\in\Z^+. \nnot(P(n))$, that is, there exists $n\in\Z^+$, and exists a sequence $r\in\text{OE}_n$ such that there is no cyclic shift of $r$ all of whose prefix sums are non-negative.
+
+        Namely, for all sequences $r=\{r_i\}_{i=1}^{2n}$, let CS$(r)$ denote the set of all cyclic shift of $r$, then $\exists n\in\Z^+.\nnot(P(n))=$$$\exists n\in\Z^+.\exists r=\{r_i\}_{i=1}^{2n} \in \T{OE}_n. \forall \{r_i'\}_{i=1}^{2n}\in \T{CS}(r). \exists m\in\Z^+. 1\leq m\leq 2n \aand \sum_{i=1}^m r_i'<0.$$
+
+        Let $C=\{2n\in\Z^+\mid \exists r=\{r_i\}_{i=1}^{2n} \in \T{OE}_n. \forall \{r_i'\}_{i=1}^{2n}\in \T{CS}(r). \exists m\in\Z^+. 1\leq m\leq 2n \aand \sum_{i=1}^m r_i'<0\}$. Then, $C\neq\nil$ by our assumptiom.
+
+        Since $\N$ has a well ordering and $\Z^+\subseteq\N$, this implies $\Z^+$ has a well ordering, so there exists a smallest element $2n_0\in C$.
+        
+        \indenv{
+            Let $2n_0\in C$ be such smallest element.
+
+            \indenv{
+                To obtain a contradiction, assume $n_0=1$;
+
+                Then, for all sequences $r\in \T{OE}_n$, consider $r\in\T{CS}(r)$;
+
+                By specialization in the condition of $C$, let $m\in\Z^+$ be such that $1\leq m\leq 2n_0=2 \aand \sum_{i=1}^m r_i<0$. Then, we show there is no such $m$ exists using 2 cases:
+
+                \begin{proofcases}
+                    \case $m=1$.
+                    \indenv{
+                        Since $r_1>0$ by definition of $r\in\T{OE}_n$, we have $\sum_{i=1}^1 r_i=r_1>0$, hence contradiction.
+                    }
+                    \case $m=2$.
+                    \indenv{
+                        Since $\sum_{i=1}^{2}r_i=\sum_{i=1}^{2n_0}r_i\geq0$ by definition of $r\in\T{OE}_n$, and we have $\sum_{i=1}^{m}r_i=\sum_{i=1}^{2}r_i<0$, hence contradiction.
+                    }
+                \end{proofcases}
+
+                Since for all cases we have reached a contradiction, we conclude this is a contradiction.
+            }
+
+            Since $n_0=1$ is a contradiction, we have shown that $n_0\neq 1$. That is, $n_0\geq 2$.
+
+            Let $r_0=\{r_i\}_{i=1}^{2n_0} \in \T{OE}_{n_0}$ be such that for all $\{r_i'\}_{i=1}^{2n_0}\in \T{CS}(r_0)$, there exists $m\in\Z^+$ such that $1\leq m\leq 2n_0$ and $\sum_{i=1}^m r_i'<0$.
+
+            Let $\{r_i'\}_{i=1}^{2n_0}\in \T{CS}(r_0)$ be arbitrary such that $r_i'>0$ for $i\in[2n_0]$ and $i$ is odd. Then by specialization of the condition of $C$, we have $\exists m\in\Z^+. 1\leq m\leq 2n_0 \aand \sum_{i=1}^m r_i'<0$. 
+
+            Define $C'=\{m\in\Z^+\mid 1\leq m\leq 2n_0 \aand \sum_{i=1}^m r_i'<0\}$. 
+            
+            Then, $C'\neq\nil$ by our assumption. 
+            
+            \indenv{
+                Let $m_0\in C'$ be such that $m_0$ is the smallest element of $C'$. 
+
+                \indenv{
+                    To obtain a contradiction, assume $m_0$ is odd;
+
+                    Then, by our assumption, we have $r_{m_0}>0$.
+
+                    \begin{proofcases}
+                        \case $m_0=1$.
+                        \indenv{
+                            Since $r_1>0$, we have $\sum_{i=1}^{m_0} r_i=r_1>0$.
+                        }
+
+                        This is contradicting the definition of $m_0$ having negative prefix sum.
+
+                        \case $m_0>1$.
+                        \indenv{
+                            Since $\sum_{i=1}^{m_0}r_i'<0$ and $r_{m_0}>0$, we have $\sum_{i=1}^{m_0-1}r_i<0$. 
+                        }
+
+                        This is contradicting the definition of $m_0$ being the smallest such $m_0$.
+                    \end{proofcases}
+
+                    For all cases contradiction occured.
+                }
+
+                Thus, by contradiction, $m_0$ must be even.
+
+                \indenv{
+                    To obtain a contradiction, assume $m_0=2n_0$;
+
+                    Then, we have $\sum_{i=1}^{2n_0} r_i'<0$.
+
+                    However, by definition of $r_0\in\T{OE}_{n_0}$, we have $\sum_{i=1}^{2n_0} r_i\geq0$.
+
+                    By Lemma 2, this is a contradiction.
+                }
+
+                We conclude $m_0\neq 2n_0$. That is, $m_0\leq 2n_0-1$.
+
+                Since $m_0+1\leq 2n_0$, we have $2n_0-m_0\geq1$. Hence, define a sequence $\{s_i\}_{i=1}^{2n_0-m_0}$ such that $s_i=r_{i+m_0}$ for all $i\in[2n_0-m_0]$, here $2n_0-m_0$ is even since both $2n_0$ and $m_0$ are even;
+
+                Then, since we assumed $n_0$ is the smallest element of $C$, this implies $2n_0-m_0\notin C$. That is, there exists a cyclic shift of $s$ all of whose prefix sums are non-negative. Namely, $\exists s'=\{s_i'\}_{i=1}^{2n_0-m_0}\in\T{CS}(s). \forall m\in\Z^+. 1\leq m\leq 2n_0-m_0\implies \sum_{i=1}^m s_i'\geq0$.
+
+                Consider the sequence $t=\{t_i\}_{i=1}^{2n_0}=\{s_i'\}_{i=1}^{2n_0-m_0}\circ\{r_i'\}_{i=1}^{m_0}$. Since $t\in\T{CS}(r_0)$ by our construction of $s'$ and $s$, this implies there exists $m_1\in\Z^+. 1\leq m_1\leq 2n_0 \aand \sum_{i=1}^{m_1} t_i<0$.
+
+                Since by definition of $r_0\in\T{OE}_{n_0}$ and Lemma 2, we have $\sum_{i=1}^{2n_0} t_i\geq0$. 
+                
+                Moreover, by our construction of $s'$ and $s$, we have $\sum_{i=1}^{p} t_i'\geq0$ for all $p\in[2n_0-m_0]$. Also, by definition of $m_0$, we have $\sum_{i=m_0+1}^{q} t_i\geq0$ for all $q\in[2n_0-1]-[m_0]$. Combining these 2 inequalities, we have $\sum_{i=1}^{p'} t_i\geq0$ for all $p'\in[2n_0-1]$. Combining with $\sum_{i=1}^{2n_0} t_i\geq0$ we have $\forall q'\in[2n_0].\sum_{i=1}^{q'} t_i\geq0$.
+            }
+        }
+
+        This contradicts our definition of $C$ and constuction of $r_0$ where $\forall r'=\{r_i'\}_{i=1}^{2n_0}\in\T{CS}(r_0). \exists m\in\Z^+. 1\leq m\leq 2n_0 \aand \sum_{i=1}^m r_i'<0$.
+    }
+
+    Therefore, we conclude $\forall n\in\Z^+. P(n)$. That is, for all $n\in\Z^+$ and all sequences $r\in\text{OE}_n$, there is a cyclic shift of $r$ all of whose prefix sums are non-negative.
+}
+
+
+
+
+\end{document}

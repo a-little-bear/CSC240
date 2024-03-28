@@ -1,0 +1,52 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3cm}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+\newtheorem*{claim}{Claim}
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+
+\begin{document}
+\begin{center}
+{\bf \Large \bf CSC240 Winter 2024 Homework Quiz 6}\\
+\end{center}
+
+Solve the recurrence
+%relation below. You just need to give the asymptotic bound.
+\[
+    T(n) = \left\{ \begin{array}{ll}
+    5 & \mbox{ if } n = 1\\
+    8 T(\lceil n/3 \rceil) + n^2 & \mbox{ if } n >1
+    \end{array} \right .
+\]
+to within a constant factor.  Briefly justify your answer.
+
+\begin{claim}
+    $T(n) \in \Theta(n^2)$.
+\end{claim}
+
+\begin{proof}
+    Let $a=8, b=3, f(n) = n^2$. 
+
+    Since $\log_b a = \log_3 8 \approx 1.89$, we have $f(n)=n^2 > n^{\log_b a+0.01}$ for all $n \geq 1$. Let $c=1$ and $\varepsilon=0.01$, we can see the first sub-condition of the 3rd case of the Master Theorem is satisfied.
+
+    Since $8 f(n/3) = 8 (n/3)^2 = 8n^2/9=\frac{8}{9}n^2$, we have $a f(n / b)=\frac{8}{9}f(n)\leq \frac{99}{100}f(n)$ for all $n \geq 1$. Let $c=\frac{99}{100}$ we can see the second sub-condition of the 3rd case of the Master Theorem is satisfied.
+
+    Hence, $T(n)$ is the third case of the Master Theorem (The MIT Textbook version), hence we conclude $T(n)\in\Theta(f(n))=\Theta(n^2)$, as needed.
+
+    Since we have shown that $T(n)\in\Theta(n^2)$, this implies the value of $T(n)$ is within a constant factor of $n^2$ by definition of $\Theta(n^2)$.
+\end{proof}
+
+\end{document}

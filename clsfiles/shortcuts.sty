@@ -1,0 +1,195 @@
+\ProvidesPackage{shortcuts}
+\NeedsTeXFormat{LaTeX2e}
+
+
+
+% Letters
+\newcommand{\al}{\alpha}
+\newcommand{\Al}{\Alpha}
+
+\newcommand{\be}{\beta}
+\newcommand{\Be}{\Beta}
+
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\vGa}{\varGamma}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\Ep}{\Epsilon}
+
+\newcommand{\de}{\delta}
+\newcommand{\De}{\Delta}
+\newcommand{\vDe}{\varDelta}
+
+\newcommand{\si}{\sigma}
+\newcommand{\Si}{\Sigma}
+\newcommand{\vSi}{\varSigma}
+
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\vOm}{\varOmega}
+
+\newcommand{\ze}{\zeta}
+\newcommand{\Ze}{\Zeta}
+
+\newcommand{\et}{\eta}
+\newcommand{\Et}{\Eta}
+
+\renewcommand{\th}{\theta}
+\newcommand{\vth}{\vartheta}
+\newcommand{\Th}{\Theta}
+\newcommand{\vTh}{\varTheta}
+
+\newcommand{\io}{\iota}
+\newcommand{\Io}{\Iota}
+
+\newcommand{\ka}{\kappa}
+\newcommand{\Ka}{\Kappa}
+
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\vLa}{\varLambda}
+
+\newcommand{\rh}{\rho}
+\newcommand{\vrh}{\varrho}
+
+\newcommand{\ph}{\phi}
+\newcommand{\vph}{\varphi}
+\newcommand{\Ph}{\Phi}
+\newcommand{\vPh}{\varPhi}
+
+\newcommand{\ps}{\psi}
+\newcommand{\Ps}{\Psi}
+\newcommand{\vPs}{\varPsi}
+
+\newcommand{\ta}{\tau}
+
+\newcommand{\ch}{\chi}
+\newcommand{\Ch}{\Chi}
+
+\newcommand{\vpi}{\varpi}
+
+
+
+
+
+
+
+% Document
+\newcommand{\np}{\newpage}
+%indent and format, Abounded commands, use indenv instead
+\newcommand{\ind}[1][5]{\hspace*{#1mm}}
+\newcommand{\explain}[2][20]{\\\ind[#1] {#2}}
+\newcommand{\unind}[1][5]{\hspace*{-#1mm}}
+
+% Functions
+\newcommand\D{\mathop{}\!\mathrm{d}}
+\newcommand{\DD}[2]{ \frac{\D #1 }{\D #2 } }
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\GF}[1][2]{\bb{F}_{#1}}
+\newcommand{\modulo}[1][n]{\Z/#1\Z}
+
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\bra}[1]{\left(#1\right)} %pair / ()
+\newcommand{\sqrbra}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curbra}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+\newcommand{\norm}[1]{\left|\left|#1\right|\right|}
+
+% Text Commands
+\DeclareRobustCommand{\tit}[1]{\textit{#1}}
+\DeclareRobustCommand{\trm}[1]{\textrm{#1}}
+\DeclareRobustCommand{\tsf}[1]{\textsf{#1}}
+\DeclareRobustCommand{\ttt}[1]{\texttt{#1}}
+\DeclareRobustCommand{\tsc}[1]{\textsc{#1}}
+\DeclareRobustCommand{\tbf}[1]{\textbf{#1}}
+\newcommand{\st}{\text{ s.t. }}
+\newcommand{\ie}{\text{ i.e. }}
+\newcommand{\eg}{\text{ e.g. }}
+\newcommand{\alt}[1]{\intertext{#1}}
+\newcommand{\Aleq}[3]{#1 &=#2 &\text{#3}&&\\}
+\newcommand{\Algeq}[3]{#1 &\ge #2 &\text{#3}&&\\}
+\newcommand{\Alleq}[3]{#1 &\le #2 &\text{#3}&&\\}
+\newcommand{\T}[1]{\text{#1}}
+
+% Math Operators / Commands
+\newcommand{\ds}{\displaystyle}
+\newcommand{\cd}{\cdot}
+\DeclareRobustCommand{\bb}[1]{\mathbb{#1}}
+\DeclareRobustCommand{\cal}[1]{\mathcal{#1}}
+\DeclareRobustCommand{\scr}[1]{\mathscr{#1}}
+\DeclareRobustCommand{\frak}[1]{\mathfrak{#1}}
+\DeclareRobustCommand{\bf}[1]{\mathbf{#1}}
+\newcommand{\nil}{\varnothing}
+\renewcommand{\O}{\cal{O}} % Reals
+\newcommand{\C}{\bb{C}} % Rationals
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\sse}{\subseteq}
+\newcommand{\newop}[2]{\newcommand{#1}{\text{#2}}}
+
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+
+
+
+
+% Defines the `proofcases` environment for the Cases in proofs.
+\newcounter{cases}
+\newcounter{subcases}[cases]
+\newenvironment{proofcases}
+{
+    \setcounter{cases}{0}
+    \setcounter{subcases}{0}
+    \newcommand{\case}
+    {
+        \par\indent\stepcounter{cases}\textbf{Case \thecases.}
+    }
+    \newcommand{\subcase}
+    {
+        \par\indent\stepcounter{subcases}\textit{Subcase (\thesubcases):}
+    }
+}
+{
+    \par
+}
+
+
+\let\over\undefined
+% arrows and stacks
+\newcommand{\over}[2]{\overset{#1}{#2}}
+\newcommand{\under}[2]{\underset{#2}{#1}}
+\newcommand{\overunder}[3]{\overset{#1}{\underset{#3}{#2}}}
+
+
+\RequirePackage{xintexpr}
+\newcommand{\Dar}[1][1]{
+    {\left\Downarrow\vbox to \dimexpr0.5cm*(#1){}\right.\kern-\nulldelimiterspace}
+}
+\newcommand{\dar}[1][1]{
+    {\left\downarrow\vbox to \dimexpr0.5cm*(#1){}\right.\kern-\nulldelimiterspace}
+}
+\newcommand{\Uar}[1][1]{
+    {\left\Uparrow\vbox to \dimexpr0.5cm*(#1){}\right.\kern-\nulldelimiterspace}
+}
+\newcommand{\uar}[1][1]{
+    {\left\uparrow\vbox to \dimexpr0.5cm*(#1){}\right.\kern-\nulldelimiterspace}
+}

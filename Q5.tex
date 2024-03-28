@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3cm}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+
+\begin{document}
+\begin{center}
+{\bf \Large \bf CSC240 Winter 2024 Homework Quiz 5}\\
+due February 9, 2024
+\end{center}
+
+A propositional formula $f$ is in \textit{negation normal form} if it is built from literals using only conjunction and disjunction.
+For instance, all CNF and DNF formulas are in negation normal form.
+
+Give a recursive definition for the set of propositional formulas in negation normal form.\\
+
+Let $N$ = set of propositional formulas in negation normal form.
+
+Base Case: Set of all literals $\subseteq N$.
+
+Constructor Case: If $f_1, f_2 \in N$, then $(f_1 \aand f_2) \in N$, and $(f_1 \oor f_2) \in N$.
+
+
+\end{document}

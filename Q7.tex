@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{changepage}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3cm}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+
+%%% Logic
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+\newcommand{\explain}[1]{{\color{blue} #1}}
+
+\begin{document}
+\begin{center}
+{\bf \Large \bf CSC240 Winter 2024  Quiz 7}\\
+due March 15, 2024
+\end{center}
+
+Consider the following algorithm DIV that, given positive integers $ a $ and $ b$,
+computes the quotient $ q $ and remainder $ r $ of $ a $ divided by $ b$:
+\begin{center}
+\begin{tabbing}
+DIV\=($a,b$):\\
+1\>$ p \leftarrow 1 $\\
+2\>$ s \leftarrow b $\\
+3\>while \=$ s\leq a $ do\\
+4\>\>$ s \leftarrow 2 \times s $\\
+5\>\>$ p \leftarrow 2\times p $\\
+6\>$ q \leftarrow 0 $\\
+7\>$ r \leftarrow a $\\
+8\>while $ s\neq b $ do\\
+9\>\>$ s \leftarrow s $~div~2\\
+10\>\>$ p \leftarrow p $~div~2\\
+11\>\>if \=$ r\geq s $~then\\
+12\>\>\>$ r \leftarrow r-s $\\
+13\>\>\>$ q \leftarrow q+p$
+\end{tabbing}
+\end{center}
+\begin{enumerate}
+\item Write a precise statement of what it means for this algorithm to be correct.
+
+%%%%%%%%% Your solution begins here %%%%%%%%%%
+{\bf Solution.}
+
+The algorithm is correct (totally correct) if it is both partially correct and terminates.
+
+{\bf Precondition:} $a$ and $b$ are positive integers.
+
+{\bf Postcondition:} $q$ and $r$ are integers such that $a=qb+r$ and $0\leq r<b$. Also, $a$ and $b$ are not changed. 
+
+Moreover, for the algorithm to be partially correct, we need the postcondition to be true whenever the algorithm terminates.\\
+
+
+
+\item Write a loop invariant for both while loops that relates $s$ and $p$. You do not have to prove that
+it is a loop invariant.
+
+%%%%%%%%% Your solution begins here %%%%%%%%%%
+{\bf Solution.}
+
+{\bf Loop Invariant for both while loops:} $s=p\times b$.\\
+
+
+\item Prove that $ a=qb+r $ is a loop invariant for the second while loop.
+%%%%%%%%% Your solution begins here %%%%%%%%%%
+{\bf Solution.}
+
+\begin{proof}
+    Initially from lines 6 and 7 we can see that $a=0\times b + a = q\times b + r$, the loop invariant holds.
+
+    Consider an arbitrary iteration of the loop,
+    \begin{adjustwidth}{1cm}{}
+        Let $q', r'$ be the values of $q$ and $r$ at the beginning of the iteration, and let $q'', r''$ be the values of $q$ and $r$ at the end of the iteration.
+
+        Suppose the invairant is true at the beginning of the iteration, on line 12 and 13, since by question 2 we have $s=p\times b$, substitute $p\times b$ into line 12's $s$ and we will see that $r''=r' - p\times b$ and on line 13 $q''=q'+p$.
+
+        Combine together we have $q''b+r'' = (q'+p)b + (r'-p\times b) = q'b + r'=a$, the loop invariant holds.
+        
+    \end{adjustwidth}
+
+    Therefore by induction we have that $a=qb+r$ is a loop invariant for the second while loop.
+    
+\end{proof}
+
+
+\end{enumerate}
+\end{document}

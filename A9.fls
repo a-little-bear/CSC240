@@ -490,6 +490,16 @@ INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/fourier/fourier-
 INPUT ./clsfiles/nightsky.png
 INPUT ./clsfiles/nightsky.png
 INPUT ./clsfiles/nightsky.png
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmcsc10.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmcsc10.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmcsc10.tfm
+INPUT ./clsfiles/nightsky.png
+INPUT ./clsfiles/nightsky.png
+INPUT ./clsfiles/nightsky.png
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rmsc.enc
+INPUT ./clsfiles/nightsky.png
+INPUT ./clsfiles/nightsky.png
+INPUT ./clsfiles/nightsky.png
 INPUT ./clsfiles/nightsky.png
 INPUT ./clsfiles/nightsky.png
 INPUT ./clsfiles/nightsky.png
@@ -501,6 +511,7 @@ INPUT ./A9.out
 INPUT ./A9.out
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/fourier/fourier-orns.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi7.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb
@@ -509,4 +520,5 @@ INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy7.pfb
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

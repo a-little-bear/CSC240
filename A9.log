@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  27 MAR 2024 01:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  28 MAR 2024 23:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1069,71 +1069,81 @@ Package hyperref Info: Link coloring ON on input line 13.
 \@outlinefile=\write5
 \openout5 = `A9.out'.
 
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 15.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 17.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 15.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 17.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 15.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 17.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 15.
+(Font)              <10> on input line 17.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 15.
+(Font)              <7> on input line 17.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 15.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 15.
+(Font)              <5> on input line 17.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 17.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/Program Files/texlive/2023/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 17.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (c:/Program Files/texlive/2023/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 15.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 17.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 15.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 17.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+futs on input line 164.
+LaTeX Font Info:    Trying to load font information for U+futs on input line 166.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/fourier/ufuts.fd
 File: ufuts.fd 2021/11/24 Fontinst v1.933 font definitions for U/futs.
 )
 <clsfiles/nightsky.png, id=32, 331.66768pt x 588.91446pt>
 File: clsfiles/nightsky.png Graphic file (type png)
 <use clsfiles/nightsky.png>
-Package pdftex.def Info: clsfiles/nightsky.png  used on input line 164.
+Package pdftex.def Info: clsfiles/nightsky.png  used on input line 166.
 (pdftex.def)             Requested size: 614.37013pt x 795.01817pt.
  [1{c:/Program Files/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}
 
 {c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./clsfiles/nightsky.png>]
 File: clsfiles/nightsky.png Graphic file (type png)
 <use clsfiles/nightsky.png>
-Package pdftex.def Info: clsfiles/nightsky.png  used on input line 164.
+Package pdftex.def Info: clsfiles/nightsky.png  used on input line 166.
 (pdftex.def)             Requested size: 614.37013pt x 795.01817pt.
  [2]
 File: clsfiles/nightsky.png Graphic file (type png)
 <use clsfiles/nightsky.png>
-Package pdftex.def Info: clsfiles/nightsky.png  used on input line 217.
+Package pdftex.def Info: clsfiles/nightsky.png  used on input line 227.
 (pdftex.def)             Requested size: 614.37013pt x 795.01817pt.
- [3]
+ [3{c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rmsc.enc}]
 File: clsfiles/nightsky.png Graphic file (type png)
 <use clsfiles/nightsky.png>
-Package pdftex.def Info: clsfiles/nightsky.png  used on input line 259.
+Package pdftex.def Info: clsfiles/nightsky.png  used on input line 400.
 (pdftex.def)             Requested size: 614.37013pt x 795.01817pt.
- [4] 
+ [4]
+File: clsfiles/nightsky.png Graphic file (type png)
+<use clsfiles/nightsky.png>
+Package pdftex.def Info: clsfiles/nightsky.png  used on input line 400.
+(pdftex.def)             Requested size: 614.37013pt x 795.01817pt.
+ [5]
+File: clsfiles/nightsky.png Graphic file (type png)
+<use clsfiles/nightsky.png>
+Package pdftex.def Info: clsfiles/nightsky.png  used on input line 407.
+(pdftex.def)             Requested size: 614.37013pt x 795.01817pt.
+ [6] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./A9.aux)
  ***********
@@ -1144,18 +1154,18 @@ Package rerunfilecheck Info: File `A9.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 39282 strings out of 474272
- 751488 string characters out of 5744472
+ 39172 strings out of 474272
+ 749266 string characters out of 5744472
  1949533 words of memory out of 5000000
- 60745 multiletter control sequences out of 15000+600000
- 584619 words of font info for 96 fonts, out of 8000000 for 9000
+ 60609 multiletter control sequences out of 15000+600000
+ 593839 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 118i,13n,121p,2905b,1233s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/fourier/fourier-orns.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on A9.pdf (4 pages, 1187286 bytes).
+ 118i,12n,121p,2905b,1245s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/fourier/fourier-orns.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on A9.pdf (6 pages, 1232971 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 12402 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 140 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 18546 words of extra memory for PDF output out of 20736 (max. 10000000)
 

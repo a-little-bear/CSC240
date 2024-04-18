@@ -8,20 +8,141 @@
 
 \begin{document}
 
-For any language $S\subseteq \Si^*$, define $C(S)=\{x\in\Si^*\mid \exists w\in\Si^*. y\in\Si^*.(xwxy\in S)\}$.
+My name and student number: Joseph Siu, 1010085701. Sanchit Manchanda, Ali Zaki Rashid.
+
+For any language $S\subseteq \Si^*$, define $C(S)=\{x\in\Si^*\mid \exists w\in\Si^*. \exists y\in\Si^*.(xwxy\in S)\}$.
 
 For example, if $S=\{ababc,aabaab\}$, then $C(S)=\{\la,a,aa,ab,aab\}$.
 
 \tbf{Question 1.} Describe the language $S=L(((01)^*+1^*)^*)=\{z\in\{0,1\}^*\mid \dots\}$ by replacing the $\dots$ with at most 10 words. ($z$ counts as one word.) Briefly justify your answer.
 
+Here $\dots$ is equivalent to ``all occurences of $0$ in $z$ are followed by $1$.''
+
+\tbf{Justification.} We will (briefly) show the equality by double subset. For the forward subset, let $s\in L(((01)^*+1^*)^*)$ be arbitrary, then by definition of $^*$, $s$ is concatenated by strings in $(01)^*+1^*$, let string $w\in (01)^*+1^*$ be an arbitrary string in such concatenation. Then $w$ is either a string of $1$'s or a string of $01$'s, for both cases we can see that all occurences of $0$ in $w$ are followed by $1$. Thus $s\in \{z\in\{0,1\}^*\mid \T{ all occurences of $0$ in $z$ are followed by $1$}\}$. 
+
+For the backward subset, let $s\in \{z\in\{0,1\}^*\mid \T{ all occurences of $0$ in $z$ are followed by $1$}\}$ be arbitrary, then the string $s$ must be a concatenation of strings in $(01)^*+1^*$ if we group all $0$'s followed by $1$'s together. Hence by definition of $^*$, $s\in L(((01)^*+1^*)^*)$.
+
+Therefore, $S=L(((01)^*+1^*)^*)=\{z\in\{0,1\}^*\mid \T{ all occurences of $0$ in $z$ are followed by $1$}\}$.\\
+
 \tbf{Question 2.} Describe the language $T=L\bra{\overline{\overline{\ph}\cd00\cd\overline{\ph}}}=\{x\in\{0,1\}^*\mid \dots\}$ by replacing the $\dots$ with at most 10 words. ($x$ counts as one word.) Briefly justify your answer.
+
+Here $\dots$ is equivalent to ``there are no consecutive $0$'s in string $x$.''
+
+\tbf{Justification.} We will (briefly) show the equality by double subset. To show $\overline{L\bra{\overline{\ph}\cd00\cd\overline{\ph}}}=L\bra{\overline{\overline{\ph}\cd00\cd\overline{\ph}}}=\{x\in\{0,1\}^*\mid \T{ there are no consecutive $0$'s in string $x$}\}$, by definition of complement it is equivalent to show $L\bra{\overline{\ph}\cd00\cd\overline{\ph}}=\{x\in\{0,1\}^*\mid \T{ there are consecutive $0$'s in string $x$}\}$.
+
+For the forward subset, let $s\in L\bra{\overline{\ph}\cd00\cd\overline{\ph}}$ be arbitrary, then by definition of carcatenation, since $\overline{\ph}=\Si^*$, string $s=\al\cd00\cd\be$ for some $\al\in\Si^*$, for some $\be\in\Si^*$, so $s$ contains consecutive $0$'s. Thus $s\in \{x\in\{0,1\}^*\mid \T{ there are consecutive $0$'s in string $x$}\}$.
+
+For the backward subset, let $s\in \{x\in\{0,1\}^*\mid \T{ there are consecutive $0$'s in string $x$}\}$ be arbitrary, then this means there exists $\al\in\Si^*$ and $\be\in\Si^*$ such that $s=\al\cd00\cd\be$, so $s\in L\bra{\overline{\ph}\cd00\cd\overline{\ph}}$.
+
+Therefore, as $L\bra{\overline{\ph}\cd00\cd\overline{\ph}}=\{x\in\{0,1\}^*\mid \T{ there are consecutive $0$'s in string $x$}\}$, we conclude that $T=L\bra{\overline{\overline{\ph}\cd00\cd\overline{\ph}}}=\{x\in\{0,1\}^*\mid \T{ there are no consecutive $0$'s in string $x$}\}$.\\
+
 
 \tbf{Question 3.} Explain why $C(S)=T$.
 
+Both $C(S)$ and $T$ are precisely the sets that contain all strings that do not have consecutive $0$'s. We will show they are equal by strong induction on the length of the string $x$.
+
+\newp{[Proof of Question 3 by induction]\hfill
+
+    Define the predicate $P(n)=$``For all strings $x\in\{0,1\}^*$ of length $n$, $x\in C(S)$ if and only if $x\in T$.''
+
+    \indenv{
+        Let $n\in\N$ be arbitrary;
+        \indenv{
+            Assume $\forall i\in\N. ((i<n)\iimplies P(i))$.
+
+            \begin{proofcases}
+                \case $n=0$. 
+                \indenv{
+                    Then only string $x=\la$ is length 0, by our condition, $\la\la\la\la\in S$ so $\la=x\in C(S)$ and $x\in T$ since $x$ has no consecutive 0's. 
+                }
+                In Case 1 $P(n)$ holds.
+                \case $n=1$.
+                \indenv{
+                    Only strings $x=0$ and $x=1$ are length 1:
+                    \subcase $x=0$: Then by condition, since $0101\in S$, $0\in C(S)$ and $0\in T$ since $0$ has no consecutive 0's. Thus $P(1)$ holds.
+                    For Case 2.1 $P(n)$ holds.
+                    \subcase $x=1$: Then by condition, since $1111\in S$, $1\in C(S)$ and $1\in T$ since $1$ has no consecutive 0's. Thus $P(1)$ holds.
+                    For Case 2.2 $P(n)$ holds.
+                }
+                In Case 2 $P(n)$ holds.
+                \case $n\ge 2$.
+                \indenv{
+                    Let string $x\in\{0,1\}^*$ of length $n$ be arbitrary. Since $n\ge2$, we know $x=y\cd\al$ for some $y\in\{0,1\}^*$ of length $n-1$ and $\al\in\{0,1\}$.
+
+                    \subcase $x$ has consecutive 0's.
+                    \indenv{
+                        Then by condition this implies $x\notin T$. 
+                        \indenv{
+                            To obtain a contradiction, assume $x\in C(S)$. This implies there exists $w'\in\Si^*$ and $y'\in \Si^*$ such that $xw'xy'\in S$. However by definition of $S$, $xw'xy'\in S$ implies all occurences of 0 in $xw'x'y'$ are followed by 1. This contradicts the fact that $x$ has consecutive 0's. 
+                        }
+                        Thus $x\notin C(S)$.
+                    }
+                    For this subcase $x\in C(S)$ if and only if $x\in T$.
+
+                    \subcase $x$ has no consecutive 0's.
+                    \indenv{
+                        Then by deifnition $x\in T$. Since $y$ has no consecutive 0's, by definition $y\in T$. 
+
+                        Moreover, by inductive hypothesis, specialization and modus ponens, $y\in C(S)$. By definition this means there exists $w'\in\Si^*$ and $y'\in\Si^*$ such that $yw'yy'\in S$.
+
+                        Combining the facts that $y\al, \al1, 1w', w'y, 1y'$ have no consecutive 0's by definition of $S$, we have $y\al 1w'y\al 1 y'\in S$ since the entire string cannot have consecutive 0's, so $x=y\al\in C(S)$ as $1w'\in\Si^*$ and $1y'\in\Si^*$.
+                    }
+                    For this subcase $x\in C(S)$ if and only if $x\in T$.
+
+                    Since for all subcases of Case 3 $x\in C(S)$ if and only if $x\in T$, for Case 3 $x\in C(S)$ if and only if $x\in T$.
+                }
+                
+                Since $x$ is arbitrary, $P(n)$ holds for Case 3.
+
+                
+            \end{proofcases}
+
+            Since all cases $P(n)$ hold, we conclude $P(n)$ holds.
+        }
+    }
+
+    By strong induction on $n$, we conclude that for all $n\in\N$, $P(n)$ holds. Thus for all $x\in\{0,1\}^*$, $x\in C(S)$ if and only if $x\in T$. By definition of set equality we conclude $C(S)\subseteq T$ and $T\subseteq C(S)$, so $C(S)=T$.
+}
+
 \tbf{Question 4.} Give any deterministic finite automaton $M=(Q,\Si,\de,q_0,F)$, construct a finite automaton $M'=(Q',\Si,\de',q_0',F')$ such that $L(M')=C(L(M))$.
+
+Let $Q'=Q, q_0'=q_0, \de'=\de, F'=\{ q\in Q'\mid \forall x\in\Si^*.\exists w\in\Si^*.\exists y\in\Si^*. \sqrbra{\de'^*(q_0',x)=q\iimplies \de'^*(q,wxy)\in F}\}$. 
+
+
+
+Then $M'=(Q',\Si,\de',q_0',F')$ is the desired finite automaton.\\
 
 \tbf{Question 5.} briefly describe how $M'$ works.
 
+The only differences between $M$ and $M'$ are the accepted states. By our construction of $F'$, we can see that string $x$ is accepted by $M'$ implies there exists strings $w$ and $y$ such that $xwxy$ is accepted by $M$. And by our condition of $C$, $xwxy$ is accepted by $M$ implies $x\in C(L(M))$. Thus $L(M')\subseteq C(L(M))$.\\
+
 \tbf{Question 6.} Prove that $L(M')=C(L(M))$.
+
+\newp{
+    First by construction \begin{align*}
+        F'&=\{ q\in Q'\mid \forall x\in\Si^*.\exists w\in\Si^*.\exists y\in\Si^*. \sqrbra{\de'^*(q_0',x)=q\iimplies \de'^*(q,wxy)\in F}\}\\
+        &=\{ q\in Q\mid \forall x\in\Si^*.\exists w\in\Si^*.\exists y\in\Si^*. \sqrbra{\de^*(q_0,x)=q\iimplies \de^*(q,wxy)\in F}\}
+    \end{align*}
+
+    \indenv{
+        So, let $x\in L(M')$ be arbitrary, then 
+        \begin{align*}
+            x\in L(M')&\iimplies \de'^*(q_0',x)\in F'\\
+            &\iimplies \de^*(q_0,x)\in F'\\
+            &\iimplies \exists q\in F'. \exists w\in\Si^*.\exists y\in\Si^*. \sqrbra{\de^*(q_0,x)=q\iimplies \de^*(q,wxy)\in F}\\
+            &\iimplies \exists q\in F'. \exists w\in\Si^*.\exists y\in\Si^*. \sqrbra{\de^*(q_0,x)=q\iimplies \de^*(\de^*(q_0,x),wxy)\in F}\\
+            &\iimplies \exists q\in F'. \exists w\in\Si^*.\exists y\in\Si^*. \sqrbra{\de^*(q_0,x)=q\iimplies \de^*(q_0,xwxy)\in F}\\
+            &\iimplies \exists w\in\Si^*.\exists y\in\Si^*. xwxy\in L(M)\\
+            &\iimplies x\in C(L(M))
+        \end{align*}
+
+        We have shown that $x\in L(M')$ implies $x\in C(L(M))$.
+    }
+
+    Since $x$ is arbitrary, we conclude $L(M')\subseteq C(L(M))$.
+
+    To show the other direction, we need to construct another automaton : (
+}
+
 
 \end{document}

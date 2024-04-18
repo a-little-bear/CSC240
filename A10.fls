@@ -459,6 +459,10 @@ INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/wasy/wasy10.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/wasy/wasy7.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/wasy/wasy5.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmri10.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmcsc10.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmcsc10.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmcsc10.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/fourier/ufuts.fd
 INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/fourier/ufuts.fd
 INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/fourier/ufuts.fd
@@ -480,15 +484,26 @@ INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/vf/public/fourier/futrorn.vf
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/fourier/fourier-alt.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/fourier/fourier-orns.tfm
+INPUT ./LatexTemplate/clsfiles/nightsky.png
+INPUT ./LatexTemplate/clsfiles/nightsky.png
+INPUT ./LatexTemplate/clsfiles/nightsky.png
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rmsc.enc
+INPUT ./LatexTemplate/clsfiles/nightsky.png
+INPUT ./LatexTemplate/clsfiles/nightsky.png
+INPUT ./LatexTemplate/clsfiles/nightsky.png
 INPUT A10.aux
 INPUT ./A10.out
 INPUT ./A10.out
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/fourier/fourier-orns.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmex10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr7.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy7.pfb
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

@@ -12,6 +12,8 @@
 
 \begin{document}
 
+My name and student number: Joseph Siu, 1010085701. Sanchit Manchanda, Ali Zaki Rashid.
+
 1. Consider the following iterative algorithm that finds the length of the longest increasing subsequence in the array $\A[1..n].$
 
 \newalg{
@@ -143,7 +145,7 @@ We also assumed the line numbers of the pseudo-code are fixed (L6, L7, L8 instea
         }
     }
 
-    By strong induction, $\forall l\in\N. P(l)$. QED.
+    By strong induction, $\forall l\in\N. P(l)$. \qed
 
     Now, since there are no assignments to $i$ and $j$ within their for-loop respectively, and so only finitely many for-loop iterations has performed thus the for loop from L2 to L5 eventually terminates. Now we are on L6.
     
@@ -163,7 +165,7 @@ We also assumed the line numbers of the pseudo-code are fixed (L6, L7, L8 instea
     For all cases $m$ is assigned with a positive integer which represents the length of the longest increasing subsequence in $\A[1..n]$, thus by proof of conjunction $\A[1..n]$ is unchanged, and $m$ is assigned with a positive integer which represents the length of the longest increasing subsequence in $\A[1..n]$.   
 }
 
-By direct proof, the algorithm is partially correct. QED.\\
+By direct proof, the algorithm is partially correct. \qed
 
 
 2. For each $k \in \ints^+$, let 
@@ -183,41 +185,43 @@ $\de(p_{k-1},0) =   \{q_{2k+1}\}$,\\
 $\de(p_{k-1},1) =  \nil$, and\\
 $\de(q,\lambda) = \nil$ for all $q \in Q$.\\
 
-Here is a drawing for $N_2$:
+% Here is a drawing for $N_2$:
 
 
-\begin{tikzpicture}[shorten >=1pt,node distance=1.75cm,on grid,auto,initial text=]
-    \node[state,initial,accepting]   (q_0)                {$q_0$};
-    \node[state,accepting]           (q_1) [right=of q_0] {$q_1$};
-    \node[state,accepting]           (q_2) [right=of q_1] {$q_2$};
-    \node[state,accepting]           (q_3) [right=of q_2] {$q_3$};
-    \node[state]                     (q_4) [right=of q_3] {$q_4$};
-    \node[state,accepting]           (q_5) [right=of q_4] {$q_5$};
-    \node[state]                     (p_0) [above=of q_0] {$p_0$};
-    \node[state]                     (p_1) [right=of p_0] {$p_1$};
-    \node[state]                     (z_0) [below=of q_0] {$z_0$};
-    \node[state]                     (z_1) [right=of z_0] {$z_1$};
-    \path[->]
-     (q_0)   edge                node {0,1} (q_1)
-     (q_1)   edge                node {0,1} (q_2)
-     (q_2)   edge                node {0,1} (q_3)
-     (q_3)   edge                node {0,1} (q_4)
-     (q_0)   edge                node {1}   (p_0)
-     (q_1)   edge                node[above] {1}   (p_0)
-     (q_0)   edge                node[left] {0}   (z_0)
-     (q_1)   edge                node {0}   (z_0)
-     (q_4)   edge                node {0,1} (q_5)
-     (p_0)   edge                node {0,1} (p_1)
-     (z_0)   edge                node[below] {0,1} (z_1)
-     (p_1)   edge [bend left, above] node {0}   (q_5)
-     (z_1)   edge [bend right, below] node {1}   (q_5)
-     (q_5)   edge [loop above]   node {0,1} (q_5);
- \end{tikzpicture}
+% \begin{tikzpicture}[shorten >=1pt,node distance=1.75cm,on grid,auto,initial text=]
+%     \node[state,initial,accepting]   (q_0)                {$q_0$};
+%     \node[state,accepting]           (q_1) [right=of q_0] {$q_1$};
+%     \node[state,accepting]           (q_2) [right=of q_1] {$q_2$};
+%     \node[state,accepting]           (q_3) [right=of q_2] {$q_3$};
+%     \node[state]                     (q_4) [right=of q_3] {$q_4$};
+%     \node[state,accepting]           (q_5) [right=of q_4] {$q_5$};
+%     \node[state]                     (p_0) [above=of q_0] {$p_0$};
+%     \node[state]                     (p_1) [right=of p_0] {$p_1$};
+%     \node[state]                     (z_0) [below=of q_0] {$z_0$};
+%     \node[state]                     (z_1) [right=of z_0] {$z_1$};
+%     \path[->]
+%      (q_0)   edge                node {0,1} (q_1)
+%      (q_1)   edge                node {0,1} (q_2)
+%      (q_2)   edge                node {0,1} (q_3)
+%      (q_3)   edge                node {0,1} (q_4)
+%      (q_0)   edge                node {1}   (p_0)
+%      (q_1)   edge                node[above] {1}   (p_0)
+%      (q_0)   edge                node[left] {0}   (z_0)
+%      (q_1)   edge                node {0}   (z_0)
+%      (q_4)   edge                node {0,1} (q_5)
+%      (p_0)   edge                node {0,1} (p_1)
+%      (z_0)   edge                node[below] {0,1} (z_1)
+%      (p_1)   edge [bend left, above] node {0}   (q_5)
+%      (z_1)   edge [bend right, below] node {1}   (q_5)
+%      (q_5)   edge [loop above]   node {0,1} (q_5);
+%  \end{tikzpicture}
 
 (a) For each state $q \in Q$, describe the set of strings $w \in \{0,1\}^*$ such that $q \in  \de^*(q_0, w)$.\\
 Your descriptions should not mention $\delta$.
 
-\tbf{Description.} Let $k\in\Z^+$ be arbitrary. By definition of $\de^*$, it is equivalent to describe for each $q\in Q$, what strings $w\in\{0,1\}^*$ will lead to state $q$ from the initial state $q_0$. We will prove our description in part (b).
+\tbf{Description.} We will use ``letter'' to denote a single element in $\Si=\{0,1\}$.
+
+Let $k\in\Z^+$ be arbitrary. By definition of $\de^*$, it is equivalent to describe for each $q\in Q$, what strings $w\in\{0,1\}^*$ will lead to state $q$ from the initial state $q_0$. We will prove our description in part (b).
 
 Now, if $q=q_i$ for some $i\in[2k]\cup\{0\}$ (we instantiate such $i$), then $q$ can be reached from $q_0$ by a string $w\in\{0,1\}^*$ if and only if $w$ is a string with length $i$.
 
@@ -235,8 +239,25 @@ Similarly, for $z_0$, if $w=w'\cd 0$ for some $w'\in\om$, then $w$ will reach $z
 
 (b) Prove that $L(N_k) = X_k$ for all $k \in \ints^+$.
 
-\tit{Proof of Question 2(b).}
+\tbf{Lemma 1.} For all $k\in\Z^+$. For all $x\in \{0,1\}^*-X_k$. $|x|=2k$.
 
+\tit{Proof of Lemma 1.}
+\indenv{
+    Let $k\in\Z^+$ be arbitrary. 
+    \indenv{
+        Let $x\in \{0,1\}^*-X_k$ be arbitrary. 
+
+        Since $X_k\subseteq\{0,1\}^*$, by definition of $X_k$ we have $\{0,1\}^*-X_k=\{x\in\{0,1\}^*: \exists y\in\{0,1\}^k. (x=y\cd y)\}$, since $x\in \{0,1\}^*-X_k$, we instantiate $y\in\{0,1\}^k$ such that $x=y\cd y$. 
+
+        Since $|y|=k$ and $|y\cd y|=2k$, by substitution we have $|x|=2k$.
+    }
+
+    Since $x$ is arbitrary, we conclude for all $x\in \{0,1\}^*-X_k$. $|x|=2k$.
+}
+
+Since $k$ is arbitrary, we conclude Lemma 1 holds. \qed
+
+\tit{Proof of Question 2(b).}
 \indenv{
     Let $k\in\Z^+$ be arbitrary.
     \indenv{
@@ -244,14 +265,141 @@ Similarly, for $z_0$, if $w=w'\cd 0$ for some $w'\in\om$, then $w$ will reach $z
         
         Consider 3 cases of the length of $w$: $|w| < 2k, |w|=2k, |w|>2k$.
 
+        Since there are no $\la$ transitions, for all $q\in Q$ we have $\de(q,\la)=\nil$, so we will simply ignore checking $\la$ transitions.
+
         \begin{proofcases}
             \case $|w| < 2k$.
             \indenv{
                 Since $\de(q_i,0)=\{q_{i+1},z_0\}$ and $\de(q_i,1)=\{q_{i+1},p_0\}$ for $0\le i \le k-1$, and $\de(q_i,0)=\de(q_i,1)=\{q_{i+1}\}$ for $k\le i\le 2k$, from these we have $q_{i+1}\in\de(q_i,\al)$ for $0\le i\le 2k$ where $\al\in\{0,1\}$.
+
+                Hence, since $q_i$ is a final state for $i\in[2k+1]\cup\{0\}-\{2k\}$, the string $w$ starting from $q_0$ and through the walk $\{\om_j\}_{j\in[|w|]}, \om_j=(q_{j-1}, q_j)$ reaches a final state $q_{|w|}$ since $|w| < 2k$ and so $|w|\in[2k+1]\cup\{0\}-\{2k\}$ by our case assumption. 
             }
+
+            For Case 1 we have shown that when $|w| < 2k$, $w$ is accepted by $N_k$, thus $w\in L(N_k)$. Moreover, by Lemma 1 and specialization of $k$, because $|w|\neq 2k$, thus $w\notin \{0,1\}^*-X_k$, so $w\in X_k$. Therefore $w\in L(N_k)$ if and only if $w\in X_k$.
+
+            \case $|w| > 2k$.
+            \indenv{
+                $|w| > 2k$ implies $|w|\ge 2k+1$, so $|w| - 2k - 1 \ge 0$. We will use $[0]$ to denote the empty set.
+
+                Since $\de(q_i,0)=\{q_{i+1},z_0\}$ and $\de(q_i,1)=\{q_{i+1},p_0\}$ for $0\le i \le k-1$, and $\de(q_i,0)=\de(q_i,1)=\{q_{i+1}\}$ for $k\le i\le 2k$, from these we have $q_{i+1}\in\de(q_i,\al)$ for $0\le i\le 2k$ where $\al\in\{0,1\}$.
+
+                Moreover, since $\de(q_{2k+1},0)=\de(q_{2k+1},1)=\{q_{2k+1}\}$, and $q_{2k+1}$ is a final state, by constructing the walk $\{(q_{i-1},q_i)\}_{i\in[2k+1]}\circ\{(p_{j},p_{j})\}_{j\in[|w|-2k-1]}, p_j=q_{2k+1}$ for all $j\in[|w|-2k-1]$. We can see that $w$ is accepted by $N_k$ since it reaches the final state $q_{2k+1}$ through such walk.
+            }
+
+            For Case 2 we have shown that when $|w| > 2k$, $w$ is accepted by $N_k$, thus $w\in L(N_k)$. Moreover, by Lemma 1 and specialization of $k$, because $|w|\neq 2k$, thus $w\notin \{0,1\}^*-X_k$, so $w\in X_k$. Therefore $w\in L(N_k)$ if and only if $w\in X_k$.
+
+            \case $|w|=2k$.
+            \indenv{
+                We will use the word ``character'' to denote element in $\Si=\{0,1\}$, moreover, since $w$ is a finite sequence of characters, we will use $w_i$ to denote the $i^{\T{th}}$ character of $w$ starting from position 1.
+
+                \subcase $\nnot(\exists y\in\{0,1\}^k. (w=y\cd y))$.
+                \indenv{
+                    First, $w=y\cd y=yy$ is equivalent to $\forall i\in[2k]$. $w_i=yy_i$.
+
+                    Hence, $\nnot(\exists y\in\{0,1\}^k. (w=y\cd y))$ is equivalent to $\forall y\in\{0,1\}^k.\exists i\in[2k]. w_i\ne yy_i$.
+
+                    Let $y'\in\{0,1\}^k$ be such that $\forall i\in[k]. y'_i=w_i$. Then by specialization of the above formula, we have $\exists i\in[2k]. w_i\ne y'y'_i$.
+
+                    Since by construction $\forall i\in[k]. w_i=y'y'_i$, combining with $\exists i\in[2k]. w_i\ne y'y'_i$ we have $\exists i\in[2k]-[k]. w_i\ne y'y'_i$, instantiate such $i$.
+
+                    Since $w_i\ne y'y'_i=y'y'_{i-k}$ but by specialization $w_{i-k}=y'_{i-k}=y'y'_{i-k}$, by substitution we have $w_i\ne w_{i-k}$.
+
+                    \tit{Subsubcase (a)} $w_i=0$.
+                    \indenv{
+
+                        Since $w_i\ne w_{i-k}$, we have $w_{i-k}=1$.
+
+                        Now define $\forall m\in[2k-i], r_m=(q_{2k+1}, q_{2k+1})$, and construct the walk $\{(q_{j-1}, q_j)\}_{j\in [i-k-1]}\circ\{(q_{i-k-1}, p_0)\}\circ\{(p_{l-1}, p_l)\}_{l\in[k-1]}\circ\{(p_{k-1}, q_{2k+1})\}\circ\{r_m\}_{m\in[2k-i]}$. Here 
+                        
+                        $\{(q_{j-1}, q_j)\}_{j\in [i-k-1]}$ is valid since $q_{b+1}\in \de(q_b, 0)=\de(q_b, 1)$ for $0\le b\le 2k$ from Case 2; 
+                        
+                        $\{(q_{i-k-1}, p_0)\}$ is valid due to $\de(q_a,1)=\{q_{a+1}, p_0\}$ for $0\le a\le k-1$ and $w_{i-k}=1$; 
+                        
+                        $\{(p_{l-1}, p_l)\}$ is valid due to $\de(p_c,0)=\de(p_c,1)=\{p_{c+1}\}$ for $0\le c\le k-2$;
+                        
+                        $\{(p_{k-1}, q_{2k+1})\}$ is valid due to $\de(p_{k-1},0)=\{q_{2k+1}\}$ and $w_i=0$ (the length of the walk before is $(i-k-1)+(1)+(k-1)=i-1$, thus we read the character $w_i$ during $\{(p_{k-1}, q_{2k+1})\}$);
+                        
+                        and finally $\{r_m\}_{m\in[2k-i]}$ is valid due to $\de(q_{2k+1},0)=\de(q_{2k+1},1)=\{q_{2k+1}\}$.
+                        
+                        So, we have shown our walk is valid and reaches the final state $q_{2k+1}$. Note that all indexes are valid due to basic algebra and arithmetic manipulations.
+                    }
+
+                    For subsubcase (a) we have shown $w$ is accepted by $N_k$ thus $w\in L(N_k)$. And by definition of $X_k$, $w\in X_k$. So for subsubcase (a) $w\in L(N_k)$ if and only if $w\in X_k$.
+
+                    \tit{Subsubcase (b)} $w_i=1$.
+                    \indenv{
+                        Since $w_i\ne w_{i-k}$, we have $w_{i-k}=0$.
+
+                        Now define $\forall m\in[2k-i], r_m=(q_{2k+1}, q_{2k+1})$, and construct the walk $\{(q_{j-1}, q_j)\}_{j\in [i-k-1]}\circ\{(q_{i-k-1}, z_0)\}\circ\{(z_{l-1}, z_l)\}_{l\in[k-1]}\circ\{(z_{k-1}, q_{2k+1})\}\circ\{r_m\}_{m\in[2k-i]}$. Here 
+                        
+                        $\{(q_{j-1}, q_j)\}_{j\in [i-k-1]}$ is valid since $q_{b+1}\in \de(q_b, 0)=\de(q_b, 1)$ for $0\le b\le 2k$ from Case 2; 
+                        
+                        $\{(q_{i-k-1}, z_0)\}$ is valid due to $\de(q_a,0)=\{q_{a+1}, z_0\}$ for $0\le a\le k-1$ and $w_{i-k}=0$; 
+                        
+                        $\{(z_{l-1}, z_l)\}$ is valid due to $\de(z_c,0)=\de(z_c,1)=\{z_{c+1}\}$ for $0\le c\le k-2$;
+                        
+                        $\{(z_{k-1}, q_{2k+1})\}$ is valid due to $\de(z_{k-1},1)=\{q_{2k+1}\}$ and $w_i=1$ (the length of the walk before is $(i-k-1)+(1)+(k-1)=i-1$, thus we read the character $w_i$ during $\{(z_{k-1}, q_{2k+1})\}$);
+                        
+                        and finally $\{r_m\}_{m\in[2k-i]}$ is valid due to $\de(q_{2k+1},0)=\de(q_{2k+1},1)=\{q_{2k+1}\}$.
+
+                        So, we have shown our walk is valid and reaches the final state $q_{2k+1}$. Note that all indexes are valid due to basic algebra and arithmetic manipulations.
+                    }
+
+                    For subsubcase (b) we have shown $w$ is accepted by $N_k$ thus $w\in L(N_k)$. And by definition of $X_k$, $w\in X_k$. So for subsubcase (b) $w\in L(N_k)$ if and only if $w\in X_k$.
+                }
+
+                For subcase (1) we have shown $w\in L(N_k)$ and $w\in X_k$. Thus $w\in L(N_k)$ if and only if $w\in X_k$.
+
+                \subcase $\exists y\in\{0,1\}^k. (w=y\cd y)$.
+                \indenv{
+                    Since $\exists y\in\{0,1\}^k. (w=y\cd y)$, we instantiate such $y$.
+
+                    By definition of $X_k$, $w\notin X_k$. We now show $w\notin L(N_k)$.
+
+                    To this end, since $|w|=2k$, and the length of path to read $q_{d}$ where $d\in[2k-1]\cup\{0\}$ is exactly $d$ by our definitions of $\de$: $q_{d}$ can only be reached from $q_{d-1}$ for $d\in[2k-1]$ and $q_0$ can only be reached only by the string $\la$, solving the simple recurrence relation we have $q_{b}$ can only be reached by the strings with length $b$ for all $b\in[2k-1]\cup\{0\}$.
+
+                    So, since $|w|=2k>2k-1$, final states $\{q_d\mid d\in[2k-1]\cup\{0\}\}$ cannot be reached by $w$, now we just have to show $q_{2k+1}$ cannot be reached by $w$.
+
+                    \indenv{
+                        To obtain a contradiction, assume there exists a walk that $q_{2k+1}$ is reached by $w$ from $q_0$.
+
+                        There are 3 possible paths to reach $q_{2k+1}$: from $q_{2k}$, from $p_{k-1}$, and from $z_{k-1}$.
+
+                        \tit{Subsubcase (a)} $w$ can be reached from $q_{2k}$.
+                        \indenv{
+                            For this case since to reach $q_{2k-1}$, the path must be at least length $2k-1$, and to reach $q_{2k}$, the path must be at least length $2k$, so the path must be at least length $2k+1$ to reach $q_{2k+1}$, which is a contradiction to $|w|=2k$.
+                        }
+                        For this subsubcase (a) contradiction occured.
+
+                        \tit{Subsubcase (b)} $w$ can be reached from $p_{k-1}$.
+                        \indenv{
+                            Since $q_{2k+1}\in\de(p_{k-1}, 0)$ and $\de(p_{k-1},1)=\nil$, this implies $w_{i}=0$ for some $i\in[2k-1]\cup\{0\}$, since the shortest path to reach $p_{k-1}$ is length $k$ (from $q_0$ to $p_0$ and from $p_0$ to $p_{k-1}$), this gives $k+1\le i\le 2k-1$. Since $w=kk$ and $w_i=0$, this shows $w_{i-k}=0$ (valid index since $i\ge k+1$). However, since the path from $p_0$ to $p_{k-1}$ is exactly length $k$, and $p_0$ can only be reached by character $1$, this implies $w_{i-k}=1$, which is a contradiction.
+                        }
+                        For this subsubcase (b) contradiction occured.
+
+                        \tit{Subsubcase (c)} $w$ can be reached from $z_{k-1}$.
+                        \indenv{
+                            Since $q_{2k+1}\in\de(z_{k-1}, 1)$ and $\de(z_{k-1},0)=\nil$, this implies $w_{i}=1$ for some $i\in[2k-1]\cup\{0\}$, since the shortest path to reach $z_{k-1}$ is length $k$ (from $q_0$ to $z_0$ and from $z_0$ to $z_{k-1}$), this gives $k+1\le i\le 2k-1$. Since $w=kk$ and $w_i=1$, this shows $w_{i-k}=1$. However, since the path from $z_0$ to $z_{k-1}$ is exactly length $k$, and $z_0$ can only be reached by character $0$, this implies $w_{i-k}=0$, which is a contradiction.
+                        }
+                        For this subsubcase (c) contradiction occured.
+                    }
+                    For all cases contradiction occured, so $q_{2k+1}$ cannot be reached by $w$. Since $w$ cannot reach all final states, we conclude $w\notin L(N_k)$, and by definition of $X_k$, $w\notin X_k$. Therefore $w\in L(N_k)$ if and only if $w\in X_k$.
+                }
+                
+                For subcase (2) we have shown $w\notin L(N_k)$ and $w\notin X_k$. Thus $w\in L(N_k)$ if and only if $w\in X_k$.
+            }
+
+            We conclude for Case 3 $w\in L(N_k)$ if and only if $w\in X_k$.
+
         \end{proofcases}
+
+        For all cases we have shown $w\in L(N_k)$ if and only if $w\in X_k$.
     }
+
+    Since $w$ is arbitrary, we conclude $\forall w\in\{0,1\}^*. w\in L(N_k)$ if and only if $w\in X_k$. Since $L(N_k)\subseteq \{0,1\}^*$ and $X_k\subseteq \{0,1\}^*$, by definition of set equality we conclude $L(N_k)=X_k$.
 }
+
+Since $k$ is arbitrary, we therefore have shown that $L(N_k)=X_k$ for all $k\in\Z^+$. \qed
 
 
 
